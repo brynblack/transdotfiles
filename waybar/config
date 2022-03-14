@@ -6,7 +6,7 @@
 	// "width": 0,
     "modules-left": ["sway/workspaces"],
 	"modules-center": [],
-    "modules-right": ["network", "pulseaudio", "cpu", "memory", "disk", "temperature", "battery", "clock"],
+    "modules-right": ["network", "pulseaudio", "backlight", "cpu", "memory", "disk", "temperature", "battery", "clock"],
     "margin": "4 4 0 4",
 	// "margin-top": 4,
 	// "margin-left": 4,
@@ -22,6 +22,11 @@
 	"ipc": false,
 	// "id": "",
 	"include": [],
+	"backlight": {
+		"device": "acpi_video0",
+		"format": "{percent}% {icon}",
+		"format-icons": ["", "", ""]
+	},
     "battery": {
 		"bat": "BAT0",
 		"adapter": "ADP1",
@@ -144,6 +149,8 @@
 		"tooltip-format-wifi": "{ipaddr} {ifname}",
 		"tooltip-format-disconnected": "",
     },
+	// ISSUE WITH PULSEAUDI TRACKED HERE
+	// https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2202
     "pulseaudio": {
         "format": "{volume}% {icon}",
 		"format-bluetooth": "{volume}% {icon}",
@@ -165,12 +172,12 @@
 		// },
 		// "max-length": 0,
 		"scroll-step": 1,
-        // "on-click": "pavucontrol"
+        "on-click": "pamixer -t",
 		// "on-click-middle": "",
 		// "on-click-right": "",
-		// "on-scroll-up": "",
-		// "on-scroll-down": "",
-		// "smooth-scrolling-threshold": 0.0,
+		"on-scroll-up": "pamixer -i 1",
+		"on-scroll-down": "pamixer -d 1",
+		"smooth-scrolling-threshold": 1.0,
 		"tooltip": true,
 		"tooltip-format": "{desc}"
 

@@ -18,6 +18,7 @@
     }
 }
 
+#backlight,
 #battery,
 #clock,
 #cpu,
@@ -31,6 +32,9 @@
 	background-color: #f5a9b8;
 	transition: background-color 0.5s, color 0.5s;
 	transition-timing-function: linear;
+}
+
+#backlight {
 }
 
 #battery {
