@@ -1,0 +1,45 @@
+window.bar {
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: 1rem;
+}
+
+button {
+  min-width: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: transparent;
+}
+
+button:active {
+  background-color: @theme_selected_bg_color;
+}
+
+button:hover {
+  border-bottom: 3px solid @theme_fg_color;
+}
+
+label {
+  font-weight: bold;
+}
+
+.workspaces button.focused {
+  border-bottom: 3px solid @theme_selected_bg_color;
+}
+
+.notification {
+  color: yellow;
+}
+
+progress,
+highlight {
+  min-height: 8px;
+}
+
+.volume {
+  font-size: 1.25rem;
+}
+
+.icons {
+  font-size: 1.25rem;
+}
