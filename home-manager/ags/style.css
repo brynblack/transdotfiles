@@ -1,6 +1,6 @@
 window.bar {
-  background-color: #1e1e2e;
-  color: #cdd6f4;
+  background-color: @window_bg_color;
+  color: @window_fg_color;
   border-radius: 1rem;
 }
 
@@ -40,6 +40,20 @@ highlight {
   font-size: 1.25rem;
 }
 
+.battery-icon {
+  margin-right: 8px;
+}
+
 .icons {
   font-size: 1.25rem;
+}
+
+.logo {
+  margin-left: 18px;
+  margin-right: 8px;
+}
+
+.clock {
+  margin-left: 8px;
+  margin-right: 8px;
 }
