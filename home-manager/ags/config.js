@@ -6,11 +6,17 @@ import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
 import SystemTray from 'resource:///com/github/Aylur/ags/service/systemtray.js';
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-import { exec, execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
+import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 
 // widgets can be only assigned as a child in one container
 // so to make a reuseable widget, make it a function
 // then you can simply instantiate one by calling it
+
+const Logo = () => Widget.Icon({
+    class_name: 'logo',
+    icon: '/home/brynleyl/.config/ags/logo.png',
+    size: 10,
+});
 
 const Workspaces = () => Widget.Box({
     class_name: 'workspaces',
@@ -26,7 +32,8 @@ const Workspaces = () => Widget.Box({
 
 const ClientTitle = () => Widget.Label({
     class_name: 'client-title',
-    css: 'max-width: 180px',
+    truncate: 'end',
+    maxWidthChars: "64",
     label: Hyprland.active.client.bind('title'),
 });
 
@@ -83,7 +90,7 @@ const Volume = () => Widget.Box({
                 0: 'muted',
             };
 
-            const icon = Audio.speaker.is_muted ? 0 : [101, 67, 34, 1, 0].find(
+            const icon = Audio.speaker.stream.isMuted ? 0 : [101, 67, 34, 1, 0].find(
                 threshold => threshold <= Audio.speaker.volume * 100);
 
             self.icon = `audio-volume-${category[icon]}-symbolic`;
@@ -104,6 +111,7 @@ const BatteryLabel = () => Widget.Box({
     visible: Battery.bind('available'),
     children: [
         Widget.Icon({
+            class_name: 'battery-icon',
             icon: Battery.bind('percent').transform(p => {
                 return `battery-level-${Math.floor(p / 10) * 10}-symbolic`;
             }),
@@ -133,6 +141,7 @@ const SysTray = () => Widget.Box({
 const Left = () => Widget.Box({
     spacing: 8,
     children: [
+        Logo(),
         Workspaces(),
         ClientTitle(),
     ],
@@ -160,7 +169,7 @@ const Right = () => Widget.Box({
 const Bar = (monitor = 0) => Widget.Window({
     name: `bar-${monitor}`, // name has to be unique
     class_name: 'bar',
-    margins: [10, 10, 0, 10],
+    margins: [6 , 6, 0, 6],
     monitor,
     anchor: ['top', 'left', 'right'],
     exclusivity: 'exclusive',
