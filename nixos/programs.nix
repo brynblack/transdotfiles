@@ -7,7 +7,7 @@
     xwayland.enable = true;
   };
 
-  programs.tmux.enable = true;
+  programs.kdeconnect.enable = true;
   programs.zsh.enable = true;
   programs.zsh.enableCompletion = true;
   programs.bash.enableCompletion = true;

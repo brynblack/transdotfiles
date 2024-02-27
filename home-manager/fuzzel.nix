@@ -3,9 +3,9 @@
     enable = true;
     settings = {
       main = {
-        font = "monospace:weight=bold:size=16";
-        width = 30;
-        horizontal-pad = "30";
+        font = "Cantarell:weight=semibold:size=12";
+        width = 16;
+        horizontal-pad = "16";
       };
       colors = {
         background = "211a1bff";
