@@ -23,11 +23,11 @@
   outputs = { home-manager, nixpkgs, ... }@inputs:
   let
     username = "brynleyl";
-    hostname = "gayuwu";
+    hostname = "nixos";
     system = "x86_64-linux";
 
     pkgs = import nixpkgs {
-      inherit system;
+      hostPlatform = system;
       config.allowUnfree = true;
     };
   in

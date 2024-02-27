@@ -4,8 +4,11 @@
   programs.helix = {
     enable = true;
 
-    extraPackages = with pkgs; [
+    extraPackages = with pkgs; with nodePackages_latest; [
       nil
+      typescript-language-server
+      ts-node
+      clang-tools
     ];
     
     settings = {

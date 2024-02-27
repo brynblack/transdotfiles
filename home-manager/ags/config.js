@@ -8,14 +8,9 @@ import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 
-// widgets can be only assigned as a child in one container
-// so to make a reuseable widget, make it a function
-// then you can simply instantiate one by calling it
-
 const Logo = () => Widget.Icon({
     class_name: 'logo',
     icon: '/home/brynleyl/.config/ags/logo.png',
-    size: 10,
 });
 
 const Workspaces = () => Widget.Box({
@@ -37,15 +32,25 @@ const ClientTitle = () => Widget.Label({
     label: Hyprland.active.client.bind('title'),
 });
 
-const Clock = () => Widget.Label({
-    class_name: 'clock',
-    setup: self => self
-        .poll(1000, self => execAsync(['date', '+%H:%M · %b %e'])
-            .then(date => self.label = date)),
+const Media = () => Widget.Button({
+    class_name: 'media',
+    on_primary_click: () => Mpris.getPlayer('')?.playPause(),
+    on_scroll_up: () => Mpris.getPlayer('')?.next(),
+    on_scroll_down: () => Mpris.getPlayer('')?.previous(),
+    child: Widget.Label({
+        truncate: 'end',
+        maxWidthChars: '32',
+        label: '-',
+    }).hook(Mpris, self => {
+        if (Mpris.players[0]) {
+            const { track_artists, track_title } = Mpris.players[0];
+            self.label = `${track_artists.join(', ')} - ${track_title}`;
+        } else {
+            self.label = 'Nothing is playing';
+        }
+    }, 'player-changed'),
 });
 
-// we don't need dunst or any other notification daemon
-// because the Notifications module is a notification daemon itself
 const Notification = () => Widget.Box({
     class_name: 'notification',
     visible: Notifications.bind('popups').transform(p => p.length > 0),
@@ -57,21 +62,6 @@ const Notification = () => Widget.Box({
             label: Notifications.bind('popups').transform(p => p[0]?.summary || ''),
         }),
     ],
-});
-
-const Media = () => Widget.Button({
-    class_name: 'media',
-    on_primary_click: () => Mpris.getPlayer('')?.playPause(),
-    on_scroll_up: () => Mpris.getPlayer('')?.next(),
-    on_scroll_down: () => Mpris.getPlayer('')?.previous(),
-    child: Widget.Label('-').hook(Mpris, self => {
-        if (Mpris.players[0]) {
-            const { track_artists, track_title } = Mpris.players[0];
-            self.label = `${track_artists.join(', ')} - ${track_title}`;
-        } else {
-            self.label = 'Nothing is playing';
-        }
-    }, 'player-changed'),
 });
 
 const Volume = () => Widget.Box({
@@ -100,7 +90,7 @@ const Volume = () => Widget.Box({
             draw_value: false,
             on_change: ({ value }) => Audio.speaker.volume = value,
             setup: self => self.hook(Audio, () => {
-                self.value = Audio.speaker?.volume || 0;
+                self.value = Audio.speaker.stream.isMuted ? 0 : Audio.speaker?.volume;
             }, 'speaker-changed'),
         }),
     ],
@@ -125,6 +115,13 @@ const BatteryLabel = () => Widget.Box({
     ],
 });
 
+const Clock = () => Widget.Label({
+    class_name: 'clock',
+    setup: self => self
+        .poll(1000, self => execAsync(['date', '+%H:%M · %b %e'])
+            .then(date => self.label = date)),
+});
+
 const SysTray = () => Widget.Box({
     class_name: 'icons',
     children: SystemTray.bind('items').transform(items => {
@@ -137,7 +134,6 @@ const SysTray = () => Widget.Box({
     }),
 });
 
-// layout of the bar
 const Left = () => Widget.Box({
     spacing: 8,
     children: [

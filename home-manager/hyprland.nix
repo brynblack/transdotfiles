@@ -21,17 +21,17 @@ in
 
     settings = {
       exec-once = [
+        "dbus-update-activation-environment --systemd --all"
         "dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus"
         "swww init"
         "hyprctl setcursor 'capitaine-cursors' 24"
       ];
 
       exec = [
-        "swww img ~/Pictures/Wallpapers/cherry.jpg"
         "killall ags; GTK_THEME=adw-gtk3-dark ags"
       ];
 
-      monitor = ",preferred,auto,1.2";
+      monitor = ",preferred,auto,auto";
 
       input = {
         kb_layout = "us";
@@ -124,9 +124,6 @@ in
           "$mod, P, pseudo,"
           "$mod, J, togglesplit,"
           "$mod, K, fullscreen, 0"
-
-          # Open emoji picker
-          "$mod, PERIOD, exec, flatpak run it.mijorus.smile"
 
           # Screenshot using $mod + prtsc
           "$mod, PRINT, exec, grim -g \"$(slurp)\" - | tee ~/Pictures/Screenshots/Screenshot_$(date +'%Y%m%d')_$(date +'%H%M%S.png') | wl-copy && notify-send \"screenshot saved :3\" || echo \"uh-oh, something went wrong :(\""

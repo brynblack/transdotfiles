@@ -24,7 +24,7 @@
     cron.enable = false;
     blueman.enable = true;
     gnome.gnome-keyring.enable = true;
-    flatpak.enable = true;
+    tlp.enable = true;
     packagekit.enable = true;
     fwupd.enable = true;
     udisks2.enable = true;
