@@ -5,10 +5,14 @@ with gnome;
 let
   mpvpaper = pkgs.callPackage ./mpvpaper {};
   gradience = pkgs.callPackage ./gradience {};
+  blender = pkgs.blender.override {
+    cudaSupport = true;
+  };
 in
 {
   environment.systemPackages = [
     capitaine-cursors
+    blender
     git
     helix
     foot
