@@ -3,11 +3,17 @@
     enable = true;
     settings = {
       main = {
-        font = "CascadiaCode:size=13";
+        font = "CaskaydiaCoveNerdFont:size=13";
+        pad = "16x16 center";
       };
+
+      scrollback = {
+        indicator-position = "none";
+      };
+
       colors = {
         foreground = "ece0e0"; # Text
-        background = "211a1b"; # Base
+        background = "1a1c1e"; # Base
         regular0 = "45475a";   # Surface 1
         regular1 = "f38ba8";   # red
         regular2 = "a6e3a1";   # green
