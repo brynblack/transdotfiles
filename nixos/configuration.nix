@@ -1,83 +1,33 @@
-{ pkgs, ... }:
-
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
     ./audio.nix
     ./boot.nix
+    ./graphics.nix
+    ./hardware-configuration.nix
     ./hardware.nix
+    ./locale.nix
     ./networking.nix
+    ./packages.nix
     ./programs.nix
-    ./services.nix
     ./users.nix
   ];
 
-  nix = {
-    daemonCPUSchedPolicy = "idle";
-    settings = {
-      auto-optimise-store = true;
-      trusted-users = [ "root" "@wheel" ];
-    };
-  };
+  nixpkgs.config.allowUnfree = true;
 
-  console.keyMap = "colemak";
-  i18n.defaultLocale = "en_AU.UTF-8";
-  time.timeZone = "Australia/Sydney";
+  nix.settings.experimental-features = "nix-command flakes";
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    GTK_THEME = "adw-gtk3-dark";
+    TERMINAL = "foot";
   };
 
-  environment.systemPackages = with pkgs; [
-    coreutils       # basic shell utilities
-    cryptsetup      # luks
-    dmidecode       # dmidecode
-    efibootmgr      # efi management
-    gawk            # awk
-    git             # version control
-    gnupg           # encryption/decryption/signing
-    gnugrep         # grep
-    gnused          # sed
-    gptfdisk        # disk partitioning
-    helix           # text editor
-    hdparm          # disk info
-    home-manager    # nix-managed home configuration
-    iproute         # ip, tc
-    iw              # wireless configuration
-    lm_sensors      # fan monitoring
-    lshw            # lshw
-    mkpasswd        # mkpasswd
-    mtools          # disk labelling
-    ncurses         # tput (terminal control)
-    nettools        # hostname, ifconfig
-    openssh         # ssh
-    pciutils        # lspci, setpci
-    procps          # ps, top, pidof, vmstat, slabtop, skill, w
-    psmisc          # fuser, killall, pstree, peekfd
-    shadow          # passwd, su
-    smartmontools   # disk monitoring
-    usbutils        # lsusb
-    utillinux       # linux system utilities
-  ];
-
-  fonts = {
-    packages = with pkgs; [
-      cantarell-fonts # main ui font
-      cascadia-code   # monospace
-    ];
-  };
-
-  virtualisation.docker.enable = true;
-
-  security = {
-    polkit.enable = true;
-    sudo = {
-      extraConfig = ''
-        Defaults umask = 0022
-        Defaults umask_override
-      '';
-    };
-  };
-
-  system.stateVersion = "23.11";
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "23.11"; # Did you read the comment?
 }

@@ -1,8 +1,5 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
-let
-  hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
-in
 {
   xdg.desktopEntries."org.gnome.Settings" = {
     name = "Settings";
@@ -13,9 +10,15 @@ in
     terminal = false;
   };
 
+  home.file.".icons/default".source = "${pkgs.capitaine-cursors}/share/icons/capitaine-cursors";
+
+  home.sessionVariables = {
+    GTK_THEME = "adw-gtk3-dark";
+    TERMINAL = "foot";
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
-    package = hyprland;
     systemd.enable = true;
     xwayland.enable = true;
 
@@ -28,10 +31,16 @@ in
       ];
 
       exec = [
-        "killall ags; GTK_THEME=adw-gtk3-dark ags"
+        "ags --quit; GTK_THEME=adw-gtk3-dark ags"
+        "LD_LIBRARY_PATH=/run/opengl-driver/lib/ LIBVA_DRIVER_NAME=vdpau VDPAU_DRIVER=nvidia mpvpaper DP-1 ~/Pictures/Wallpapers/anime.mp4 -o 'no-audio --loop-playlist shuffle'"
+        "swww img --outputs=HDMI-A-1 ~/Pictures/Wallpapers/city.jpg"
       ];
 
-      monitor = ",preferred,auto,auto";
+      monitor = [
+        ",preferred,auto,auto"
+        "desc:ASUSTek COMPUTER INC VG279QM M3LMQS406491,preferred,0x0,1"
+        "desc:Microstep MSI MP273A PB4H643C00347,1920x1080@100,1920x-350,1,transform,1"
+      ];
 
       input = {
         kb_layout = "us";
@@ -41,7 +50,7 @@ in
           natural_scroll = true;
         };
         accel_profile = "flat";
-        sensitivity = 0;
+        sensitivity = -0.6;
         repeat_rate = 30;
         repeat_delay = 200;
       };
@@ -49,9 +58,7 @@ in
       general = {
         gaps_in = 6;
         gaps_out = 6;
-        border_size = 1;
-        "col.active_border" = "rgba(ffffffff)";
-        "col.inactive_border" = "rgba(595959aa)";
+        border_size = 0;
         layout = "dwindle";
         allow_tearing = false;
       };
@@ -103,9 +110,6 @@ in
         animate_manual_resizes = true;
       };
 
-      # windowrulev2 = "nomaximizerequest, class:.*";
-      windowrulev2 = "float,class:(it.mijorus.smile),title:(Smile)";
-
       # Variables used for keybinds
       "$mod" = "ALT";
       "$terminal" = "foot";
@@ -125,8 +129,11 @@ in
           "$mod, J, togglesplit,"
           "$mod, K, fullscreen, 0"
 
-          # Screenshot using $mod + prtsc
-          "$mod, PRINT, exec, grim -g \"$(slurp)\" - | tee ~/Pictures/Screenshots/Screenshot_$(date +'%Y%m%d')_$(date +'%H%M%S.png') | wl-copy && notify-send \"screenshot saved :3\" || echo \"uh-oh, something went wrong :(\""
+          # Rectangluar screenshot using $mod + SHIFT + R
+          "$mod + SHIFT, R, exec, grim -g \"$(slurp -d)\" - | tee ~/Pictures/Screenshots/Screenshot_$(date +'%Y%m%d')_$(date +'%H%M%S.png') | wl-copy && notify-send \"screenshot saved :3\" || echo \"uh-oh, something went wrong :(\""
+
+          # Screenshot monitor using $mod + prtsc
+          "$mod, PRINT, exec, grim -g \"$(slurp -d -o)\" - | tee ~/Pictures/Screenshots/Screenshot_$(date +'%Y%m%d')_$(date +'%H%M%S.png') | wl-copy && notify-send \"screenshot saved :3\" || echo \"uh-oh, something went wrong :(\""
 
           # Scroll through existing workspaces with $mod + scroll
           "$mod, mouse_down, workspace, e+1"
@@ -136,10 +143,6 @@ in
           ", XF86AudioPrev, exec, playerctl previous"
           ", XF86AudioPlay, exec, playerctl play-pause"
           ", XF86AudioNext, exec, playerctl next"
-
-          # Control brightness with brightness keys
-          ", XF86MonBrightnessDown, exec, brightnessctl s 5%-"
-          ", XF86MonBrightnessUp, exec, brightnessctl s 5%+"
 
           # Toggle audio mute
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_SINK@ toggle"
@@ -183,6 +186,12 @@ in
           "$mod + SHIFT, o, movewindow, r"
           "$mod + SHIFT, i, movewindow, u"
           "$mod + SHIFT, e, movewindow, d"
+
+          # Move active window granularly with $mod + CTRL + SHIFT + direction keys
+          "$mod + CTRL + SHIFT, n, moveactive, -50 0"
+          "$mod + CTRL + SHIFT, o, moveactive, 50 0"
+          "$mod + CTRL + SHIFT, i, moveactive, 0 -50"
+          "$mod + CTRL + SHIFT, e, moveactive, 0 50"
 
           # Control volume with volume keys
           ", XF86AudioLowerVolume, exec, wpctl set-volume --limit 1.0 @DEFAULT_SINK@ 2%-"

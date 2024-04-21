@@ -1,19 +1,18 @@
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
-import Notifications from 'resource:///com/github/Aylur/ags/service/notifications.js';
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
 import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
-import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
 import SystemTray from 'resource:///com/github/Aylur/ags/service/systemtray.js';
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import { NotificationPopups } from "./notification.js"
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 
-const Logo = () => Widget.Icon({
+const Logo = Widget.Icon({
     class_name: 'logo',
     icon: '/home/brynleyl/.config/ags/logo.png',
 });
 
-const Workspaces = () => Widget.Box({
+const Workspaces = Widget.Box({
     class_name: 'workspaces',
     children: Hyprland.bind('workspaces').transform(ws => {
         return ws.map(({ id }) => Widget.Button({
@@ -25,16 +24,17 @@ const Workspaces = () => Widget.Box({
     }),
 });
 
-const ClientTitle = () => Widget.Label({
-    class_name: 'client-title',
+const Active = Widget.Label({
+    class_name: 'active',
     truncate: 'end',
     maxWidthChars: "64",
     label: Hyprland.active.client.bind('title'),
+    visible: Hyprland.active.client.bind('title').as(title => title.length > 0),
 });
 
-const Media = () => Widget.Button({
+const Media = Widget.Button({
     class_name: 'media',
-    on_primary_click: () => Mpris.getPlayer('')?.playPause(),
+    onClicked: () => Mpris.getPlayer('')?.playPause(),
     on_scroll_up: () => Mpris.getPlayer('')?.next(),
     on_scroll_down: () => Mpris.getPlayer('')?.previous(),
     child: Widget.Label({
@@ -49,22 +49,22 @@ const Media = () => Widget.Button({
             self.label = 'Nothing is playing';
         }
     }, 'player-changed'),
+    visible: Mpris.bind('players').as(p => !!p.length),
 });
 
-const Notification = () => Widget.Box({
-    class_name: 'notification',
-    visible: Notifications.bind('popups').transform(p => p.length > 0),
-    children: [
-        Widget.Icon({
-            icon: 'preferences-system-notifications-symbolic',
-        }),
-        Widget.Label({
-            label: Notifications.bind('popups').transform(p => p[0]?.summary || ''),
-        }),
-    ],
+const Tray = Widget.Box({
+    class_name: 'tray',
+    children: SystemTray.bind('items').transform(items => {
+        return items.map(item => Widget.Button({
+            child: Widget.Icon({ binds: [['icon', item, 'icon']] }),
+            on_primary_click: (_, event) => item.activate(event),
+            on_secondary_click: (_, event) => item.openMenu(event),
+            binds: [['tooltip-markup', item, 'tooltip-markup']],
+        }));
+    }),
 });
 
-const Volume = () => Widget.Box({
+const Volume = Widget.Box({
     class_name: 'volume',
     css: 'min-width: 180px',
     children: [
@@ -86,6 +86,7 @@ const Volume = () => Widget.Box({
             self.icon = `audio-volume-${category[icon]}-symbolic`;
         }, 'speaker-changed'),
         Widget.Slider({
+            class_name: 'slider',
             hexpand: true,
             draw_value: false,
             on_change: ({ value }) => Audio.speaker.volume = value,
@@ -96,83 +97,50 @@ const Volume = () => Widget.Box({
     ],
 });
 
-const BatteryLabel = () => Widget.Box({
-    class_name: 'battery',
-    visible: Battery.bind('available'),
-    children: [
-        Widget.Icon({
-            class_name: 'battery-icon',
-            icon: Battery.bind('percent').transform(p => {
-                return `battery-level-${Math.floor(p / 10) * 10}-symbolic`;
-            }),
-        }),
-        Widget.ProgressBar({
-            vpack: 'center',
-            fraction: Battery.bind('percent').transform(p => {
-                return p > 0 ? p / 100 : 0;
-            }),
-        }),
-    ],
-});
-
-const Clock = () => Widget.Label({
+const Clock = Widget.Label({
     class_name: 'clock',
     setup: self => self
         .poll(1000, self => execAsync(['date', '+%H:%M · %b %e'])
             .then(date => self.label = date)),
 });
 
-const SysTray = () => Widget.Box({
-    class_name: 'icons',
-    children: SystemTray.bind('items').transform(items => {
-        return items.map(item => Widget.Button({
-            child: Widget.Icon({ binds: [['icon', item, 'icon']] }),
-            on_primary_click: (_, event) => item.activate(event),
-            on_secondary_click: (_, event) => item.openMenu(event),
-            binds: [['tooltip-markup', item, 'tooltip-markup']],
-        }));
-    }),
-});
-
-const Left = () => Widget.Box({
+const Left = Widget.Box({
     spacing: 8,
     children: [
-        Logo(),
-        Workspaces(),
-        ClientTitle(),
+        Logo,
+        Workspaces,
+        Active,
     ],
 });
 
-const Center = () => Widget.Box({
+const Center = Widget.Box({
     spacing: 8,
     children: [
-        Media(),
-        Notification(),
+        Media,
     ],
 });
 
-const Right = () => Widget.Box({
+const Right = Widget.Box({
     hpack: 'end',
     spacing: 8,
     children: [
-        Volume(),
-        BatteryLabel(),
-        Clock(),
-        SysTray(),
+        Tray,
+        Volume,
+        Clock,
     ],
 });
 
 const Bar = (monitor = 0) => Widget.Window({
-    name: `bar-${monitor}`, // name has to be unique
+    name: `bar-${monitor}`,
     class_name: 'bar',
-    margins: [6 , 6, 0, 6],
+    margins: [5, 5, 0, 5],
     monitor,
     anchor: ['top', 'left', 'right'],
     exclusivity: 'exclusive',
     child: Widget.CenterBox({
-        start_widget: Left(),
-        center_widget: Center(),
-        end_widget: Right(),
+        start_widget: Left,
+        center_widget: Center,
+        end_widget: Right,
     }),
 });
 
@@ -186,15 +154,11 @@ monitorFile(
     },
 );
 
-// exporting the config so ags can manage the windows
-export default {
-    style: App.configDir + '/style.css',
+App.config({
+    style: './style.css',
     windows: [
         Bar(),
-
-        // you can call it, for each monitor
-        // Bar(0),
-        // Bar(1)
-    ],
-};
+        NotificationPopups(),
+    ],    
+});
 

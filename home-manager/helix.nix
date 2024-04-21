@@ -10,6 +10,18 @@
       ts-node
       clang-tools
     ];
+
+    themes = {
+      catppuccin_mocha = {
+        inherits = "catppuccin_mocha";
+        "ui.background" = "none";
+        "ui.menu" = "none";
+        "ui.help" = "none";
+        "ui.popup" = "none";
+        "ui.statusline" = "none";
+        "ui.gutter" = "none";
+      };
+    };
     
     settings = {
       theme = "catppuccin_mocha";

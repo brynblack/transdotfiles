@@ -8,13 +8,13 @@
         horizontal-pad = "16";
       };
       colors = {
-        background = "211a1bff";
+        background = "1a1c1eff";
         text = "ece0e0ff";
         match = "f38ba8ff";
         selection = "585b70ff";
         selection-match = "f38ba8ff";
         selection-text = "cdd6f4ff";
-        border = "ffffffff";
+        border = "383A3Cff";
       };
     };
   };

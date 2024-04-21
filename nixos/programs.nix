@@ -1,24 +1,35 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 
-{  
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    xwayland.enable = true;
-  };
+{
+  programs = {
+    hyprland.enable = true;
+    starship = {
+      enable = true;
+      presets = [ "nerd-font-symbols" ];
+      settings = {
+        format = pkgs.lib.concatStrings [
+          "[╭╴](238)$all"
+          "[╰─>](238)$character"
+        ];
 
-  programs.kdeconnect.enable = true;
-  programs.zsh.enable = true;
-  programs.zsh.enableCompletion = true;
-  programs.bash.enableCompletion = true;
-  programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
-  programs.mtr.enable = true;
-  programs.light.enable = true;
-  programs.adb.enable = true;
-  programs.bcc.enable = true;
-  programs.fuse = {
-    userAllowOther = true;
+        character = {
+          success_symbol = "";
+          error_symbol = "";
+        };
+      };
+    };
+    thefuck.enable = true;
+    kdeconnect.enable = true;
+    alvr = {
+      enable = true;
+      openFirewall = true;
+    };
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
+    };
+    adb.enable = true;
   };
-  programs.seahorse.enable = false;
-  programs.starship.enable = true;
 }
