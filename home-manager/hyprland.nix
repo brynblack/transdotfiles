@@ -50,7 +50,7 @@
           natural_scroll = true;
         };
         accel_profile = "flat";
-        sensitivity = -0.6;
+        sensitivity = -0.7;
         repeat_rate = 30;
         repeat_delay = 200;
       };
