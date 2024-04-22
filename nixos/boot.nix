@@ -1,7 +1,7 @@
 { config, ... }:
 
 { 
-  boot.kernelModules = [ "v4l2loopback" ];
+  boot.kernelModules = [ "v4l2loopback" "nvidia_uvm" ];
   boot.extraModulePackages = [
     config.boot.kernelPackages.v4l2loopback.out
   ];

@@ -10,6 +10,11 @@
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    aagl = {
+      url = "github:ezKEa/aagl-gtk-on-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, home-manager, ... }@inputs:
@@ -20,6 +25,7 @@
   in
   {
     nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
       modules = [ ./nixos/configuration.nix ];
     };
 

@@ -2,6 +2,8 @@
 
 {
   programs = {
+    anime-game-launcher.enable = true;
+    gamemode.enable = true;
     hyprland.enable = true;
     starship = {
       enable = true;
