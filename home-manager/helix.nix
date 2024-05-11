@@ -4,11 +4,12 @@
   programs.helix = {
     enable = true;
 
-    extraPackages = with pkgs; with nodePackages_latest; [
+    extraPackages = with pkgs; with nodePackages_latest; with python311Packages; [
       nil
       typescript-language-server
       ts-node
       clang-tools
+      python-lsp-server
     ];
 
     themes = {

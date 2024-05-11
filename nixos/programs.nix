@@ -33,5 +33,6 @@
       syntaxHighlighting.enable = true;
     };
     adb.enable = true;
+    nix-ld.enable = true;
   };
 }

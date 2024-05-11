@@ -28,6 +28,7 @@
         "dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus"
         "swww init"
         "hyprctl setcursor 'capitaine-cursors' 24"
+        "openrgb --profile Default --startminimized"
       ];
 
       exec = [
