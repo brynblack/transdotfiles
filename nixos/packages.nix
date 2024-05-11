@@ -11,7 +11,15 @@ let
 in
 {
   environment.systemPackages = [
+    docker-compose
+    docker
+    usbutils
+    gcc
+    rustup
+    bottles
+    pulseaudio
     capitaine-cursors
+    godot_4
     blender
     git
     helix
