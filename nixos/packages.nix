@@ -2,15 +2,24 @@
 
 with pkgs;
 with gnome;
+with nodePackages_latest;
+with python311Packages; 
 let
   mpvpaper = pkgs.callPackage ./mpvpaper {};
   gradience = pkgs.callPackage ./gradience {};
-  blender = pkgs.blender.override {
-    cudaSupport = true;
-  };
 in
 {
   environment.systemPackages = [
+    nil
+    typescript-language-server
+    ts-node
+    clang-tools
+    python-lsp-server
+    wofi
+
+    hyprlock
+    ripgrep
+    prismlauncher
     docker-compose
     docker
     usbutils
@@ -20,7 +29,6 @@ in
     pulseaudio
     capitaine-cursors
     godot_4
-    blender
     git
     helix
     foot
