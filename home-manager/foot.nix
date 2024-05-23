@@ -13,7 +13,7 @@
 
       colors = {
         foreground = "ece0e0"; # Text
-        background = "1a1c1e"; # Base
+        background = "1c1c16"; # Base
         regular0 = "45475a";   # Surface 1
         regular1 = "f38ba8";   # red
         regular2 = "a6e3a1";   # green

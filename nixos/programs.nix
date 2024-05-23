@@ -5,6 +5,7 @@
     anime-game-launcher.enable = true;
     gamemode.enable = true;
     hyprland.enable = true;
+    neovim.enable = true;
     starship = {
       enable = true;
       presets = [ "nerd-font-symbols" ];

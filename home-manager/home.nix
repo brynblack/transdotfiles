@@ -33,6 +33,7 @@ in
   };
 
   services.kdeconnect.enable = true;
+  services.arrpc.enable = true;
   services.ssh-agent.enable = true;
 
   programs.home-manager.enable = true;
