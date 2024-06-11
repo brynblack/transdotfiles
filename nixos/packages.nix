@@ -5,7 +5,6 @@ with gnome;
 with nodePackages_latest;
 with python311Packages; 
 let
-  mpvpaper = pkgs.callPackage ./mpvpaper {};
   gradience = pkgs.callPackage ./gradience {};
 in
 {
@@ -15,8 +14,10 @@ in
     ts-node
     clang-tools
     python-lsp-server
+    java-language-server
     wofi
 
+    obs-studio
     hyprlock
     ripgrep
     prismlauncher
@@ -28,7 +29,6 @@ in
     bottles
     pulseaudio
     capitaine-cursors
-    godot_4
     git
     helix
     foot
@@ -44,7 +44,6 @@ in
     eza
     vesktop
     btop
-    steam
     adw-gtk3
     helvum
     grim
