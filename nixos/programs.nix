@@ -6,6 +6,7 @@
     gamemode.enable = true;
     hyprland.enable = true;
     neovim.enable = true;
+    steam.enable = true;
     starship = {
       enable = true;
       presets = [ "nerd-font-symbols" ];

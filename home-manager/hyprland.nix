@@ -84,6 +84,7 @@
 
       monitor = [
         ",preferred,auto,auto"
+        "Unknown-1,disabled"
         "desc:ASUSTek COMPUTER INC VG279QM M3LMQS406491,preferred,0x0,1"
         "desc:Microstep MSI MP273A PB4H643C00347,1920x1080@100,1920x-350,1,transform,1"
       ];
