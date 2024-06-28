@@ -161,7 +161,7 @@
       "$mod" = "ALT";
       "$terminal" = "foot";
       "$fileManager" = "nautilus";
-      "$menu" = "fuzzel";
+      "$menu" = "wofi -I -M fuzzy -S drun";
 
       bind =
         [

@@ -9,7 +9,6 @@ in
     ./btop.nix
     ./cava.nix
     ./foot.nix
-    ./fuzzel.nix
     ./helix.nix
     ./hyprland.nix
     ./wlsunset.nix
