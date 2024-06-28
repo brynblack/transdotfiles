@@ -34,7 +34,5 @@ in
   services.kdeconnect.enable = true;
   services.ssh-agent.enable = true;
 
-  home.file.".config/nvim".source = ./nvim; 
-
   programs.home-manager.enable = true;
 }

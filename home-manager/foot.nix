@@ -12,6 +12,7 @@
       };
 
       colors = {
+        alpha = "0.8";
         foreground = "ece0e0"; # Text
         background = "1c1c16"; # Base
         regular0 = "45475a";   # Surface 1
