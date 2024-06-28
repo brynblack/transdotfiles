@@ -7,8 +7,8 @@
       alias ls='eza -lh --icons=always'
       alias lsa='ls -a'
       alias shx='sudo -E hx'
-      alias nv='nvim'
-      alias snv='sudo -E nvim'
+      alias update='sudo nix flake update /etc/nixos'
+      alias rebuild='sudo nixos-rebuild switch --flake /etc/nixos && home-manager switch --flake /etc/nixos'
 
       colorscript --random
     '';
