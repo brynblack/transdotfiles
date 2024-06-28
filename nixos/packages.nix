@@ -17,10 +17,12 @@ in
     java-language-server
     wofi
 
+    cemu
     obs-studio
     hyprlock
     ripgrep
     prismlauncher
+    osu-lazer-bin
     docker-compose
     docker
     usbutils
@@ -33,7 +35,6 @@ in
     helix
     foot
     swww
-    fuzzel
     wl-clipboard
     playerctl
     pfetch
