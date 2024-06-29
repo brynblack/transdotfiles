@@ -15,8 +15,9 @@ in
     clang-tools
     python-lsp-server
     java-language-server
-    wofi
 
+    wofi
+    killall
     cemu
     obs-studio
     hyprlock
@@ -40,7 +41,6 @@ in
     pfetch
     brave
     home-manager
-    mpvpaper
     cava
     eza
     vesktop
