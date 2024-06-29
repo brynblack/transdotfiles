@@ -1,8 +1,5 @@
 # transdotfiles
-My Home Manager + NixOS configuration!
-![image](https://github.com/brynblack/transdotfiles/assets/49110391/8e4788b9-50f1-4ed4-a7cd-ddc5fe3cbeb9)
 
-## Screenshots
 ![image](https://github.com/brynblack/transdotfiles/assets/49110391/3ba5a792-8460-4f05-b655-b996f7212b5f)
 
 ![Screenshot_20240629_191147](https://github.com/brynblack/transdotfiles/assets/49110391/e9037f06-393f-486d-9a16-e4bfc5b2f25e)
