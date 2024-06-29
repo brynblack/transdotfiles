@@ -23,6 +23,7 @@
         "ui.statusline.inactive" = "none";
         "ui.gutter" = "none";
         "ui.linenr" = "#45475a";
+        "ui.window" = "#1c1c16";
       };
     };
     
