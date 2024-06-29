@@ -24,8 +24,6 @@ in
     ripgrep
     prismlauncher
     osu-lazer-bin
-    docker-compose
-    docker
     usbutils
     gcc
     rustup
