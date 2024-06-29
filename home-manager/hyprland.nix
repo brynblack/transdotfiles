@@ -78,8 +78,7 @@
 
       exec = [
         "ags --quit; GTK_THEME=adw-gtk3-dark ags"
-        "LD_LIBRARY_PATH=/run/opengl-driver/lib/ LIBVA_DRIVER_NAME=vdpau VDPAU_DRIVER=nvidia mpvpaper DP-1 ~/Pictures/Wallpapers/frieren.mp4 -o 'no-audio --loop-playlist shuffle --video-scale-y=1.1 --video-scale-x=1.1'"
-        "swww img --outputs=HDMI-A-1 ~/Pictures/Wallpapers/branch.jpg"
+        "swww img ~/Pictures/Wallpapers/branch.jpg"
       ];
 
       monitor = [
