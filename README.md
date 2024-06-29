@@ -3,9 +3,9 @@ My Home Manager + NixOS configuration!
 ![image](https://github.com/brynblack/transdotfiles/assets/49110391/8e4788b9-50f1-4ed4-a7cd-ddc5fe3cbeb9)
 
 ## Screenshots
-![Screenshot_20240421_011841](https://github.com/brynblack/transdotfiles/assets/49110391/72582192-600a-45b9-8dc4-b85b0e36b611)
+![image](https://github.com/brynblack/transdotfiles/assets/49110391/3ba5a792-8460-4f05-b655-b996f7212b5f)
 
-![Screenshot_20240420_232525](https://github.com/brynblack/transdotfiles/assets/49110391/ecc5bcb2-a79c-4df5-9942-14d6d67ef51e)
+![Screenshot_20240629_191147](https://github.com/brynblack/transdotfiles/assets/49110391/e9037f06-393f-486d-9a16-e4bfc5b2f25e)
 
 ## License
 The source code for this project is licensed under the MIT license. You may find the conditions of the license [here](LICENSE.md).
