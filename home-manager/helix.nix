@@ -20,7 +20,9 @@
         "ui.help" = "none";
         "ui.popup" = "none";
         "ui.statusline" = "none";
+        "ui.statusline.inactive" = "none";
         "ui.gutter" = "none";
+        "ui.linenr" = "#45475a";
       };
     };
     
