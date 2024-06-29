@@ -10,7 +10,7 @@
       alias update='sudo nix flake update /etc/nixos'
       alias rebuild='sudo nixos-rebuild switch --flake /etc/nixos && home-manager switch --flake /etc/nixos'
 
-      colorscript --random
+      colorscript -e zwaves
     '';
   };
 }
