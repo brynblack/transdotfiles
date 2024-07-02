@@ -16,6 +16,7 @@ in
     python-lsp-server
     java-language-server
 
+    ukmm
     wofi
     killall
     cemu
