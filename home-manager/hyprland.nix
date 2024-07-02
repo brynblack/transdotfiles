@@ -71,14 +71,13 @@
       exec-once = [
         "dbus-update-activation-environment --systemd --all"
         "dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus"
-        "swww init"
+        "swww-daemon"
         "hyprctl setcursor 'capitaine-cursors' 24"
         "openrgb --profile Default --startminimized"
       ];
 
       exec = [
         "ags --quit; GTK_THEME=adw-gtk3-dark ags"
-        "swww img ~/Pictures/Wallpapers/branch.jpg"
       ];
 
       monitor = [
@@ -140,10 +139,6 @@
         pseudotile = true;
         preserve_split = true;
         force_split = 2;
-      };
-
-      master = {
-        new_is_master = true;
       };
 
       gestures = {

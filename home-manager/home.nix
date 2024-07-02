@@ -31,8 +31,10 @@ in
     cursorTheme.package = pkgs.capitaine-cursors;
   };
 
-  services.kdeconnect.enable = true;
-  services.ssh-agent.enable = true;
+  services = {
+    kdeconnect.enable = true;
+    ssh-agent.enable = true;
+  };
 
   programs.home-manager.enable = true;
 }
