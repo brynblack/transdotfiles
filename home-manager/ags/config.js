@@ -15,7 +15,8 @@ const Logo = Widget.Icon({
 const Workspaces = Widget.Box({
     class_name: 'workspaces',
     children: Hyprland.bind('workspaces').transform(ws => {
-        return ws.map(({ id }) => Widget.Button({
+        const sortedWs = ws.sort((a, b) => a.id - b.id);
+        return sortedWs.map(({ id }) => Widget.Button({
             on_clicked: () => Hyprland.sendMessage(`dispatch workspace ${id}`),
             child: Widget.Label(`${id}`),
             class_name: Hyprland.active.workspace.bind('id')

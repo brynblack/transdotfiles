@@ -32,6 +32,7 @@ in
     pulseaudio
     capitaine-cursors
     git
+    git-lfs
     helix
     foot
     swww
