@@ -145,7 +145,6 @@ const Bar = (monitor = 0) => Widget.Window({
   }),
 });
 
-
 const contents = Utils.readFile('/home/brynleyl/.config/gtk-3.0/gtk.css');
 const output = convertGtkToScss(contents);
 Utils.writeFile(output, 'style/_gtk.scss')
@@ -155,34 +154,27 @@ const css = `/tmp/style.css`
 console.log(Utils.exec(`sass ${scss} ${css}`))
 
 Utils.monitorFile(
-    // directory that contains the scss files
-    `${App.configDir}/style`,
+  `${App.configDir}/style`,
 
-    // reload function
-    function() {
-        // main scss file
-        const scss = `${App.configDir}/style/style.scss`
+  function() {
+    const scss = `${App.configDir}/style/style.scss`
+    const css = `/tmp/style.css`
 
-        // target css file
-        const css = `/tmp/style.css`
+    console.log(Utils.exec(`sass ${scss} ${css}`))
 
-        // compile, reset, apply
-        console.log(Utils.exec(`sass ${scss} ${css}`))
-        App.resetCss()
-        App.applyCss(css)
-    },
+    App.resetCss()
+    App.applyCss(css)
+  },
 )
 
 Utils.monitorFile(
-    // directory that contains the scss files
-    `/home/brynleyl/.config/gtk-3.0/gtk.css`,
+  `/home/brynleyl/.config/gtk-3.0/gtk.css`,
 
-    // reload function
-    function() {
-        const contents = Utils.readFile('/home/brynleyl/.config/gtk-3.0/gtk.css');
-        const output = convertGtkToScss(contents);
-        Utils.writeFile(output, 'style/_gtk.scss')
-    },
+  function() {
+    const contents = Utils.readFile('/home/brynleyl/.config/gtk-3.0/gtk.css');
+    const output = convertGtkToScss(contents);
+    Utils.writeFile(output, 'style/_gtk.scss')
+  },
 )
 
 App.config({
