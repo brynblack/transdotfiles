@@ -13,8 +13,8 @@
 
       colors = {
         alpha = "0.8";
-        foreground = "ece0e0"; # Text
-        background = "1c1c16"; # Base
+        foreground = "e4e1e6"; # Text
+        background = "1b1b1f"; # Base
         regular0 = "45475a";   # Surface 1
         regular1 = "f38ba8";   # red
         regular2 = "a6e3a1";   # green
