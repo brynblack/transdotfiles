@@ -10,6 +10,25 @@
     terminal = false;
   };
 
+  xdg.desktopEntries."vesktop.desktop" = {
+    categories = [ "X-Network" "X-InstantMessaging" "X-ChatUU" ];
+    exec = "vesktop --disable-gpu-compositing %U";
+    genericName = "Internet Messenger";
+    icon = "vesktop";
+    name = "Vesktop";
+    type = "Application";
+  };
+
+  xdg.desktopEntries."brave-browser.desktop" = {
+    categories = [ "X-Network" "X-WebBrowser" ];
+    exec = "brave --disable-gpu-compositing %U";
+    genericName = "Web Browser";
+    icon = "brave-browser";
+    name = "Brave Web Browser";
+    mimeType = [ "application/pdf" "application/rdf+xml" "application/rss+xml" "application/xhtml+xml" "application/xhtml_xml" "application/xml" "image/gif" "image/jpeg" "image/png" "image/webp" "text/html" "text/xml" "x-scheme-handler/http" "x-scheme-handler/https" "x-scheme-handler/ipfs" "x-scheme-handler/ipns" ];
+    type = "Application";
+  };
+
   home.file.".icons/default".source = "${pkgs.capitaine-cursors}/share/icons/capitaine-cursors";
 
   home.file.".config/hypr/hyprlock.conf".text = ''
@@ -103,9 +122,12 @@
       general = {
         gaps_in = 6;
         gaps_out = 6;
-        border_size = 0;
+        border_size = 1;
         layout = "dwindle";
         allow_tearing = false;
+
+        "col.active_border" = "rgba(35363Eff)";
+        "col.inactive_border" = "rgba(35363Eff)";
       };
 
       decoration = {
@@ -133,6 +155,10 @@
         "fade, 1, 1, default"
         "workspaces, 1, 6, myBezier"
         ];
+      };
+
+      xwayland = {
+        force_zero_scaling = true;
       };
 
       dwindle = {

@@ -16,12 +16,15 @@ in
     python-lsp-server
     java-language-server
 
+    sass
+    bun
     ukmm
     wofi
     killall
     cemu
     obs-studio
     hyprlock
+    hyprpicker
     ripgrep
     prismlauncher
     osu-lazer-bin

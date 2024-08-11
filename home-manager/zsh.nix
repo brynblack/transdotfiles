@@ -5,7 +5,7 @@
       initExtra = ''
         export EDITOR=hx
 
-        alias ls='eza -lh --icons=always'
+        alias ls='eza -lh --icons=always --sort=type'
         alias lsa='ls -a'
         alias shx='sudo -E hx'
         alias update='sudo nix flake update /etc/nixos'
