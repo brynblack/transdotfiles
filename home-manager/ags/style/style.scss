@@ -1,15 +1,11 @@
 @import 'gtk';
 
-$theme_selected_bg_color: #000;
-$theme_bg_color: #000;
-$theme_fg_color: #000;
-$theme_unfocused_fg_color: #000;
-$wm_borders_edge: #000;
+$border: #35363E;
 
 window.bar {
   background-color: $window_bg_color;
   color: $window_fg_color;
-  border-bottom: 1px solid #35363E;
+  border-bottom: 1px solid $border;
   opacity: 0.8;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
@@ -25,14 +21,11 @@ button {
   padding-top: 0;
   padding-bottom: 0;
   background-color: transparent;
-}
+  color: $window_fg_color;
 
-button:active {
-  background-color: $theme_selected_bg_color;
-}
-
-button:hover {
-  border-bottom: 3px solid $theme_fg_color;
+  &:hover {
+    border-bottom: 3px solid $window_fg_color;
+  }
 }
 
 label {
@@ -40,7 +33,7 @@ label {
 }
 
 .workspaces button.focused {
-  border-bottom: 3px solid $theme_selected_bg_color;
+  border-bottom: 3px solid $accent_color;
 }
 
 progress,
@@ -50,11 +43,11 @@ highlight {
 
 .volume {
   font-size: 1.25rem;
-}
 
-.volume > .slider {
-  padding-right: 0;
-  margin-right: 0;
+  > .slider {
+    padding-right: 0;
+    margin-right: 0;
+  }
 }
 
 .tray {
@@ -79,7 +72,6 @@ highlight {
   background-color: $dark_4;
 }
 
-
 .workspaces {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -87,75 +79,61 @@ highlight {
 
 .tray {
   padding: 0;
+
+  > button {
+    border-radius: 1rem;
+  }
 }
 
-.tray > button {
-  border-radius: 1rem;
-}
-
-
-
-
-
-
-
-
-
-/* this is the notiiii */
 window.notification-popups box.notifications {
-    padding: .5em;
+  padding: .5em;
 }
 
 .icon {
-    min-width: 68px;
-    min-height: 68px;
-    margin-right: 1em;
-}
+  min-width: 68px;
+  min-height: 68px;
+  margin-right: 1em;
 
-.icon image {
+  image {
     font-size: 58px;
-    /* to center the icon */
     margin: 5px;
-    color: $theme_fg_color;
-}
+    color: $window_fg_color;
+  }
 
-.icon box {
+  box {
     min-width: 68px;
     min-height: 68px;
     border-radius: 7px;
+  }
 }
 
 .notification {
-    min-width: 350px;
-    border-radius: 11px;
-    padding: 1em;
-    margin: .5em;
-    border: 1px solid $wm_borders_edge;
-    background-color: $theme_bg_color;
-}
+  min-width: 350px;
+  border-radius: 11px;
+  padding: 1em;
+  margin: .5em;
+  border: 1px solid $border;
+  background-color: $window_bg_color;
 
-.notification.critical {
-    border: 1px solid lightcoral;
+  &.critical {
+    border: 1px solid $error_color;
+  }
 }
 
 .title {
-    color: $theme_fg_color;
-    font-size: 1.4em;
-}
-
-.body {
-    color: $theme_unfocused_fg_color;
+  color: $window_fg_color;
+  font-size: 1.4em;
 }
 
 .actions .action-button {
-    margin: 0 .4em;
-    margin-top: .8em;
-}
+  margin: 0 .4em;
+  margin-top: .8em;
 
-.actions .action-button:first-child {
-    margin-left: 0;
-}
+  &:first-child {
+      margin-left: 0;
+  }
 
-.actions .action-button:last-child {
-    margin-right: 0;
+  &:last-child {
+      margin-right: 0;
+  }
 }
