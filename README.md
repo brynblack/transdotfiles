@@ -1,6 +1,6 @@
 # transdotfiles
 
-![image](https://github.com/brynblack/transdotfiles/assets/49110391/3ba5a792-8460-4f05-b655-b996f7212b5f)
+![image](https://github.com/user-attachments/assets/0a11cc60-9e11-44f3-8c09-47a098c52f1d)
 
 ![image](https://github.com/brynblack/transdotfiles/assets/49110391/a1b7c1df-c58c-41d2-9057-a4fc9a66ff42)
 
