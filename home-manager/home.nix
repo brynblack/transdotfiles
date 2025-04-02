@@ -1,13 +1,8 @@
-{ inputs, username, ... }:
+{ username, ... }:
 
 let homeDirectory = "/home/${username}";
 in {
-  imports = [
-    ./packages.nix
-    ./programs.nix
-    ./zsh.nix
-    inputs.aagl.nixosModules.default
-  ];
+  imports = [ ./zsh.nix ];
 
   home = {
     inherit username homeDirectory;

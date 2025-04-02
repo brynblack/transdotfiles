@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 
 with pkgs; {
-  home.packages = [
+  environment.systemPackages = [
     home-manager
 
     nil # nix lsp
@@ -35,6 +35,7 @@ with pkgs; {
         asvetliakov.vscode-neovim
         jnoortheen.nix-ide
         github.vscode-github-actions
+        vue.volar
       ]));
     })
     prismlauncher # Minecraft
