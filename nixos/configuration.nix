@@ -1,3 +1,5 @@
+{ inputs, ... }:
+
 {
   imports = [
     ./audio.nix
@@ -7,7 +9,10 @@
     ./hardware.nix
     ./locale.nix
     ./networking.nix
+    ./packages.nix
+    ./programs.nix
     ./users.nix
+    inputs.aagl.nixosModules.default
   ];
 
   nixpkgs.config.allowUnfree = true;
