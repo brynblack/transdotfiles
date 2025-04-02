@@ -20,5 +20,5 @@
       LC_TELEPHONE = "en_AU.UTF-8";
       LC_TIME = "en_AU.UTF-8";
     };
-  }; 
+  };
 }
