@@ -15,6 +15,9 @@ with pkgs; {
     rustup # rust support
     nixfmt-classic # nix formatter
     wl-clipboard # clipboard support
+    unzip
+    wget
+    npm-check-updates
 
     # upscayl # Image upscaling
     # ukmm # BOTW
