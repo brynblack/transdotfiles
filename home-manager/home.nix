@@ -1,35 +1,22 @@
-{ inputs, pkgs, username, ... }:
+{ inputs, username, ... }:
 
-let
-  homeDirectory = "/home/${username}";
-in
-{
+let homeDirectory = "/home/${username}";
+in {
   imports = [
-    ./ags.nix
-    ./btop.nix
-    ./cava.nix
-    ./foot.nix
-    ./helix.nix
-    ./hyprland.nix
-    ./wlsunset.nix
+    ./packages.nix
+    ./programs.nix
     ./zsh.nix
-    inputs.ags.homeManagerModules.default
+    inputs.aagl.nixosModules.default
   ];
 
   home = {
     inherit username homeDirectory;
-    stateVersion = "23.11";
+    stateVersion = "25.05";
   };
 
   home.file.".config/thefuck/settings.py".text = ''
     exclude_rules = [ "fix_file" ]
   '';
-
-  gtk = {
-    enable = true;
-    cursorTheme.name = "capitaine-cursors";
-    cursorTheme.package = pkgs.capitaine-cursors;
-  };
 
   services = {
     kdeconnect.enable = true;

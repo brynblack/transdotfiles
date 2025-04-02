@@ -6,6 +6,7 @@
 
     nvidia = {
       modesetting.enable = true;
+      powerManagement.enable = true;
       open = true;
       nvidiaSettings = false;
       package = config.boot.kernelPackages.nvidiaPackages.beta;
@@ -13,15 +14,15 @@
 
     graphics = {
       enable = true;
-      extraPackages = with pkgs; [
-        libvdpau-va-gl
-      ];
+      extraPackages = with pkgs; [ libvdpau-va-gl ];
     };
   };
 
   services = {
     hardware.openrgb.enable = true;
-    blueman.enable = true;
+    udev.extraRules = ''
+      SUBSYSTEM=="usb", ATTR{idVendor}=="2833", ATTR{idProduct}=="0186", MODE="0666"
+    '';
   };
 
   fileSystems = {
@@ -33,5 +34,5 @@
       device = "/dev/disk/by-id/wwn-0x5000c500d489a950-part1";
       fsType = "ext4";
     };
-  }; 
+  };
 }
