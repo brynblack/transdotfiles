@@ -18,6 +18,7 @@ with pkgs; {
     unzip
     wget
     npm-check-updates
+    kdePackages.ksshaskpass
 
     # upscayl # Image upscaling
     # ukmm # BOTW
