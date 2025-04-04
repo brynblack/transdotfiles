@@ -30,6 +30,7 @@ with pkgs; {
     dwt1-shell-color-scripts # Fancy terminal colors
     eza # ls
     git # Git
+    jdk23
     neovim # Code editor (only used for vscodium integration)
     (vscode-with-extensions.override {
       vscodeExtensions = ((with vscode-extensions; [
@@ -39,6 +40,10 @@ with pkgs; {
         jnoortheen.nix-ide
         github.vscode-github-actions
         vue.volar
+        vscjava.vscode-gradle
+        vscjava.vscode-java-pack
+        redhat.java
+        leonardssh.vscord
       ]));
     })
     prismlauncher # Minecraft
