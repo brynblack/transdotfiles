@@ -2,37 +2,34 @@
 
 with pkgs; {
   environment.systemPackages = [
-    home-manager
+    home-manager # self-explanatory
 
     nil # nix lsp
     lua-language-server # lua lsp
+    nixfmt-classic # nix formatter
 
-    ripgrep # nvim tool
     openal # openrgb plugin support
-    icu
-    icu.dev
+    icu # this is probably important
+    icu.dev # this too
     gcc # compiler
     rustup # rust support
-    nixfmt-classic # nix formatter
     wl-clipboard # clipboard support
-    unzip
-    wget
-    npm-check-updates
-    kdePackages.ksshaskpass
+    unzip # unzipping archives
+    wget # downloading files
+    npm-check-updates # bulk-updating npm packages
 
-    # upscayl # Image upscaling
+    # upscayl # image upscaling
     # ukmm # BOTW
     # cemu # BOTW
 
-    btop # Task manager
-    cava # Audio visualizer
+    btop # task manager
+    cava # audio visualizer
     kde-rounded-corners # KDE theming
     adw-gtk3 # GTK theming
-    dwt1-shell-color-scripts # Fancy terminal colors
+    dwt1-shell-color-scripts # fancy terminal colors
     eza # ls
-    git # Git
-    jdk23
-    neovim # Code editor (only used for vscodium integration)
+    git # git
+    neovim # code editor (only used for vscodium integration)
     (vscode-with-extensions.override {
       vscodeExtensions = ((with vscode-extensions; [
         continue.continue
@@ -47,16 +44,16 @@ with pkgs; {
         leonardssh.vscord
       ]));
     })
-    prismlauncher # Minecraft
+    prismlauncher # minecraft
     osu-lazer-bin # osu!
-    vesktop # Discord
-    krita # Drawing
-    spotify # Music
-    kdePackages.kdenlive # Video editor
-    audacity # Audio editor
+    vesktop # discord
+    krita # drawing
+    spotify # music
+    kdePackages.kdenlive # video editor
+    audacity # audio editor
     (blender.override { cudaSupport = true; })
     wlx-overlay-s # VR desktop manager
-    inputs.zen-browser.packages."${system}".default # Browser
+    inputs.zen-browser.packages."${system}".default # browser
   ];
 
   fonts.packages = [ ] ++ builtins.filter lib.attrsets.isDerivation
