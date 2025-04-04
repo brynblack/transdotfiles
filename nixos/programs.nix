@@ -18,6 +18,10 @@
         };
       };
     };
+    ssh = {
+      startAgent = true;
+      askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+    };
     thefuck.enable = true;
     kdeconnect.enable = true;
     obs-studio.enable = true;
