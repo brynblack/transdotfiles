@@ -16,6 +16,7 @@ in {
   services = {
     kdeconnect.enable = true;
     ssh-agent.enable = true;
+    arrpc.enable = true;
   };
 
   programs.home-manager.enable = true;
