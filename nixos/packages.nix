@@ -33,11 +33,13 @@ with pkgs; {
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
+    capitaine-cursors
 
     ## Disabled packages
     # ukmm # BOTW
     # cemu # BOTW
 
+    loupe # image viewer
     nautilus # file manager
     upscayl # image upscaling
     neovim # code editor
