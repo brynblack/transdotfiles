@@ -33,7 +33,7 @@
             inherit system;
             config.allowUnfree = true;
           };
-          extraSpecialArgs = { inherit system username; };
+          extraSpecialArgs = { inherit inputs system username; };
           modules = [ ./home-manager/home.nix ];
         };
     };

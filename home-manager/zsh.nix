@@ -2,9 +2,10 @@
   programs = {
     zsh = {
       enable = true;
-      initExtra = ''
+      initContent = ''
         export EDITOR=nvim
         alias ls='eza -lh --icons=always --sort=type'
+        bindkey '^E' autosuggest-accept
         colorscript -e zwaves
       '';
     };

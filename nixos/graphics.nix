@@ -6,7 +6,7 @@ let
     src = ./.;
     dontUnpack = true;
     installPhase = ''
-      cp $src/wallpaper.jpg $out
+      cp $src/galaxy.png $out
     '';
   };
 in {
@@ -21,7 +21,6 @@ in {
       enable = true;
       theme = "breeze";
     };
-    desktopManager.plasma6.enable = true;
   };
 
   environment.systemPackages = [
