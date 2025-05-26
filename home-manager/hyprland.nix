@@ -20,7 +20,10 @@ in {
     xwayland.enable = true;
 
     settings = {
-      exec-once = [ "openrgb --profile 'Pink :3' --startminimized" ];
+      exec-once = [
+        "openrgb --profile Default --startminimized"
+        "hyprctl setcursor capitaine-cursors 24"
+      ];
 
       monitor = [
         ",preferred,auto,auto"

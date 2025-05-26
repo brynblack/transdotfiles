@@ -23,11 +23,19 @@ in {
       name = "adw-gtk3-dark";
       package = pkgs.adw-gtk3;
     };
+    cursorTheme = {
+      name = "capitaine-cursors";
+      package = pkgs.capitaine-cursors;
+      size = 24;
+    };
   };
 
   services = {
     blueman-applet.enable = true;
-    kdeconnect.enable = true;
+    kdeconnect = {
+      enable = true;
+      indicator = true;
+    };
     ssh-agent.enable = true;
     arrpc = {
       enable = true;
