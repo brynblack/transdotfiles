@@ -4,46 +4,43 @@ with pkgs; {
   environment.systemPackages = [
     home-manager # self-explanatory
 
+    ## LSP/Formatting
+
     nil # nix lsp
     lua-language-server # lua lsp
     nixfmt-classic # nix formatter
+
+    ## Development/CLI tools
 
     openal # openrgb plugin support
     icu # this is probably important
     icu.dev # this too
     gcc # compiler
-    rustup # rust support
+    # rustup # rust support
     wl-clipboard # clipboard support
     unzip # unzipping archives
     wget # downloading files
     npm-check-updates # bulk-updating npm packages
+    cava # audio visualizer
+    eza # ls
+    git # git
+    pfetch # neofetch
+    grim
+    slurp
+    ripgrep
+    libnotify
+    ffmpeg
 
-    # upscayl # image upscaling
+    ## Theming
+    dwt1-shell-color-scripts # fancy terminal colors
+
+    ## Disabled packages
     # ukmm # BOTW
     # cemu # BOTW
 
-    btop # task manager
-    cava # audio visualizer
-    kde-rounded-corners # KDE theming
-    adw-gtk3 # GTK theming
-    dwt1-shell-color-scripts # fancy terminal colors
-    eza # ls
-    git # git
-    neovim # code editor (only used for vscodium integration)
-    (vscode-with-extensions.override {
-      vscodeExtensions = ((with vscode-extensions; [
-        continue.continue
-        catppuccin.catppuccin-vsc
-        asvetliakov.vscode-neovim
-        jnoortheen.nix-ide
-        github.vscode-github-actions
-        vue.volar
-        vscjava.vscode-gradle
-        vscjava.vscode-java-pack
-        redhat.java
-        leonardssh.vscord
-      ]));
-    })
+    nautilus # file manager
+    upscayl # image upscaling
+    neovim # code editor
     prismlauncher # minecraft
     osu-lazer-bin # osu!
     vesktop # discord
