@@ -1,6 +1,6 @@
 # transdotfiles
 
-![image](https://github.com/user-attachments/assets/5d1eb89f-b674-48dc-a3ac-f8037df55c24)
+![Screenshot_20250526_234947](https://github.com/user-attachments/assets/1d5a4fdf-34cc-42ed-8cc2-464de638fc79)
 
 ## License
 
