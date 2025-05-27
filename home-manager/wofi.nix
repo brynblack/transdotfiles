@@ -4,6 +4,8 @@
     settings = {
       show = "drun";
       matching = "fuzzy";
+      allow_images = true;
+      prompt = "search";
     };
     style = ''
       * {
@@ -18,6 +20,25 @@
       }
       #outer-box {
         padding: 12px;
+      }
+      #input {
+        padding: 12px;
+        border: 1px solid #35363e;
+        border-radius: 12px;
+        margin-bottom: 12px;
+      }
+      #input > * {
+        margin-right: 8px;
+      }
+      #entry {
+        padding: 12px;
+        border-radius: 12px;
+      }
+      #entry:selected {
+        background-color: rgba(30, 46, 46, 1.0);
+      }
+      #img {
+        margin-right: 8px;
       }
     '';
   };

@@ -30,6 +30,7 @@ with pkgs; {
     ripgrep
     libnotify
     ffmpeg
+    playerctl
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
