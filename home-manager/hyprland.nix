@@ -5,6 +5,7 @@ let
     "${config.home.homeDirectory}/Pictures/Wallpapers/purple_leaves.png";
 in {
   home.file.".config/hypr/scripts/volume.sh".source = ./scripts/volume.sh;
+  home.file.".config/hypr/scripts/autostart.sh".source = ./scripts/autostart.sh;
 
   services.hyprpaper = {
     enable = true;
@@ -20,10 +21,7 @@ in {
     xwayland.enable = true;
 
     settings = {
-      exec-once = [
-        "openrgb --profile Default --startminimized"
-        "hyprctl setcursor capitaine-cursors 24"
-      ];
+      exec-once = [ "~/.config/hypr/scripts/autostart.sh" ];
 
       monitor = [
         ",preferred,auto,auto"
