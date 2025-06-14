@@ -20,12 +20,12 @@
     };
     ssh.startAgent = true;
     hyprland.enable = true;
-    kdeconnect.enable = true;
     obs-studio.enable = true;
     alvr = {
       enable = true;
       openFirewall = true;
     };
+    localsend.enable = true;
     zsh = {
       enable = true;
       enableCompletion = true;

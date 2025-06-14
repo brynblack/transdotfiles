@@ -12,7 +12,6 @@ hyprctl setcursor capitaine-cursors 24
 # Restart user services
 systemctl --user restart \
   hyprpaper.service \
+  wlsunset.service \
   waybar.service \
-  blueman-applet.service \
-  kdeconnect.service \
-  kdeconnect-indicator.service
+  blueman-applet.service

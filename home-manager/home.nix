@@ -8,6 +8,7 @@ in {
     ./mako.nix
     ./waybar.nix
     ./wezterm.nix
+    ./wlsunset.nix
     ./wofi.nix
     ./zsh.nix
   ];
@@ -32,10 +33,6 @@ in {
 
   services = {
     blueman-applet.enable = true;
-    kdeconnect = {
-      enable = true;
-      indicator = true;
-    };
     ssh-agent.enable = true;
     arrpc = {
       enable = true;
