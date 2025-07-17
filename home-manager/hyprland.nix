@@ -103,7 +103,7 @@ in {
       workspace = [ "1, monitor:DP-3" "2, monitor:HDMI-A-1" ];
 
       # Variables used for keybinds
-      "$mod" = "ALT";
+      "$mod" = "mod4";
       "$terminal" = "wezterm";
       "$fileManager" = "nautilus";
       "$menu" = "wofi";

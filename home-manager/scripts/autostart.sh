@@ -4,7 +4,7 @@
 while [ ! -S "$XDG_RUNTIME_DIR/wayland-1" ]; do sleep 0.1; done
 
 # Load OpenRGB profile and minimize
-openrgb --profile Default --startminimized &
+openrgb --startminimized &
 
 # Set cursor theme and size
 hyprctl setcursor capitaine-cursors 24
