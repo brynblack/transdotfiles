@@ -31,6 +31,8 @@ with pkgs; {
     libnotify
     ffmpeg
     playerctl
+    hyprpicker # color picker
+    alsa-utils # alsa controls
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
@@ -40,6 +42,7 @@ with pkgs; {
     # ukmm # BOTW
     # cemu # BOTW
 
+    pavucontrol # audio manager
     loupe # image viewer
     nautilus # file manager
     upscayl # image upscaling

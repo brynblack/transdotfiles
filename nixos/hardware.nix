@@ -21,7 +21,10 @@
   };
 
   services = {
-    hardware.openrgb.enable = true;
+    hardware.openrgb = {
+      enable = true;
+      package = pkgs.openrgb-with-all-plugins;
+    };
     udev.extraRules = ''
       SUBSYSTEM=="usb", ATTR{idVendor}=="2833", ATTR{idProduct}=="0186", MODE="0666"
     '';

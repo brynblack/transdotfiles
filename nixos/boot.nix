@@ -9,7 +9,7 @@
   boot.initrd.luks.devices."luks-f08bd8ad-b9c8-4200-ab4e-9f8c7c7d8bf4".device =
     "/dev/disk/by-uuid/f08bd8ad-b9c8-4200-ab4e-9f8c7c7d8bf4";
   boot.initrd.verbose = false;
-  boot.kernelPackages = pkgs.linuxPackages_6_14;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot = {
     consoleLogLevel = 0;
     kernelParams = [
