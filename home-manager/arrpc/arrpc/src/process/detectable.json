@@ -3,6 +3,18 @@
     "executables": [
       {
         "is_launcher": false,
+        "name": "brokenarrow.exe",
+        "os": "win32"
+      }
+    ],
+    "hook": true,
+    "id": "1384216004925849793",
+    "name": "Broken Arrow"
+  },
+  {
+    "executables": [
+      {
+        "is_launcher": false,
         "name": "speedrunners.exe",
         "os": "win32"
       }
