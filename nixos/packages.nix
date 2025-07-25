@@ -33,6 +33,9 @@ with pkgs; {
     playerctl
     hyprpicker # color picker
     alsa-utils # alsa controls
+    usbutils # lsusb, etc
+    yubikey-manager # yubikey manager
+    onlykey-cli # onlykey manager
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
@@ -42,6 +45,7 @@ with pkgs; {
     # ukmm # BOTW
     # cemu # BOTW
 
+    darktable # RAW editing
     pavucontrol # audio manager
     loupe # image viewer
     nautilus # file manager
