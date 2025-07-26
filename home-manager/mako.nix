@@ -10,7 +10,7 @@
       border-size = 1;
       outer-margin = 12;
       max-icon-size = 48;
-      output = "DP-3";
+      output = "DP-2";
       layer = "overlay";
       default-timeout = "10000";
 

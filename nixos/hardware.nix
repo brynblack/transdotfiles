@@ -38,8 +38,12 @@
       device = "/dev/disk/by-id/wwn-0x50014ee263f3b567-part1";
       fsType = "ext4";
     };
-    "/mnt/games" = {
+    "/mnt/stuff2" = {
       device = "/dev/disk/by-id/wwn-0x5000c500d489a950-part1";
+      fsType = "ext4";
+    };
+    "/mnt/games" = {
+      device = "/dev/disk/by-id/nvme-KLEVV_CRAS_C910_M.2_NVMe_SSD_4TB_2025041805001081";
       fsType = "ext4";
     };
   };
