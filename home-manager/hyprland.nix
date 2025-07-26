@@ -100,7 +100,7 @@ in {
         "noanim, wofi"
       ];
 
-      workspace = [ "1, monitor:DP-3" "2, monitor:HDMI-A-1" ];
+      workspace = [ "1, monitor:DP-2" "2, monitor:HDMI-A-1" ];
 
       # Variables used for keybinds
       "$mod" = "mod4";

@@ -5,7 +5,7 @@
     settings = {
       mainBar = {
         layer = "top";
-        output = [ "DP-3" ];
+        output = [ "DP-2" ];
         position = "top";
         margin = "6 6 0 6";
         height = 32;
