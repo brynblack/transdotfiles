@@ -25,7 +25,10 @@
     SSH_ASKPASS_REQUIRE = "force";
   };
 
-  services.upower.enable = true;
+  services = {
+    upower.enable = true;
+    gvfs.enable = true;
+  };
 
   system.stateVersion = "25.05";
 }
