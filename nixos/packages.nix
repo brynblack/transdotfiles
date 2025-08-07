@@ -16,7 +16,7 @@ with pkgs; {
     icu # this is probably important
     icu.dev # this too
     gcc # compiler
-    # rustup # rust support
+    rustup # rust support
     wl-clipboard # clipboard support
     unzip # unzipping archives
     wget # downloading files
@@ -44,8 +44,8 @@ with pkgs; {
     ## Disabled packages
     # ukmm # BOTW
     # cemu # BOTW
+    # darktable # RAW editing
 
-    darktable # RAW editing
     pavucontrol # audio manager
     loupe # image viewer
     nautilus # file manager
@@ -61,6 +61,7 @@ with pkgs; {
     (blender.override { cudaSupport = true; })
     wlx-overlay-s # VR desktop manager
     inputs.zen-browser.packages."${system}".default # browser
+    tor-browser # anonymous browsing
   ];
 
   fonts.packages = [ ] ++ builtins.filter lib.attrsets.isDerivation

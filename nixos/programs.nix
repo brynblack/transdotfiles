@@ -4,7 +4,10 @@
   programs = {
     anime-game-launcher.enable = true;
     gamemode.enable = true;
-    steam.enable = true;
+    steam = {
+      enable = true;
+      protontricks.enable = true;
+    };
     starship = {
       enable = true;
       presets = [ "nerd-font-symbols" ];

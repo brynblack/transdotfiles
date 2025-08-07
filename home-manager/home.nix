@@ -18,6 +18,11 @@ in {
     stateVersion = "25.05";
   };
 
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+  };
+
   gtk = {
     enable = true;
     theme = {
