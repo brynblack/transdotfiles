@@ -34,7 +34,7 @@
   };
 
   fileSystems = {
-    "/mnt/games" = {
+    "/srv/games" = {
       device = "/dev/mapper/games";
       fsType = "ext4";
     };
