@@ -30,12 +30,14 @@ with pkgs; {
     ripgrep
     libnotify
     ffmpeg
+    exiftool
     playerctl
     hyprpicker # color picker
     alsa-utils # alsa controls
     usbutils # lsusb, etc
     yubikey-manager # yubikey manager
     onlykey-cli # onlykey manager
+    sshfs # ssh filesystem
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
@@ -55,7 +57,7 @@ with pkgs; {
     osu-lazer-bin # osu!
     vesktop # discord
     krita # drawing
-    spotify # music
+    feishin # music
     kdePackages.kdenlive # video editor
     audacity # audio editor
     (blender.override { cudaSupport = true; })
