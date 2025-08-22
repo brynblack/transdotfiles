@@ -39,10 +39,6 @@ in {
   services = {
     blueman-applet.enable = true;
     ssh-agent.enable = true;
-    arrpc = {
-      enable = true;
-      package = pkgs.callPackage ./arrpc { };
-    };
   };
 
   programs.home-manager.enable = true;

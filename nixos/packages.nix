@@ -31,6 +31,7 @@ with pkgs; {
     libnotify
     ffmpeg
     exiftool
+    rsgain
     playerctl
     hyprpicker # color picker
     alsa-utils # alsa controls
@@ -38,6 +39,7 @@ with pkgs; {
     yubikey-manager # yubikey manager
     onlykey-cli # onlykey manager
     sshfs # ssh filesystem
+    qbittorrent # torrenting
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
@@ -62,8 +64,11 @@ with pkgs; {
     audacity # audio editor
     (blender.override { cudaSupport = true; })
     wlx-overlay-s # VR desktop manager
+    signal-desktop # private messaging
     inputs.zen-browser.packages."${system}".default # browser
     tor-browser # anonymous browsing
+    mullvad-browser # private browsing
+    bitwarden # password manager
   ];
 
   fonts.packages = [ ] ++ builtins.filter lib.attrsets.isDerivation
