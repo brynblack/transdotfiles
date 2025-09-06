@@ -5,6 +5,7 @@
 
   hardware = {
     bluetooth.enable = true;
+    uinput.enable = true;
 
     nvidia = {
       modesetting.enable = true;
@@ -34,9 +35,26 @@
   };
 
   fileSystems = {
-    "/srv/games" = {
-      device = "/dev/mapper/games";
-      fsType = "ext4";
+    # "/srv/games" = {
+    #   device = "/dev/mapper/games";
+    #   fsType = "ext4";
+    # };
+    "/mnt/vault" = {
+      device = "//192.168.20.4/vault";
+      fsType = "cifs";
+      options = let
+        automount_opts = "x-systemd.automount,noauto,"
+          + "x-systemd.idle-timeout=60," + "x-systemd.device-timeout=5s,"
+          + "x-systemd.mount-timeout=5s";
+      in [
+        "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=${
+          toString config.users.users.brynleyl.uid
+        },gid=${toString config.users.groups.users.gid}"
+        "uid=1000"
+        "gid=100"
+        ",vers=3.1.1,seal"
+        ",_netdev"
+      ];
     };
   };
 }

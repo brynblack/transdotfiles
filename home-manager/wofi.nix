@@ -3,9 +3,12 @@
     enable = true;
     settings = {
       show = "drun";
-      matching = "fuzzy";
+      matching = "multi-contains";
+      insensitive = true;
+      sort_order = "alphabetical";
       allow_images = true;
       prompt = "search";
+      no_actions = true;
     };
     style = ''
       * {

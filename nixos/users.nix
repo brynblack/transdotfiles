@@ -4,7 +4,7 @@
     users.brynleyl = {
       isNormalUser = true;
       description = "Brynley Llewellyn-Roux";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "input" "uinput" ];
     };
   };
 }
