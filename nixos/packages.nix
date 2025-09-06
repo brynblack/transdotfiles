@@ -39,7 +39,6 @@ with pkgs; {
     yubikey-manager # yubikey manager
     onlykey-cli # onlykey manager
     sshfs # ssh filesystem
-    qbittorrent # torrenting
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
@@ -67,8 +66,6 @@ with pkgs; {
     signal-desktop # private messaging
     inputs.zen-browser.packages."${system}".default # browser
     tor-browser # anonymous browsing
-    mullvad-browser # private browsing
-    bitwarden # password manager
   ];
 
   fonts.packages = [ ] ++ builtins.filter lib.attrsets.isDerivation
