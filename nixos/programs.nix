@@ -2,7 +2,6 @@
 
 {
   programs = {
-    anime-game-launcher.enable = true;
     gamemode.enable = true;
     steam = {
       enable = true;

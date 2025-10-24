@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   boot = {
     kernelModules = [ "nvidia_uvm" ];
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot.enable = lib.mkForce false;
       efi.canTouchEfiVariables = true;
       timeout = 0;
     };
@@ -16,9 +16,13 @@
       luks.devices = {
         "luks-f08bd8ad-b9c8-4200-ab4e-9f8c7c7d8bf4".device =
           "/dev/disk/by-uuid/f08bd8ad-b9c8-4200-ab4e-9f8c7c7d8bf4";
-        # games.device = "/dev/disk/by-uuid/ccd10201-9a3f-4f38-aaa9-79d2f4ce2050";
+        games.device = "/dev/disk/by-uuid/2ec7ec00-8207-4a78-940d-de141353b4ce";
       };
       verbose = false;
+    };
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/var/lib/sbctl";
     };
     kernelPackages = pkgs.linuxPackages_latest;
     consoleLogLevel = 0;

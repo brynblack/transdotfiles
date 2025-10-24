@@ -1,19 +1,36 @@
 { config, ... }:
 
-let
-  wallpaperPath =
-    "${config.home.homeDirectory}/Pictures/Wallpapers/purple_leaves.png";
-in {
-  home.file.".config/hypr/scripts/volume.sh".source = ./scripts/volume.sh;
-  home.file.".config/hypr/scripts/autostart.sh".source = ./scripts/autostart.sh;
+{
+  home.file = (builtins.listToAttrs (builtins.map (x: {
+    name = ".config/hypr/scripts/" + x + ".sh";
+    value = { source = ./scripts/${x}.sh; };
+  }) [ "autostart" "brightness" "filter" "media" "powermenu" "volume" ]));
 
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      preload = [ wallpaperPath ];
-      wallpaper = [ ", ${wallpaperPath}" ];
+  services = {
+    swww.enable = true;
+    hypridle = {
+      enable = true;
+      settings = {
+        general = {
+          lock_cmd = "pidof hyprlock || hyprlock";
+          before_sleep_cmd = "loginctl lock-session";
+        };
+        listener = [
+          {
+            timeout = 300;
+            on-timeout = "loginctl lock-session";
+          }
+          {
+            timeout = 600;
+            on-timeout = "systemctl suspend";
+          }
+        ];
+      };
     };
+    hyprsunset.enable = true;
   };
+
+  programs.hyprlock = { enable = true; };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -39,6 +56,8 @@ in {
         repeat_delay = 200;
       };
 
+      cursor.no_hardware_cursors = 1;
+
       general = {
         gaps_in = 6;
         gaps_out = 6;
@@ -56,6 +75,8 @@ in {
           enabled = true;
           size = 10;
           passes = 3;
+          input_methods = true;
+          input_methods_ignorealpha = 0.0;
         };
       };
 
@@ -80,11 +101,6 @@ in {
         force_split = 2;
       };
 
-      gestures = {
-        workspace_swipe = true;
-        workspace_swipe_cancel_ratio = 0;
-      };
-
       misc = {
         force_default_wallpaper = 0;
         animate_manual_resizes = true;
@@ -100,6 +116,13 @@ in {
         "noanim, wofi"
       ];
 
+      windowrule = [
+        "float, title:OpenRGB"
+        "float, class:org.fcitx."
+        "float, class:.blueman-manager-wrapped"
+        "persistentsize, floating:1"
+      ];
+
       workspace = [ "1, monitor:DP-2" "2, monitor:HDMI-A-1" ];
 
       # Variables used for keybinds
@@ -110,16 +133,17 @@ in {
 
       bind = [
         # Generic binds
+        "$mod, ESCAPE, exec, ~/.config/hypr/scripts/powermenu.sh"
         "$mod, Q, exec, $terminal"
         "$mod, M, killactive,"
-        "$mod + SUPER, Y, exit,"
         "$mod, F, exec, $fileManager"
         "$mod, SEMICOLON, togglefloating,"
-        "$mod, SPACE, exec, $menu"
+        "$mod, SPACE, exec, pkill wofi; $menu"
         "$mod, P, pseudo,"
         "$mod, J, togglesplit,"
         "$mod, K, fullscreen, 0"
-        "$mod, L, exec, hyprlock"
+        "$mod, L, exec, loginctl lock-session"
+        "$mod, BACKSLASH, exec, ~/.config/hypr/scripts/filter.sh"
 
         # Rectangluar screenshot using $mod + SHIFT + R
         ''
@@ -127,19 +151,22 @@ in {
 
         # Screenshot monitor using $mod + prtsc
         ''
-          $mod, PRINT, exec, grim -g "$(slurp -d -o)" - | tee ~/Pictures/Screenshots/Screenshot_$(date +'%Y%m%d')_$(date +'%H%M%S.png') | wl-copy && notify-send "screenshot saved :3" || echo "uh-oh, something went wrong :("''
+          $mod + SHIFT, P, exec, grim -g "$(slurp -d -o)" - | tee ~/Pictures/Screenshots/Screenshot_$(date +'%Y%m%d')_$(date +'%H%M%S.png') | wl-copy && notify-send "screenshot saved :3" || echo "uh-oh, something went wrong :("''
 
         # Scroll through existing workspaces with $mod + scroll
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
 
         # Control MPRIS with media keys
-        ", XF86AudioPrev, exec, playerctl previous"
-        ", XF86AudioPlay, exec, playerctl play-pause"
-        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPrev, exec, ~/.config/hypr/scripts/media.sh previous"
+        ", XF86AudioPlay, exec, ~/.config/hypr/scripts/media.sh play-pause"
+        ", XF86AudioNext, exec, ~/.config/hypr/scripts/media.sh next"
 
         # Toggle audio mute
         ", XF86AudioMute, exec, ~/.config/hypr/scripts/volume.sh"
+
+        # Color picker
+        "$mod, HOME, exec, hyprpicker -a"
       ] ++ (
         # workspaces
         # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
@@ -179,6 +206,10 @@ in {
         # Control volume with volume keys
         ", XF86AudioLowerVolume, exec, ~/.config/hypr/scripts/volume.sh 2%-"
         ", XF86AudioRaiseVolume, exec, ~/.config/hypr/scripts/volume.sh 2%+"
+
+        # Control brightness with $mod + volume keys
+        "$mod, XF86AudioLowerVolume, exec, ~/.config/hypr/scripts/brightness.sh -2"
+        "$mod, XF86AudioRaiseVolume, exec, ~/.config/hypr/scripts/brightness.sh +2"
       ];
 
       bindm = [

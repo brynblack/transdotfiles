@@ -9,9 +9,15 @@ openrgb --startminimized &
 # Set cursor theme and size
 hyprctl setcursor capitaine-cursors 24
 
+# Start fcitx5
+# fcitx5 &
+
 # Restart user services
 systemctl --user restart \
-  hyprpaper.service \
+  hypridle.service \
+  swww.service \
   wlsunset.service \
+  hyprsunset.service \
   waybar.service \
-  blueman-applet.service
+  blueman-applet.service \
+  xremap.service

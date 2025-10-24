@@ -12,19 +12,20 @@
     ./packages.nix
     ./programs.nix
     ./users.nix
-    inputs.aagl.nixosModules.default
     inputs.xremap.nixosModules.default
+    inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings = {
+    experimental-features = "nix-command flakes";
+    auto-optimise-store = true;
+  };
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    WLR_NO_HARDWARE_CURSORS = "1";
     SSH_ASKPASS_REQUIRE = "force";
-    GSK_RENDERER = "ngl"; # temporary workaround for NVIDIA GTK bug
   };
 
   services = {
@@ -38,7 +39,13 @@
       config = {
         modmap = [{
           name = "colemak->qwerty";
-          application.only = [ "steam_app_275850" "steam_app_2399830" ];
+          application.only = [
+            "steam_app_275850"
+            "steam_app_2399830"
+            "steam_app_648350"
+            "steam_app_376210"
+            "steam_app_1604270"
+          ];
           remap = {
             # top row
             q = "q";
@@ -87,6 +94,11 @@
         }];
       };
     };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "qt5ct";
   };
 
   system.stateVersion = "25.05";

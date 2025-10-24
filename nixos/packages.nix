@@ -1,6 +1,7 @@
 { pkgs, inputs, ... }:
 
-with pkgs; {
+let feishin = pkgs.callPackage ./feishin.nix { };
+in with pkgs; {
   environment.systemPackages = [
     home-manager # self-explanatory
 
@@ -39,22 +40,33 @@ with pkgs; {
     yubikey-manager # yubikey manager
     onlykey-cli # onlykey manager
     sshfs # ssh filesystem
+    wev # key utility
+    sbctl # secure boot
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
     capitaine-cursors
+    kdePackages.breeze-icons
+    kdePackages.breeze
 
     ## Disabled packages
     # ukmm # BOTW
     # cemu # BOTW
-    # darktable # RAW editing
 
+    via # keyboard customiser
+    qt6ct # qt5/qt6 customiser
+    anki # SRS app
+    mpv # video player
+    inkscape # SVG editing
+    darktable # RAW editing
+    libreoffice-qt # document editing
     pavucontrol # audio manager
     loupe # image viewer
     nautilus # file manager
     upscayl # image upscaling
     neovim # code editor
     prismlauncher # minecraft
+    vintagestory # vintage story
     osu-lazer-bin # osu!
     vesktop # discord
     krita # drawing
@@ -66,8 +78,11 @@ with pkgs; {
     signal-desktop # private messaging
     inputs.zen-browser.packages."${system}".default # browser
     tor-browser # anonymous browsing
+    fragments # torrenting
+    protonvpn-gui # vpn
   ];
 
-  fonts.packages = [ ] ++ builtins.filter lib.attrsets.isDerivation
+  fonts.packages = [ noto-fonts-cjk-sans ]
+    ++ builtins.filter lib.attrsets.isDerivation
     (builtins.attrValues pkgs.nerd-fonts);
 }

@@ -6,6 +6,7 @@
       enable = true;
       dns = "systemd-resolved";
     };
+    firewall.enable = true;
   };
 
   services = {
