@@ -30,7 +30,10 @@
     hyprsunset.enable = true;
   };
 
-  programs.hyprlock = { enable = true; };
+  programs = {
+    hyprlock.enable = true;
+    hyprshot.enable = true;
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -61,12 +64,9 @@
       general = {
         gaps_in = 6;
         gaps_out = 6;
-        border_size = 1;
+        border_size = 0;
         layout = "dwindle";
         allow_tearing = false;
-
-        "col.active_border" = "rgba(35363Eff)";
-        "col.inactive_border" = "rgba(35363Eff)";
       };
 
       decoration = {
@@ -78,6 +78,7 @@
           input_methods = true;
           input_methods_ignorealpha = 0.0;
         };
+        shadow.enabled = false;
       };
 
       animations = {
@@ -106,15 +107,7 @@
         animate_manual_resizes = true;
       };
 
-      layerrule = [
-        "blur, notifications"
-        "ignorealpha 0.05, notifications"
-        "blur, waybar"
-        "ignorealpha 0.05, waybar"
-        "blur, wofi"
-        "ignorealpha 0.05, wofi"
-        "noanim, wofi"
-      ];
+      layerrule = [ "noanim, wofi" ];
 
       windowrule = [
         "float, title:OpenRGB"
@@ -130,6 +123,8 @@
       "$terminal" = "wezterm";
       "$fileManager" = "nautilus";
       "$menu" = "wofi";
+      "$screenshotDir" = "HYPRSHOT_DIR=~/Pictures/Screenshots";
+      "$screenshotName" = "$(date +'Screenshot_%Y%m%d_%H%M%S.png')";
 
       bind = [
         # Generic binds
@@ -145,13 +140,14 @@
         "$mod, L, exec, loginctl lock-session"
         "$mod, BACKSLASH, exec, ~/.config/hypr/scripts/filter.sh"
 
-        # Rectangluar screenshot using $mod + SHIFT + R
-        ''
-          $mod + SHIFT, R, exec, grim -g "$(slurp -d)" - | tee ~/Pictures/Screenshots/Screenshot_$(date +'%Y%m%d')_$(date +'%H%M%S.png') | wl-copy && notify-send "screenshot saved :3" || echo "uh-oh, something went wrong :("''
+        # Screenshot region using $mod + SHIFT + R
+        "$mod + SHIFT, R, exec, $screenshotDir hyprshot -z -f $screenshotName -m region"
 
-        # Screenshot monitor using $mod + prtsc
-        ''
-          $mod + SHIFT, P, exec, grim -g "$(slurp -d -o)" - | tee ~/Pictures/Screenshots/Screenshot_$(date +'%Y%m%d')_$(date +'%H%M%S.png') | wl-copy && notify-send "screenshot saved :3" || echo "uh-oh, something went wrong :("''
+        # Screenshot window using $mod + SHIFT + W
+        "$mod + SHIFT, W, exec, $screenshotDir hyprshot -z -f $screenshotName -m window"
+
+        # Screenshot output using $mod + SHIFT + P
+        "$mod + SHIFT, P, exec, $screenshotDir hyprshot -z -f $screenshotName -m output"
 
         # Scroll through existing workspaces with $mod + scroll
         "$mod, mouse_down, workspace, e+1"
@@ -168,8 +164,7 @@
         # Color picker
         "$mod, HOME, exec, hyprpicker -a"
       ] ++ (
-        # workspaces
-        # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+        # Binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
         builtins.concatLists (builtins.genList (x:
           let
             ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));

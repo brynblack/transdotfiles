@@ -1,4 +1,4 @@
-{ pkgs, username, ... }:
+{ pkgs, username, inputs, ... }:
 
 let homeDirectory = "/home/${username}";
 in {
@@ -6,11 +6,14 @@ in {
     ./btop.nix
     ./hyprland.nix
     ./mako.nix
-    ./waybar.nix
+    ./nixvim/nixvim.nix
+    ./quickshell.nix
+    # ./waybar.nix
     ./wezterm.nix
     ./wlsunset.nix
     ./wofi.nix
     ./zsh.nix
+    inputs.nixvim.homeModules.nixvim
   ];
 
   home = {
@@ -22,6 +25,9 @@ in {
     enable = true;
     createDirectories = true;
   };
+
+  home.file.".icons/default".source =
+    "${pkgs.capitaine-cursors}/share/icons/capitaine-cursors";
 
   gtk = {
     enable = true;

@@ -2,10 +2,10 @@
   services.mako = {
     enable = true;
     settings = {
-      background-color = "#1e1e2e2e";
-      text-color = "#cdd6f4";
-      border-color = "#35363e";
-      progress-color = "over #313244";
+      background-color = "#fad9db";
+      text-color = "#8f4959";
+      border-color = "#000000";
+      progress-color = "over #E8AEBD";
       border-radius = 12;
       border-size = 1;
       outer-margin = 12;

@@ -10,6 +10,7 @@ in with pkgs; {
     nil # nix lsp
     lua-language-server # lua lsp
     nixfmt-classic # nix formatter
+    prettier # general formatter
 
     ## Development/CLI tools
 
@@ -42,10 +43,10 @@ in with pkgs; {
     sshfs # ssh filesystem
     wev # key utility
     sbctl # secure boot
+    entr # fs watch
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
-    capitaine-cursors
     kdePackages.breeze-icons
     kdePackages.breeze
 
@@ -64,7 +65,6 @@ in with pkgs; {
     loupe # image viewer
     nautilus # file manager
     upscayl # image upscaling
-    neovim # code editor
     prismlauncher # minecraft
     vintagestory # vintage story
     osu-lazer-bin # osu!
