@@ -1,10 +1,12 @@
 {
   lsp = {
     servers = {
-      qmlls.enable = true;
-      nil_ls.enable = true;
-      cssls.enable = true;
       bashls.enable = true;
+      cssls.enable = true;
+      lua_ls.enable = true;
+      nil_ls.enable = true;
+      qmlls.enable = true;
+      rust_analyzer.enable = true;
     };
     inlayHints.enable = true;
   };

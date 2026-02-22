@@ -1,7 +1,17 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 
 {
   programs = {
+    dms-shell = {
+      enable = true;
+      systemd = {
+        enable = true;
+        restartIfChanged = true;
+      };
+    };
     gamemode.enable = true;
     steam = {
       enable = true;
@@ -11,8 +21,10 @@
       enable = true;
       presets = [ "nerd-font-symbols" ];
       settings = {
-        format =
-          pkgs.lib.concatStrings [ "[╭╴](238)$all" "[╰─>](238)$character" ];
+        format = pkgs.lib.concatStrings [
+          "[╭╴](238)$all"
+          "[╰─>](238)$character"
+        ];
 
         character = {
           success_symbol = "";
@@ -20,8 +32,10 @@
         };
       };
     };
-    ssh.startAgent = true;
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+    };
     obs-studio.enable = true;
     alvr = {
       enable = true;
@@ -34,7 +48,6 @@
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
     };
-    adb.enable = true;
     nix-ld.enable = true;
     partition-manager.enable = true;
   };

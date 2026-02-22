@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 
-let feishin = pkgs.callPackage ./feishin.nix { };
-in with pkgs; {
+with pkgs;
+{
   environment.systemPackages = [
     home-manager # self-explanatory
 
@@ -9,7 +9,7 @@ in with pkgs; {
 
     nil # nix lsp
     lua-language-server # lua lsp
-    nixfmt-classic # nix formatter
+    nixfmt-tree # nix formatter
     prettier # general formatter
 
     ## Development/CLI tools
@@ -29,6 +29,7 @@ in with pkgs; {
     pfetch # neofetch
     grim
     slurp
+    hyprshot
     ripgrep
     libnotify
     ffmpeg
@@ -39,23 +40,26 @@ in with pkgs; {
     alsa-utils # alsa controls
     usbutils # lsusb, etc
     yubikey-manager # yubikey manager
-    onlykey-cli # onlykey manager
     sshfs # ssh filesystem
     wev # key utility
     sbctl # secure boot
     entr # fs watch
+    adw-gtk3
+    hugin
+    enblend-enfuse
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
     kdePackages.breeze-icons
     kdePackages.breeze
+    capitaine-cursors
 
     ## Disabled packages
     # ukmm # BOTW
     # cemu # BOTW
 
     via # keyboard customiser
-    qt6ct # qt5/qt6 customiser
+    kdePackages.qt6ct # qt5/qt6 customiser
     anki # SRS app
     mpv # video player
     inkscape # SVG editing
@@ -74,15 +78,15 @@ in with pkgs; {
     kdePackages.kdenlive # video editor
     audacity # audio editor
     (blender.override { cudaSupport = true; })
-    wlx-overlay-s # VR desktop manager
-    signal-desktop # private messaging
+    wayvr # VR desktop manager
     inputs.zen-browser.packages."${system}".default # browser
     tor-browser # anonymous browsing
     fragments # torrenting
     protonvpn-gui # vpn
   ];
 
-  fonts.packages = [ noto-fonts-cjk-sans ]
-    ++ builtins.filter lib.attrsets.isDerivation
-    (builtins.attrValues pkgs.nerd-fonts);
+  fonts.packages = [
+    noto-fonts-cjk-sans
+  ]
+  ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 }

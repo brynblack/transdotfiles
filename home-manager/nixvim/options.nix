@@ -4,12 +4,10 @@
     number = true;
     relativenumber = true;
     shiftwidth = 2;
+    fillchars = "eob: ";
   };
-  colorschemes.catppuccin = {
+  colorschemes.rose-pine = {
     enable = true;
-    settings = {
-      transparent_background = true;
-      flavour = "latte";
-    };
+    settings.styles.transparency = true;
   };
 }

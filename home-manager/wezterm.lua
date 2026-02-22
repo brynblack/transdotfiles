@@ -8,12 +8,6 @@ config.font = wezterm.font_with_fallback {
   'CaskaydiaCove Nerd Font',
   'Noto Sans Mono CJK JP'
 }
-
-local catppuccin_latte = wezterm.color.get_builtin_schemes()['Catppuccin Latte']
-catppuccin_latte.background = '#fad9db'
-config.color_schemes = {
-  ['Catppuccin Latte (Sakura)'] = catppuccin_latte,
-}
-config.color_scheme = 'Catppuccin Latte (Sakura)'
+config.color_scheme = 'dank-theme'
 
 return config

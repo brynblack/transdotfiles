@@ -10,8 +10,11 @@
       enable = true;
       autoEnableSources = true;
       settings = {
-        sources =
-          [ { name = "nvim_lsp"; } { name = "path"; } { name = "buffer"; } ];
+        sources = [
+          { name = "nvim_lsp"; }
+          { name = "path"; }
+          { name = "buffer"; }
+        ];
         mapping = {
           "<s-tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
           "<tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
@@ -24,16 +27,21 @@
       enable = true;
       settings = {
         options = {
-          offsets = [{
-            filetype = "NvimTree";
-            highlight = "Directory";
-          }];
+          close_command.__raw = "  function(bufnum)\n    require('bufdelete').bufdelete(bufnum, true)\n  end\n";
+          offsets = [
+            {
+              filetype = "NvimTree";
+              highlight = "Directory";
+            }
+          ];
         };
       };
     };
     toggleterm = {
       enable = true;
-      settings = { open_mapping = "[[<c-\\>]]"; };
+      settings = {
+        open_mapping = "[[<c-\\>]]";
+      };
     };
     comment = {
       enable = true;
@@ -62,13 +70,17 @@
         };
       };
     };
+    highlight-colors = {
+      enable = true;
+      settings = {
+        render = "virtual";
+        virtual_symbol = "■";
+      };
+    };
     nvim-tree = {
       enable = true;
       settings = {
-        on_attach = {
-          __raw =
-            "  function(bufnr)\n    local api = require(\"nvim-tree.api\")\n    local map = vim.keymap.set\n    api.config.mappings.default_on_attach(bufnr)\n    map(\"n\", \"n\", \"h\", { buffer = bufnr, noremap = true, silent = true })\n    map(\"n\", \"e\", \"j\", { buffer = bufnr, noremap = true, silent = true })\n    map(\"n\", \"i\", \"k\", { buffer = bufnr, noremap = true, silent = true })\n    map(\"n\", \"o\", \"l\", { buffer = bufnr, noremap = true, silent = true })\n    map(\"n\", \"<c-n>\", api.tree.toggle, { noremap = true, silent = true })\n  end\n";
-        };
+        on_attach.__raw = "  function(bufnr)\n    local api = require(\"nvim-tree.api\")\n    local map = vim.keymap.set\n    api.config.mappings.default_on_attach(bufnr)\n    map(\"n\", \"n\", \"h\", { buffer = bufnr, noremap = true, silent = true })\n    map(\"n\", \"e\", \"j\", { buffer = bufnr, noremap = true, silent = true })\n    map(\"n\", \"i\", \"k\", { buffer = bufnr, noremap = true, silent = true })\n    map(\"n\", \"o\", \"l\", { buffer = bufnr, noremap = true, silent = true })\n    map(\"n\", \"<c-n>\", api.tree.toggle, { noremap = true, silent = true })\n  end\n";
       };
     };
   };

@@ -23,24 +23,24 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs:
+  outputs =
+    { nixpkgs, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "brynleyl";
-    in {
+    in
+    {
       nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs system; };
         modules = [ ./nixos/configuration.nix ];
       };
-      homeConfigurations.${username} =
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
-          extraSpecialArgs = { inherit inputs system username; };
-          modules = [ ./home-manager/home.nix ];
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
         };
+        extraSpecialArgs = { inherit inputs system username; };
+        modules = [ ./home-manager/home.nix ];
+      };
     };
 }
-
