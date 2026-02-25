@@ -47,6 +47,7 @@ with pkgs;
     adw-gtk3
     hugin
     enblend-enfuse
+    dig
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
@@ -73,6 +74,7 @@ with pkgs;
     vintagestory # vintage story
     osu-lazer-bin # osu!
     vesktop # discord
+    element-desktop # private messaging
     krita # drawing
     feishin # music
     kdePackages.kdenlive # video editor

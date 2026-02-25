@@ -50,5 +50,9 @@
     };
     nix-ld.enable = true;
     partition-manager.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
   };
 }
