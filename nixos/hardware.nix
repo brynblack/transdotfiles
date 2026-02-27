@@ -3,7 +3,6 @@
 {
   services = {
     blueman.enable = true;
-    pcscd.enable = true;
   };
 
   hardware = {
