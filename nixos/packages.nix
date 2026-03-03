@@ -89,6 +89,7 @@ with pkgs;
 
   fonts.packages = [
     noto-fonts-cjk-sans
+    lato
   ]
   ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 }

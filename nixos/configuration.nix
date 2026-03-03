@@ -53,6 +53,7 @@
               "steam_app_881100"
               "steam_app_3240220"
               "OxygenNotIncluded"
+              "PathOfTitans-Linux-Shipping"
             ];
             remap = {
               # top row
