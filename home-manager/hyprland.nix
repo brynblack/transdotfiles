@@ -86,7 +86,7 @@
         "$mod, SEMICOLON, togglefloating,"
         "$mod, SPACE, exec, dms ipc call spotlight toggle"
         "$mod, P, pseudo,"
-        "$mod, J, togglesplit,"
+        "$mod, J, layoutmsg, togglesplit"
         "$mod, K, fullscreen, 0"
         "$mod, L, exec, dms ipc call lock lock"
 
