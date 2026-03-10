@@ -25,7 +25,6 @@
           "[╭╴](238)$all"
           "[╰─>](238)$character"
         ];
-
         character = {
           success_symbol = "";
           error_symbol = "";
