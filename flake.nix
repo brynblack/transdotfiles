@@ -28,19 +28,36 @@
     let
       system = "x86_64-linux";
       username = "brynleyl";
+      overlay = self: super: {
+        openimagedenoise = super.openimagedenoise.overrideAttrs (oldAttrs: {
+          patches = [
+            (builtins.fetchurl {
+              url = "https://raw.githubusercontent.com/NixOS/nixpkgs/a391915df5fa365cb461a0da154fe3a57118c732/pkgs/by-name/op/openimagedenoise/cuda.patch";
+              sha256 = "sha256:1p3sbc3yzlxjscn3jgbvk5vwvz2p9k6fsn9x631dlqk7r2i4nysj";
+            })
+          ];
+        });
+      };
     in
     {
       nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs system; };
         modules = [ ./nixos/configuration.nix ];
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          overlays = [
+            overlay
+          ];
+        };
       };
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+        extraSpecialArgs = { inherit inputs system username; };
+        modules = [ ./home-manager/home.nix ];
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
         };
-        extraSpecialArgs = { inherit inputs system username; };
-        modules = [ ./home-manager/home.nix ];
       };
     };
 }
