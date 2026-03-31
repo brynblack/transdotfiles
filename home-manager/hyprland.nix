@@ -5,7 +5,8 @@
 
     settings = {
       exec-once = [
-        "fcitx5"
+        "uwsm app -- openrgb --startminimized"
+        "uwsm app -- fcitx5"
         "hyprctl setcursor capitaine-cursors 24"
       ];
 
@@ -60,7 +61,9 @@
       };
 
       misc = {
-        force_default_wallpaper = 0;
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
+        background_color = "0x000000";
         animate_manual_resizes = true;
       };
 
@@ -89,6 +92,7 @@
         "$mod, J, layoutmsg, togglesplit"
         "$mod, K, fullscreen, 0"
         "$mod, L, exec, dms ipc call lock lock"
+        "$mod, BACKSLASH, exec, hyprpicker -na"
 
         # Screenshot region using $mod + SHIFT + R
         "$mod + SHIFT, R, exec, $screenshotDir hyprshot -z -f $screenshotName -m region"

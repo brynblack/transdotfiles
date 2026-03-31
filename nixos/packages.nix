@@ -48,6 +48,7 @@ with pkgs;
     hugin
     enblend-enfuse
     dig
+    python3
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
@@ -69,7 +70,7 @@ with pkgs;
     pavucontrol # audio manager
     loupe # image viewer
     nautilus # file manager
-    upscayl # image upscaling
+    upscaler # image upscaling
     prismlauncher # minecraft
     vintagestory # vintage story
     osu-lazer-bin # osu!
@@ -84,7 +85,8 @@ with pkgs;
     inputs.zen-browser.packages."${system}".default # browser
     tor-browser # anonymous browsing
     fragments # torrenting
-    protonvpn-gui # vpn
+    proton-vpn # vpn
+    mangohud # perf profiler
   ];
 
   fonts.packages = [

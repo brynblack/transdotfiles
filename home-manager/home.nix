@@ -21,10 +21,10 @@ in
     inherit username homeDirectory;
     stateVersion = "25.05";
   };
-
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
+    setSessionVariables = false;
   };
 
   home.file.".icons/default".source = "${pkgs.capitaine-cursors}/share/icons/capitaine-cursors";

@@ -12,6 +12,7 @@
         restartIfChanged = true;
       };
     };
+    dsearch.enable = true;
     gamemode.enable = true;
     steam = {
       enable = true;
@@ -48,10 +49,10 @@
       syntaxHighlighting.enable = true;
     };
     nix-ld.enable = true;
-    partition-manager.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
     };
+    dconf.enable = true;
   };
 }
