@@ -51,8 +51,8 @@
           block = "<leader><c-/>";
         };
         opleader = {
-          line = "/";
-          block = "<c-/>";
+          line = "<leader>/";
+          block = "<leader><c-/>";
         };
       };
     };

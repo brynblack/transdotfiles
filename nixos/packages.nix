@@ -82,7 +82,7 @@ with pkgs;
     audacity # audio editor
     (blender.override { cudaSupport = true; })
     wayvr # VR desktop manager
-    inputs.zen-browser.packages."${system}".default # browser
+    inputs.zen-browser.packages."${stdenv.hostPlatform.system}".default # browser
     tor-browser # anonymous browsing
     fragments # torrenting
     proton-vpn # vpn
