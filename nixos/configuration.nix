@@ -1,11 +1,14 @@
-{ inputs, ... }:
+{
+  inputs,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [
     ./audio.nix
     ./boot.nix
     ./graphics.nix
-    ./hardware-configuration.nix
     ./hardware.nix
     ./locale.nix
     ./networking.nix
@@ -14,7 +17,10 @@
     ./users.nix
     inputs.xremap.nixosModules.default
     inputs.lanzaboote.nixosModules.lanzaboote
+    (modulesPath + "/installer/scan/not-detected.nix")
   ];
+
+  nixpkgs.hostPlatform = "x86_64-linux";
 
   nix.settings = {
     experimental-features = "nix-command flakes";

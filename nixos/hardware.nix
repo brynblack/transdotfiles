@@ -1,4 +1,8 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
 
 {
   services = {
@@ -6,6 +10,7 @@
   };
 
   hardware = {
+    cpu.amd.updateMicrocode = true;
     bluetooth.enable = true;
     uinput.enable = true;
 
@@ -40,6 +45,18 @@
   };
 
   fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/8c4a536b-109e-471d-bbfe-2ff2ae3b9512";
+      fsType = "ext4";
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/C63C-E1AC";
+      fsType = "vfat";
+      options = [
+        "fmask=0022"
+        "dmask=0022"
+      ];
+    };
     "/srv/games" = {
       device = "/dev/mapper/games";
       fsType = "ext4";
