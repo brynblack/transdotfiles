@@ -30,7 +30,6 @@ in
   home.file.".icons/default".source = "${pkgs.capitaine-cursors}/share/icons/capitaine-cursors";
 
   services = {
-    blueman-applet.enable = true;
     ssh-agent.enable = true;
   };
 

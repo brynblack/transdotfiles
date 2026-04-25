@@ -49,6 +49,7 @@ with pkgs;
     enblend-enfuse
     dig
     python3
+    claude-code
 
     ## Theming
     dwt1-shell-color-scripts # fancy terminal colors
@@ -70,7 +71,7 @@ with pkgs;
     pavucontrol # audio manager
     loupe # image viewer
     nautilus # file manager
-    upscaler # image upscaling
+    # upscaler # image upscaling - broken
     prismlauncher # minecraft
     vintagestory # vintage story
     osu-lazer-bin # osu!
