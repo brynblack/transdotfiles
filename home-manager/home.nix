@@ -19,7 +19,7 @@ in
 
   home = {
     inherit username homeDirectory;
-    stateVersion = "25.05";
+    stateVersion = "26.05";
   };
   xdg.userDirs = {
     enable = true;

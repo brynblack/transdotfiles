@@ -1,11 +1,28 @@
+let
+  commentLineKey = "<leader>/";
+  commentBlockKey = "<leader><c-/>";
+in
 {
   plugins = {
-    lualine.enable = true;
-    web-devicons.enable = true;
-    treesitter.enable = true;
-    gitsigns.enable = true;
-    nvim-autopairs.enable = true;
-    lspconfig.enable = true;
+    bufdelete.enable = true;
+    bufferline = {
+      enable = true;
+      settings = {
+        options = {
+          close_command.__raw = ''
+            function(bufnum)
+              require('bufdelete').bufdelete(bufnum, true)
+            end
+          '';
+          offsets = [
+            {
+              filetype = "neo-tree";
+              highlight = "Directory";
+            }
+          ];
+        };
+      };
+    };
     cmp = {
       enable = true;
       autoEnableSources = true;
@@ -22,42 +39,50 @@
         };
       };
     };
-    bufdelete.enable = true;
-    bufferline = {
-      enable = true;
-      settings = {
-        options = {
-          close_command.__raw = "  function(bufnum)\n    require('bufdelete').bufdelete(bufnum, true)\n  end\n";
-          offsets = [
-            {
-              filetype = "NvimTree";
-              highlight = "Directory";
-            }
-          ];
-        };
-      };
-    };
-    toggleterm = {
-      enable = true;
-      settings = {
-        open_mapping = "[[<c-\\>]]";
-      };
-    };
     comment = {
       enable = true;
       settings = {
         toggler = {
-          line = "<leader>/";
-          block = "<leader><c-/>";
+          line = commentLineKey;
+          block = commentBlockKey;
         };
         opleader = {
-          line = "<leader>/";
-          block = "<leader><c-/>";
+          line = commentLineKey;
+          block = commentBlockKey;
         };
       };
     };
+    gitsigns.enable = true;
+    highlight-colors = {
+      enable = true;
+      settings = {
+        render = "virtual";
+        virtual_symbol = "■";
+      };
+    };
+    indent-blankline = {
+      enable = true;
+      settings = {
+        indent.highlight = "LineNr";
+        scope.highlight = "Comment";
+      };
+    };
+    lspconfig.enable = true;
+    lualine.enable = true;
+    neo-tree = {
+      enable = true;
+      settings.window.mappings = {
+        "n".__raw = "function() vim.cmd('normal! h') end";
+        "e".__raw = "function() vim.cmd('normal! j') end";
+        "i".__raw = "function() vim.cmd('normal! k') end";
+        "o".__raw = "function() vim.cmd('normal! l') end";
+      };
+    };
+    nvim-autopairs.enable = true;
+    scope.enable = true;
     telescope = {
       enable = true;
+      enabledExtensions = [ "scope" ];
       keymaps = {
         "<leader>ff" = "find_files";
         "<leader>fw" = "live_grep";
@@ -67,21 +92,20 @@
         defaults = {
           sorting_strategy = "ascending";
           layout_config.prompt_position = "top";
+          borderchars = [
+            " "
+            " "
+            " "
+            " "
+            " "
+            " "
+            " "
+            " "
+          ];
         };
       };
     };
-    highlight-colors = {
-      enable = true;
-      settings = {
-        render = "virtual";
-        virtual_symbol = "■";
-      };
-    };
-    nvim-tree = {
-      enable = true;
-      settings = {
-        on_attach.__raw = "  function(bufnr)\n    local api = require(\"nvim-tree.api\")\n    local map = vim.keymap.set\n    api.config.mappings.default_on_attach(bufnr)\n    map(\"n\", \"n\", \"h\", { buffer = bufnr, noremap = true, silent = true })\n    map(\"n\", \"e\", \"j\", { buffer = bufnr, noremap = true, silent = true })\n    map(\"n\", \"i\", \"k\", { buffer = bufnr, noremap = true, silent = true })\n    map(\"n\", \"o\", \"l\", { buffer = bufnr, noremap = true, silent = true })\n    map(\"n\", \"<c-n>\", api.tree.toggle, { noremap = true, silent = true })\n  end\n";
-      };
-    };
+    treesitter.enable = true;
+    web-devicons.enable = true;
   };
 }

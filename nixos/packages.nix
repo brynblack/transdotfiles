@@ -5,10 +5,7 @@ with pkgs;
   environment.systemPackages = [
     home-manager # self-explanatory
 
-    ## LSP/Formatting
-
-    nil # nix lsp
-    lua-language-server # lua lsp
+    ## Formatting
     nixfmt-tree # nix formatter
     prettier # general formatter
 
@@ -18,7 +15,6 @@ with pkgs;
     icu # this is probably important
     icu.dev # this too
     gcc # compiler
-    rustup # rust support
     wl-clipboard # clipboard support
     unzip # unzipping archives
     wget # downloading files
@@ -88,6 +84,7 @@ with pkgs;
     fragments # torrenting
     proton-vpn # vpn
     mangohud # perf profiler
+    neovide # code editor
   ];
 
   fonts.packages = [
