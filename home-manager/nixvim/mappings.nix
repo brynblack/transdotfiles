@@ -83,5 +83,29 @@ in
         action = "<c-\\><c-n>";
         mode = "t";
       }
+      {
+        key = "<leader>/";
+        action = "gcc";
+        mode = "n";
+        options.remap = true;
+      }
+      {
+        key = "<leader>/";
+        action = "gc";
+        mode = "v";
+        options.remap = true;
+      }
+      {
+        key = "<leader><c-/>";
+        action = "gbc";
+        mode = "n";
+        options.remap = true;
+      }
+      {
+        key = "<leader><c-/>";
+        action = "gb";
+        mode = "v";
+        options.remap = true;
+      }
     ];
 }

@@ -1,9 +1,17 @@
-let
-  commentLineKey = "<leader>/";
-  commentBlockKey = "<leader><c-/>";
-in
 {
   plugins = {
+    blink-cmp = {
+      enable = true;
+      settings = {
+        keymap.preset = "super-tab";
+        sources.default = [
+          "lsp"
+          "path"
+          "buffer"
+          "snippets"
+        ];
+      };
+    };
     bufdelete.enable = true;
     bufferline = {
       enable = true;
@@ -20,35 +28,6 @@ in
               highlight = "Directory";
             }
           ];
-        };
-      };
-    };
-    cmp = {
-      enable = true;
-      autoEnableSources = true;
-      settings = {
-        sources = [
-          { name = "nvim_lsp"; }
-          { name = "path"; }
-          { name = "buffer"; }
-        ];
-        mapping = {
-          "<s-tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
-          "<tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-          "<c-space>" = "cmp.mapping.complete()";
-        };
-      };
-    };
-    comment = {
-      enable = true;
-      settings = {
-        toggler = {
-          line = commentLineKey;
-          block = commentBlockKey;
-        };
-        opleader = {
-          line = commentLineKey;
-          block = commentBlockKey;
         };
       };
     };

@@ -27,6 +27,7 @@ with pkgs;
     slurp
     hyprshot
     ripgrep
+    fd
     libnotify
     ffmpeg
     exiftool
