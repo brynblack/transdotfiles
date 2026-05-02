@@ -22,6 +22,11 @@
               require('bufdelete').bufdelete(bufnum, true)
             end
           '';
+          custom_filter.__raw = ''
+            function(buf_number)
+              return vim.bo[buf_number].buftype ~= "terminal"
+            end
+          '';
           offsets = [
             {
               filetype = "neo-tree";

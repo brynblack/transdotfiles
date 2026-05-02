@@ -45,8 +45,26 @@ in
     (map ({ from, to }: mkMap from to) colemakAll)
     ++ (map ({ from, to }: mkMap "<c-w>${from}" "<c-w>${to}") colemakMotion)
     ++ [
-      (mkMap "<tab>" ":BufferLineCycleNext<cr>")
-      (mkMap "<s-tab>" ":BufferLineCyclePrev<cr>")
+      {
+        key = "<tab>";
+        action.__raw = ''
+          function()
+            if vim.bo.buftype ~= "terminal" then
+              vim.cmd("BufferLineCycleNext")
+            end
+          end
+        '';
+      }
+      {
+        key = "<s-tab>";
+        action.__raw = ''
+          function()
+            if vim.bo.buftype ~= "terminal" then
+              vim.cmd("BufferLineCyclePrev")
+            end
+          end
+        '';
+      }
       {
         key = "<leader>x";
         action.__raw = ''

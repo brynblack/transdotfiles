@@ -68,7 +68,7 @@ with pkgs;
     pavucontrol # audio manager
     loupe # image viewer
     nautilus # file manager
-    # upscaler # image upscaling - broken
+    upscaler # image upscaling
     prismlauncher # minecraft
     vintagestory # vintage story
     osu-lazer-bin # osu!

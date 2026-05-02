@@ -37,11 +37,10 @@
       withUWSM = true;
     };
     obs-studio.enable = true;
-    # Broken
-    # alvr = {
-    #   enable = true;
-    #   openFirewall = true;
-    # };
+    alvr = {
+      enable = true;
+      openFirewall = true;
+    };
     localsend.enable = true;
     zsh = {
       enable = true;

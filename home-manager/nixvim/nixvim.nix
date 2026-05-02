@@ -13,6 +13,7 @@
       number = true;
       relativenumber = true;
       shiftwidth = 2;
+      expandtab = true;
       fillchars = "eob: ";
       guifont = "CaskaydiaCove Nerd Font:h12";
       updatetime = 500;
@@ -25,6 +26,8 @@
     lsp = {
       servers = {
         nil_ls.enable = true;
+        vtsls.enable = true;
+        vue_ls.enable = true;
       };
 
       inlayHints.enable = true;
