@@ -7,6 +7,8 @@
 
     enable = true;
 
+    nixpkgs.config.allowUnfree = true;
+
     clipboard.register = "unnamedplus";
 
     opts = {
