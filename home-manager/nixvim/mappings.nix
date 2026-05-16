@@ -96,6 +96,7 @@ in
       (mkMap "<leader>h" ":belowright split | terminal<cr>i")
       (mkMap "<leader>v" ":belowright vsplit | terminal<cr>i")
       (mkMap "<leader>th" ":Telescope colorscheme enable_preview=true<cr>")
+      (mkMap "<leader>tk" ":Telescope keymaps<cr>")
       {
         key = "<c-x>";
         action = "<c-\\><c-n>";

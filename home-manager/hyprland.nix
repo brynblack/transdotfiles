@@ -2,6 +2,8 @@
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
+    # Pinned until Hyprland 0.55+ lands in nixos-unstable; flip to "lua" then.
+    configType = "hyprlang";
 
     settings = {
       exec-once = [

@@ -54,5 +54,9 @@
       enableSSHSupport = true;
     };
     dconf.enable = true;
+    direnv = {
+      enable = true;
+      silent = true;
+    };
   };
 }

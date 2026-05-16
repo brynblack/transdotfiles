@@ -28,6 +28,10 @@
     lsp = {
       servers = {
         nil_ls.enable = true;
+        rust_analyzer = {
+          enable = true;
+          packageFallback = true;
+        };
         vtsls.enable = true;
         vue_ls.enable = true;
       };

@@ -36,6 +36,7 @@
         };
       };
     };
+    direnv.enable = true;
     gitsigns.enable = true;
     highlight-colors = {
       enable = true;
