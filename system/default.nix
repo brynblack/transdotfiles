@@ -33,6 +33,7 @@
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
+    QT_LOGGING_RULES = "qt.qpa.services.warning=false";
     SSH_ASKPASS_REQUIRE = "force";
     XCURSOR_SIZE = "24";
   };

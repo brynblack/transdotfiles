@@ -1,96 +1,68 @@
 { pkgs, inputs, ... }:
 
+let
+  blender = pkgs.blender.override { cudaSupport = true; };
+  zen-browser = inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default;
+in
 with pkgs;
 {
   environment.systemPackages = [
-    home-manager # self-explanatory
-
-    ## Formatting
-    nixfmt-tree # nix formatter
-    prettier # general formatter
-
-    ## Development/CLI tools
-
-    openal # openrgb plugin support
-    icu # this is probably important
-    icu.dev # this too
-    gcc # compiler
-    wl-clipboard # clipboard support
-    unzip # unzipping archives
-    wget # downloading files
-    npm-check-updates # bulk-updating npm packages
-    cava # audio visualizer
-    eza # ls
-    git # git
-    pfetch # neofetch
-    grim
-    slurp
-    hyprshot
-    ripgrep
-    fd
-    libnotify
-    ffmpeg
-    exiftool
-    rsgain
-    playerctl
-    hyprpicker # color picker
-    alsa-utils # alsa controls
-    usbutils # lsusb, etc
-    yubikey-manager # yubikey manager
-    sshfs # ssh filesystem
-    wev # key utility
-    sbctl # secure boot
-    entr # fs watch
-    adw-gtk3
-    hugin
-    enblend-enfuse
-    dig
-    python3
-    claude-code
-
-    ## Theming
-    dwt1-shell-color-scripts # fancy terminal colors
-    kdePackages.breeze-icons
-    kdePackages.breeze
-    capitaine-cursors
-
-    ## Disabled packages
-    # ukmm # BOTW
-    # cemu # BOTW
-
-    via # keyboard customiser
-    kdePackages.qt6ct # qt5/qt6 customiser
-    anki # SRS app
-    mpv # video player
-    inkscape # SVG editing
-    darktable # RAW editing
-    libreoffice-qt # document editing
-    pavucontrol # audio manager
-    loupe # image viewer
-    nautilus # file manager
-    upscaler # image upscaling
-    prismlauncher # minecraft
-    vintagestory # vintage story
-    osu-lazer-bin # osu!
-    vesktop # discord
-    element-desktop # private messaging
-    krita # drawing
-    feishin # music
-    kdePackages.kdenlive # video editor
+    adw-gtk3 # theming
+    anki # srs app
     audacity # audio editor
-    (blender.override { cudaSupport = true; })
-    wayvr # VR desktop manager
-    inputs.zen-browser.packages."${stdenv.hostPlatform.system}".default # browser
-    tor-browser # anonymous browsing
+    blender # 3d modelling
+    capitaine-cursors # cursor package
+    claude-code # ai agent
+    darktable # raw editing
+    dwt1-shell-color-scripts # shell eye candy
+    element-desktop # private messaging
+    enblend-enfuse # darktable plugin
+    eza # ls replacement
+    fd # telescope.nvim find_files
+    feishin # music
     fragments # torrenting
-    proton-vpn # vpn
+    git # git
+    hugin # darktable plugin
+    hyprpicker # color picker
+    hyprshot # screenshot utility
+    inkscape # svg editing
+    kdePackages.breeze # theming
+    kdePackages.breeze-icons # theming
+    kdePackages.kdenlive # video editor
+    kdePackages.qt6ct # qt5/qt6 customiser
+    krita # drawing
+    libreoffice-qt # productivity suite
+    loupe # image viewer
     mangohud # perf profiler
+    mpv # video player
+    nautilus # file manager
     neovide # code editor
+    nixfmt-tree # nix formatter
+    osu-lazer-bin # osu!
+    pfetch # neofetch replacement
+    prismlauncher # minecraft
+    proton-vpn # vpn
+    python3 # python interpreter
+    ripgrep # telescope.nvim live_grep
+    sbctl # secure boot
+    sshfs # ssh filesystem
+    tor-browser # anonymous browsing
+    unzip # unzipping archives
+    upscaler # image upscaling
+    usbutils # lsusb, etc
+    vesktop # discord
+    via # keyboard customiser
+    vintagestory # vintage story
+    wayvr # vr desktop manager
+    wev # key utility
+    wget # downloading files
+    wl-clipboard # clipboard support
+    yubikey-manager # yubikey manager
+    zen-browser # browser
   ];
 
   fonts.packages = [
     noto-fonts-cjk-sans
-    lato
   ]
   ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 }

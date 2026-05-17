@@ -48,10 +48,8 @@
       syntaxHighlighting.enable = true;
     };
     nix-ld.enable = true;
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
+    gnupg.agent.enable = true;
+    ssh.askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
     dconf.enable = true;
     direnv = {
       enable = true;

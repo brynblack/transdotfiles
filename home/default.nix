@@ -22,8 +22,4 @@
     enable = true;
     createDirectories = true;
   };
-
-  services = {
-    ssh-agent.enable = true;
-  };
 }
