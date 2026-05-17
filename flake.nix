@@ -22,24 +22,21 @@
 
   outputs =
     { nixpkgs, home-manager, ... }@inputs:
-    let
-      system = "x86_64-linux";
-      username = "brynleyl";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-    in
     {
       nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs system; };
-        modules = [ ./nixos/configuration.nix ];
-        inherit pkgs;
-      };
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = { inherit inputs system username; };
-        modules = [ ./home-manager/home.nix ];
-        inherit pkgs;
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./system
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.brynleyl = import ./home;
+            };
+          }
+        ];
       };
     };
 }

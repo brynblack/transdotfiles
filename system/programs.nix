@@ -44,7 +44,6 @@
     localsend.enable = true;
     zsh = {
       enable = true;
-      enableCompletion = true;
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
     };

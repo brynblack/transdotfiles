@@ -1,7 +1,6 @@
 local mod = "SUPER"
 local terminal = "wezterm"
 local fileManager = "nautilus"
-local menu = "wofi"
 local screenshotEnv = "HYPRSHOT_DIR=~/Pictures/Screenshots"
 local screenshotName = "$(date +'Screenshot_%Y%m%d_%H%M%S.png')"
 
@@ -9,7 +8,6 @@ hl.config({
   input = {
     kb_layout = "us",
     kb_variant = "colemak",
-    follow_mouse = 1,
     accel_profile = "flat",
     sensitivity = -0.8,
     repeat_rate = 30,
@@ -22,13 +20,10 @@ hl.config({
     gaps_in = 6,
     gaps_out = 6,
     border_size = 0,
-    layout = "dwindle",
-    allow_tearing = false,
   },
   decoration = {
     rounding = 12,
     blur = {
-      enabled = true,
       size = 10,
       passes = 3,
       input_methods = true,
@@ -43,7 +38,6 @@ hl.config({
     force_zero_scaling = true,
   },
   dwindle = {
-    pseudotile = true,
     preserve_split = true,
     force_split = 2,
   },

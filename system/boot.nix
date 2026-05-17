@@ -12,7 +12,6 @@
       "nvidia_uvm"
     ];
     loader = {
-      systemd-boot.enable = false;
       efi.canTouchEfiVariables = true;
       timeout = 0;
     };
