@@ -1,3 +1,5 @@
+{ lib, ... }:
+
 {
   programs.nixvim = {
     imports = [
@@ -26,17 +28,13 @@
     };
 
     lsp = {
-      servers = {
+      servers = lib.mapAttrs (_: cfg: { packageFallback = true; } // cfg) {
         lua_ls.enable = true;
         nil_ls.enable = true;
-        rust_analyzer = {
-          enable = true;
-          packageFallback = true;
-        };
+        rust_analyzer.enable = true;
         vtsls.enable = true;
         vue_ls.enable = true;
       };
-
       inlayHints.enable = true;
     };
 
