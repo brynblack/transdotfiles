@@ -50,5 +50,5 @@
     platformTheme = "qt5ct";
   };
 
-  system.stateVersion = "25.05";
+  system.stateVersion = "26.05";
 }

@@ -5,10 +5,10 @@
       isNormalUser = true;
       description = "Brynley";
       extraGroups = [
-        "networkmanager"
-        "wheel"
         "input"
+        "networkmanager"
         "uinput"
+        "wheel"
       ];
     };
   };

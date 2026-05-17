@@ -5,19 +5,26 @@
 
 {
   programs = {
-    dms-shell = {
+    alvr = {
       enable = true;
-      systemd = {
-        enable = true;
-        restartIfChanged = true;
-      };
+      openFirewall = true;
     };
+    dconf.enable = true;
+    direnv = {
+      enable = true;
+      silent = true;
+    };
+    dms-shell.enable = true;
     dsearch.enable = true;
     gamemode.enable = true;
-    steam = {
+    gnupg.agent.enable = true;
+    hyprland = {
       enable = true;
-      protontricks.enable = true;
+      withUWSM = true;
     };
+    localsend.enable = true;
+    obs-studio.enable = true;
+    ssh.askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
     starship = {
       enable = true;
       presets = [ "nerd-font-symbols" ];
@@ -27,33 +34,19 @@
           "[╰─>](238)$character"
         ];
         character = {
-          success_symbol = "";
           error_symbol = "";
+          success_symbol = "";
         };
       };
     };
-    hyprland = {
+    steam = {
       enable = true;
-      withUWSM = true;
+      protontricks.enable = true;
     };
-    obs-studio.enable = true;
-    alvr = {
-      enable = true;
-      openFirewall = true;
-    };
-    localsend.enable = true;
     zsh = {
       enable = true;
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
-    };
-    nix-ld.enable = true;
-    gnupg.agent.enable = true;
-    ssh.askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
-    dconf.enable = true;
-    direnv = {
-      enable = true;
-      silent = true;
     };
   };
 }
