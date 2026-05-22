@@ -56,11 +56,17 @@
     lualine.enable = true;
     neo-tree = {
       enable = true;
-      settings.window.mappings = {
-        "n".__raw = "function() vim.cmd('normal! h') end";
-        "e".__raw = "function() vim.cmd('normal! j') end";
-        "i".__raw = "function() vim.cmd('normal! k') end";
-        "o".__raw = "function() vim.cmd('normal! l') end";
+      settings = {
+        filesystem.follow_current_file = {
+          enabled = true;
+          leave_dirs_open = false;
+        };
+        window.mappings = {
+          "n".__raw = "function() vim.cmd('normal! h') end";
+          "e".__raw = "function() vim.cmd('normal! j') end";
+          "i".__raw = "function() vim.cmd('normal! k') end";
+          "o".__raw = "function() vim.cmd('normal! l') end";
+        };
       };
     };
     nvim-autopairs.enable = true;

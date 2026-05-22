@@ -1,3 +1,5 @@
+{ defaultGuifont }:
+
 let
   mkMap = key: action: { inherit key action; };
 
@@ -86,6 +88,29 @@ in
           end
         '';
       }
+      {
+        key = "<c-=>";
+        action.__raw = ''
+          function()
+            local font, size = vim.o.guifont:match("^(.*):h(%d+)$")
+            if font and size then
+              vim.o.guifont = font .. ":h" .. (tonumber(size) + 1)
+            end
+          end
+        '';
+      }
+      {
+        key = "<c-->";
+        action.__raw = ''
+          function()
+            local font, size = vim.o.guifont:match("^(.*):h(%d+)$")
+            if font and size and tonumber(size) > 1 then
+              vim.o.guifont = font .. ":h" .. (tonumber(size) - 1)
+            end
+          end
+        '';
+      }
+      (mkMap "<c-0>" ":set guifont=${builtins.replaceStrings [ " " ] [ "\\ " ] defaultGuifont}<cr>")
       (mkMap "<c-tab>" ":tabnext<cr>")
       (mkMap "<c-s-tab>" ":tabprevious<cr>")
       (mkMap "grd" ":lua vim.lsp.buf.definition()<cr>")

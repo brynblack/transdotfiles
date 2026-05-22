@@ -1,9 +1,12 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
+let
+  defaultGuifont = "CaskaydiaCove Nerd Font:h12";
+in
 {
   programs.nixvim = {
     imports = [
-      ./mappings.nix
+      (import ./mappings.nix { inherit defaultGuifont; })
       ./plugins.nix
     ];
 
@@ -19,7 +22,7 @@
       shiftwidth = 2;
       expandtab = true;
       fillchars = "eob: ";
-      guifont = "CaskaydiaCove Nerd Font:h12";
+      guifont = defaultGuifont;
       updatetime = 500;
     };
 
@@ -32,7 +35,26 @@
         lua_ls.enable = true;
         nil_ls.enable = true;
         rust_analyzer.enable = true;
-        vtsls.enable = true;
+        vtsls = {
+          enable = true;
+          config = {
+            filetypes = [
+              "javascript"
+              "javascriptreact"
+              "typescript"
+              "typescriptreact"
+              "vue"
+            ];
+            settings.vtsls.tsserver.globalPlugins = [
+              {
+                name = "@vue/typescript-plugin";
+                location = "${pkgs.vue-language-server}/lib/language-tools/packages/language-server/node_modules/@vue/typescript-plugin";
+                languages = [ "vue" ];
+                enableForWorkspaceTypeScriptVersions = true;
+              }
+            ];
+          };
+        };
         vue_ls.enable = true;
       };
       inlayHints.enable = true;
@@ -50,10 +72,7 @@
       };
     };
 
-    colorschemes.tokyonight = {
-      enable = true;
-      settings.style = "night";
-    };
+    colorschemes.ayu.enable = true;
 
     autoCmd = [
       {
