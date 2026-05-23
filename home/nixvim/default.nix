@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 let
-  defaultGuifont = "CaskaydiaCove Nerd Font:h12";
+  defaultGuifont = "CaskaydiaCove Nerd Font:h11";
 in
 {
   programs.nixvim = {
