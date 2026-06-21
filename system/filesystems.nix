@@ -22,7 +22,7 @@
       fsType = "ext4";
     };
     "/mnt/vault" = {
-      device = "//192.168.20.4/vault";
+      device = "//10.0.0.2/vault";
       fsType = "cifs";
       options =
         let

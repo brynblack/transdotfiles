@@ -9,16 +9,19 @@
         {
           name = "colemak->qwerty";
           application.only = [
-            "steam_app_275850"
-            "steam_app_2399830"
-            "steam_app_648350"
-            "steam_app_376210"
-            "steam_app_1604270"
-            "steam_app_1766740"
-            "steam_app_881100"
-            "steam_app_3240220"
             "OxygenNotIncluded"
             "PathOfTitans-Linux-Shipping"
+            "steam_app_1172620"
+            "steam_app_1604270"
+            "steam_app_1766740"
+            "steam_app_2399830"
+            "steam_app_275850"
+            "steam_app_3041230"
+            "steam_app_3240220"
+            "steam_app_376210"
+            "steam_app_526870"
+            "steam_app_648350"
+            "steam_app_881100"
           ];
           remap = {
             # top row
