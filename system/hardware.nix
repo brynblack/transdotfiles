@@ -41,7 +41,7 @@
       powerManagement.enable = true;
       open = true;
       nvidiaSettings = false;
-      package = config.boot.kernelPackages.nvidiaPackages.new_feature;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
 
     graphics = {

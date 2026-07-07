@@ -33,7 +33,7 @@
           "/dev/disk/by-uuid/f08bd8ad-b9c8-4200-ab4e-9f8c7c7d8bf4";
         "luks-c0129f7e-299d-40ca-834d-60f1aff9e11b".device =
           "/dev/disk/by-uuid/c0129f7e-299d-40ca-834d-60f1aff9e11b";
-        games.device = "/dev/disk/by-uuid/41bee30a-6023-4b2f-b235-99348e1914d0";
+        games.device = "/dev/disk/by-uuid/2d2422ef-e6a3-4173-85fa-b77e78c6ba6d";
       };
       verbose = false;
     };

@@ -12,6 +12,7 @@
             "OxygenNotIncluded"
             "PathOfTitans-Linux-Shipping"
             "steam_app_1172620"
+            "steam_app_1229490"
             "steam_app_1604270"
             "steam_app_1766740"
             "steam_app_2399830"
