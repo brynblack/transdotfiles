@@ -20,6 +20,10 @@
     "/srv/games" = {
       device = "/dev/mapper/games";
       fsType = "ext4";
+      options = [
+        "nofail"
+        "x-systemd.device-timeout=10s"
+      ];
     };
     "/mnt/vault" = {
       device = "//10.0.0.2/vault";

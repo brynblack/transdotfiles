@@ -14,7 +14,10 @@
       enable = true;
       silent = true;
     };
-    dms-shell.enable = true;
+    dms-shell = {
+      enable = true;
+      enableCalendarEvents = false; # broken
+    };
     dsearch.enable = true;
     gamemode.enable = true;
     gnupg.agent.enable = true;
