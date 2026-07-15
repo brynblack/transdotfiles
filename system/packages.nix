@@ -40,6 +40,7 @@ with pkgs;
     nixfmt-tree # nix formatter
     osu-lazer-bin # osu!
     pfetch # neofetch replacement
+    picard # music tagger
     prismlauncher # minecraft
     proton-vpn # vpn
     python3 # python interpreter
