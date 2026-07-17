@@ -4,7 +4,7 @@
   services = {
     xserver = {
       enable = true;
-      videoDrivers = [ "nvidia" ];
+      videoDrivers = [ "amdgpu" ];
       excludePackages = [ pkgs.xterm ];
     };
     displayManager.dms-greeter = {

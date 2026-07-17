@@ -52,7 +52,7 @@ hl.config({
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
 hl.monitor({
   output = "desc:ASUSTek COMPUTER INC VG279QM M3LMQS406491",
-  mode = "preferred",
+  mode = "1920x1080@239.76",
   position = "0x0",
   scale = 1,
 })

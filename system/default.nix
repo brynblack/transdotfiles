@@ -31,6 +31,8 @@
     auto-optimise-store = true;
   };
 
+  nixpkgs.config.permittedInsecurePackages = [ "electron-40.10.5" ];
+
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     QT_LOGGING_RULES = "qt.qpa.services.warning=false";

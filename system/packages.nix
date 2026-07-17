@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 
 let
-  blender = pkgs.blender.override { cudaSupport = true; };
+  blender = pkgs.blender.override { rocmSupport = true; };
   zen-browser = inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default;
 in
 with pkgs;

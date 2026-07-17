@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   ...
 }:
@@ -36,17 +35,11 @@
     bluetooth.enable = true;
     uinput.enable = true;
 
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = true;
-      open = true;
-      nvidiaSettings = false;
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
-    };
+    amdgpu.opencl.enable = true;
 
     graphics = {
       enable = true;
-      extraPackages = with pkgs; [ libvdpau-va-gl ];
+      enable32Bit = true;
     };
   };
 }

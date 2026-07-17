@@ -9,7 +9,6 @@
   boot = {
     kernelModules = [
       "kvm-amd"
-      "nvidia_uvm"
     ];
     loader = {
       efi.canTouchEfiVariables = true;
@@ -18,10 +17,7 @@
     plymouth.enable = true;
     initrd = {
       kernelModules = [
-        "nvidia"
-        "nvidia_modeset"
-        "nvidia_uvm"
-        "nvidia_drm"
+        "amdgpu"
       ];
       availableKernelModules = [
         "nvme"

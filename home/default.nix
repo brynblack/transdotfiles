@@ -6,6 +6,7 @@
 
 {
   imports = [
+    ./git.nix
     ./hyprland
     ./nixvim
     ./wezterm
