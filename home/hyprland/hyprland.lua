@@ -96,7 +96,7 @@ hl.bind(mod .. " + SHIFT + SLASH", hl.dsp.exec_cmd("dms ipc keybinds toggle hypr
 for i = 1, 10 do
   local key = tostring(i % 10)
   hl.bind(mod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-  hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = tostring(i), follow = false }))
+  hl.bind(mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = tostring(i), follow = true }))
 end
 
 hl.bind(mod .. " + n", hl.dsp.focus({ direction = "l" }), { repeating = true })
