@@ -24,10 +24,31 @@ in
       fillchars = "eob: ";
       guifont = defaultGuifont;
       updatetime = 500;
+      # Neovide draws the message grid as a floating layer, and floating layers
+      # composite their background over the root fill (SrcOver) rather than
+      # replacing it (Src), so at 0.8 opacity that row lands at 0.96 and reads as
+      # an opaque bar. It happens below the highlight layer, so no MsgArea change
+      # reaches it. Reclaiming the row removes it outright; messages still appear
+      # over the last line when there are any.
+      cmdheight = 0;
     };
 
     globals = {
       neovide_cursor_animation_length = 0;
+      # neovide_opacity would fade the text along with everything else. This
+      # fades only the Normal background, matching what wezterm's
+      # window_background_opacity does at the same 0.8.
+      neovide_normal_opacity = 0.8;
+
+      # wezterm's default window_padding is 1cell horizontally and 0.5cell
+      # vertically. Measured off a screenshot, CaskaydiaCove at h11 gives a 9x18
+      # px cell here, so both work out to 9px. neovide takes pixels and defaults
+      # to 0, hence the explicit values — they only hold for this font at this
+      # size, and would need remeasuring if either changes.
+      neovide_padding_top = 9;
+      neovide_padding_bottom = 9;
+      neovide_padding_left = 9;
+      neovide_padding_right = 9;
     };
 
     lsp = {
@@ -72,7 +93,11 @@ in
       };
     };
 
-    colorschemes.ayu.enable = true;
+    # Theming comes from noctalia's neovim template, which generates
+    # ~/.config/nvim/lua/matugen.lua. Its apply.sh can only install the plugin
+    # into a lazy.nvim tree, so nixvim has to provide it here. No colorschemes.*
+    # entry: matugen.setup() would just overwrite it.
+    extraPlugins = [ pkgs.vimPlugins.base16-nvim ];
 
     autoCmd = [
       {
@@ -98,6 +123,7 @@ in
         opts.border = opts.border or "solid"
         return orig(contents, syntax, opts, ...)
       end
-    '';
+    ''
+    + builtins.readFile ./theme.lua;
   };
 }

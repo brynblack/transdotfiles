@@ -9,7 +9,15 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    millennium = {
+      url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixvim.url = "github:nix-community/nixvim";
+    noctalia-greeter = {
+      url = "github:noctalia-dev/noctalia-greeter";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     xremap = {
       url = "github:xremap/nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,6 +35,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./system
+          inputs.noctalia-greeter.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {

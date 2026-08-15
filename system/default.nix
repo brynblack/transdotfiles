@@ -24,6 +24,7 @@
   nixpkgs = {
     hostPlatform = "x86_64-linux";
     config.allowUnfree = true;
+    overlays = [ inputs.millennium.overlays.default ];
   };
 
   nix.settings = {
@@ -41,11 +42,31 @@
   };
 
   services = {
-    upower.enable = true;
-    gvfs.enable = true;
-    gnome.gnome-keyring.enable = true;
     accounts-daemon.enable = true;
+    gnome.gnome-keyring.enable = true;
+    gvfs.enable = true;
+    upower.enable = true;
+    wivrn = {
+      enable = true;
+      autoStart = true;
+      highPriority = true;
+      openFirewall = true;
+      steam.importOXRRuntimes = true;
+    };
   };
+
+  # Auto-Sync fires this action on every wallpaper, colour or theme-mode change,
+  # and the shipped policy demands auth_admin even for an active local session.
+  # The helper only ever installs a validated staging directory into
+  # /var/lib/noctalia-greeter, and wheel can already reach root via sudo, so
+  # dropping the prompt for this one action grants nothing new.
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (action.id === "org.noctalia.greeter.apply-appearance" && subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
 
   qt = {
     enable = true;

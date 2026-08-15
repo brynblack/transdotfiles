@@ -19,7 +19,10 @@ hl.config({
   general = {
     gaps_in = 6,
     gaps_out = 6,
-    border_size = 0,
+    border_size = 1,
+    -- translucent white reads against dark backgrounds, where the shadow can't
+    ["col.active_border"] = "rgba(ffffff33)",
+    ["col.inactive_border"] = "rgba(ffffff14)",
   },
   decoration = {
     rounding = 12,
@@ -29,7 +32,14 @@ hl.config({
       input_methods = true,
       input_methods_ignorealpha = 0.0,
     },
-    shadow = { enabled = false },
+    shadow = {
+      enabled = true,
+      range = 30,
+      render_power = 2,
+      color = "rgba(000000b3)",
+      offset = { 0, 6 },
+      sharp = false,
+    },
   },
   animations = {
     enabled = false,
@@ -64,20 +74,23 @@ hl.monitor({
   transform = 1,
 })
 
-hl.workspace_rule({ workspace = "1", monitor = "DP-2" })
+hl.workspace_rule({ workspace = "1", monitor = "DP-1" })
 hl.workspace_rule({ workspace = "2", monitor = "HDMI-A-1" })
 
-hl.bind(mod .. " + ESCAPE", hl.dsp.exec_cmd("dms ipc call powermenu toggle"))
+hl.bind(mod .. " + ESCAPE", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
 hl.bind(mod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mod .. " + M", hl.dsp.window.close())
 hl.bind(mod .. " + F", hl.dsp.exec_cmd(fileManager))
 hl.bind(mod .. " + SEMICOLON", hl.dsp.window.float())
-hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd("dms ipc call spotlight toggle"))
+hl.bind(mod .. " + SPACE", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
 hl.bind(mod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mod .. " + J", hl.dsp.layout("togglesplit"))
 hl.bind(mod .. " + K", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-hl.bind(mod .. " + L", hl.dsp.exec_cmd("dms ipc call lock lock"))
+hl.bind(mod .. " + L", hl.dsp.exec_cmd("noctalia msg session lock"))
 hl.bind(mod .. " + BACKSLASH", hl.dsp.exec_cmd("hyprpicker -na"))
+hl.bind(mod .. " + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
+hl.bind(mod .. " + C", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"))
+hl.bind(mod .. " + TAB", hl.dsp.exec_cmd("noctalia msg window-switcher"))
 
 hl.bind(mod .. " + SHIFT + R", hl.dsp.exec_cmd(screenshotEnv .. " hyprshot -z -f " .. screenshotName .. " -m region"))
 hl.bind(mod .. " + SHIFT + W", hl.dsp.exec_cmd(screenshotEnv .. " hyprshot -z -f " .. screenshotName .. " -m window"))
@@ -86,12 +99,12 @@ hl.bind(mod .. " + SHIFT + P", hl.dsp.exec_cmd(screenshotEnv .. " hyprshot -z -f
 hl.bind(mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("dms ipc mpris previous"))
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("dms ipc mpris playPause"))
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("dms ipc mpris next"))
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("dms ipc audio mute"))
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("noctalia msg media previous"))
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("noctalia msg media toggle"))
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("noctalia msg media next"))
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("noctalia msg volume-mute"))
 
-hl.bind(mod .. " + SHIFT + SLASH", hl.dsp.exec_cmd("dms ipc keybinds toggle hyprland"))
+hl.bind(mod .. " + SHIFT + SLASH", hl.dsp.exec_cmd("noctalia msg settings-toggle"))
 
 for i = 1, 10 do
   local key = tostring(i % 10)
@@ -119,8 +132,8 @@ hl.bind(mod .. " + CTRL + SHIFT + o", hl.dsp.window.move({ x = 50, y = 0, relati
 hl.bind(mod .. " + CTRL + SHIFT + i", hl.dsp.window.move({ x = 0, y = -50, relative = true }), { repeating = true })
 hl.bind(mod .. " + CTRL + SHIFT + e", hl.dsp.window.move({ x = 0, y = 50, relative = true }), { repeating = true })
 
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("dms ipc audio decrement 2"), { repeating = true })
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("dms ipc audio increment 2"), { repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("noctalia msg volume-down 2"), { repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("noctalia msg volume-up 2"), { repeating = true })
 
 hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })

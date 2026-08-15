@@ -11,9 +11,11 @@ with pkgs;
     anki # srs app
     audacity # audio editor
     blender # 3d modelling
+    btop # system monitor
     capitaine-cursors # cursor package
     claude-code # ai agent
     darktable # raw editing
+    ddcutil # brightness control
     dwt1-shell-color-scripts # shell eye candy
     element-desktop # private messaging
     enblend-enfuse # darktable plugin
@@ -33,20 +35,22 @@ with pkgs;
     krita # drawing
     libreoffice-qt # productivity suite
     loupe # image viewer
-    mangohud # perf profiler
     mpv # video player
     nautilus # file manager
     neovide # code editor
+    nh # nix helper
     nixfmt-tree # nix formatter
     osu-lazer-bin # osu!
     pfetch # neofetch replacement
     picard # music tagger
     prismlauncher # minecraft
     proton-vpn # vpn
+    protonplus # proton tools
     python3 # python interpreter
     ripgrep # telescope.nvim live_grep
     sbctl # secure boot
     sshfs # ssh filesystem
+    stylua # lua formatter
     tor-browser # anonymous browsing
     unzip # unzipping archives
     upscaler # image upscaling

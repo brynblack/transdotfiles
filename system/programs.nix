@@ -5,16 +5,11 @@
 
 {
   programs = {
-    alvr = {
-      enable = true;
-      openFirewall = true;
-    };
     dconf.enable = true;
     direnv = {
       enable = true;
       silent = true;
     };
-    dms-shell.enable = true;
     dsearch.enable = true;
     gamemode.enable = true;
     gnupg.agent.enable = true;
@@ -23,6 +18,11 @@
       withUWSM = true;
     };
     localsend.enable = true;
+    noctalia = {
+      enable = true;
+      systemd.enable = true;
+      recommendedServices.enable = true;
+    };
     obs-studio.enable = true;
     ssh.askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
     starship = {
@@ -41,6 +41,7 @@
     };
     steam = {
       enable = true;
+      package = pkgs.millennium-steam;
       protontricks.enable = true;
     };
     zsh = {

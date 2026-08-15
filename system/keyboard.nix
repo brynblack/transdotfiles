@@ -15,6 +15,7 @@
             "steam_app_1229490"
             "steam_app_1604270"
             "steam_app_1766740"
+            "steam_app_236390"
             "steam_app_2399830"
             "steam_app_275850"
             "steam_app_3041230"

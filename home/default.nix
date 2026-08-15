@@ -8,6 +8,7 @@
   imports = [
     ./git.nix
     ./hyprland
+    ./mangohud.nix
     ./nixvim
     ./wezterm
     ./zsh.nix
