@@ -140,6 +140,5 @@ hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 hl.on("hyprland.start", function()
   hl.exec_cmd("uwsm app -- openrgb --startminimized")
-  hl.exec_cmd("uwsm app -- fcitx5")
   hl.exec_cmd("hyprctl setcursor capitaine-cursors 24")
 end)

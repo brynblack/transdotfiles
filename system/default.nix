@@ -10,13 +10,12 @@
     ./filesystems.nix
     ./graphics.nix
     ./hardware.nix
-    ./keyboard.nix
     ./locale.nix
     ./networking.nix
     ./packages.nix
     ./programs.nix
     ./users.nix
-    inputs.xremap.nixosModules.default
+    ./vopono.nix
     inputs.lanzaboote.nixosModules.lanzaboote
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -28,7 +27,10 @@
   };
 
   nix.settings = {
-    experimental-features = "nix-command flakes";
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     auto-optimise-store = true;
   };
 

@@ -1,16 +1,9 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
-let
-  blender = pkgs.blender.override { rocmSupport = true; };
-  zen-browser = inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default;
-in
 with pkgs;
 {
   environment.systemPackages = [
     adw-gtk3 # theming
-    anki # srs app
-    audacity # audio editor
-    blender # 3d modelling
     btop # system monitor
     capitaine-cursors # cursor package
     claude-code # ai agent
@@ -22,48 +15,31 @@ with pkgs;
     eza # ls replacement
     fd # telescope.nvim find_files
     feishin # music
-    fragments # torrenting
     git # git
     hugin # darktable plugin
     hyprpicker # color picker
     hyprshot # screenshot utility
-    inkscape # svg editing
     kdePackages.breeze # theming
     kdePackages.breeze-icons # theming
-    kdePackages.kdenlive # video editor
     kdePackages.qt6ct # qt5/qt6 customiser
-    krita # drawing
-    libreoffice-qt # productivity suite
     loupe # image viewer
     mpv # video player
     nautilus # file manager
     neovide # code editor
     nh # nix helper
-    nixfmt-tree # nix formatter
-    osu-lazer-bin # osu!
     pfetch # neofetch replacement
-    picard # music tagger
     prismlauncher # minecraft
+    proton-pass # password manager
     proton-vpn # vpn
     protonplus # proton tools
-    python3 # python interpreter
     ripgrep # telescope.nvim live_grep
-    sbctl # secure boot
-    sshfs # ssh filesystem
-    stylua # lua formatter
     tor-browser # anonymous browsing
-    unzip # unzipping archives
-    upscaler # image upscaling
-    usbutils # lsusb, etc
     vesktop # discord
     via # keyboard customiser
     vintagestory # vintage story
+    vopono # per-app vpn namespaces
     wayvr # vr desktop manager
-    wev # key utility
-    wget # downloading files
     wl-clipboard # clipboard support
-    yubikey-manager # yubikey manager
-    zen-browser # browser
   ];
 
   fonts.packages = [

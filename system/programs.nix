@@ -10,7 +10,6 @@
       enable = true;
       silent = true;
     };
-    dsearch.enable = true;
     gamemode.enable = true;
     gnupg.agent.enable = true;
     hyprland = {
@@ -23,7 +22,6 @@
       systemd.enable = true;
       recommendedServices.enable = true;
     };
-    obs-studio.enable = true;
     ssh.askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
     starship = {
       enable = true;
@@ -42,7 +40,6 @@
     steam = {
       enable = true;
       package = pkgs.millennium-steam;
-      protontricks.enable = true;
     };
     zsh = {
       enable = true;
