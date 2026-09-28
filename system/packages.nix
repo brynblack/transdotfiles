@@ -22,6 +22,7 @@ with pkgs;
     kdePackages.breeze # theming
     kdePackages.breeze-icons # theming
     kdePackages.qt6ct # qt5/qt6 customiser
+    librewolf # browser
     loupe # image viewer
     mpv # video player
     nautilus # file manager
@@ -37,7 +38,6 @@ with pkgs;
     vesktop # discord
     via # keyboard customiser
     vintagestory # vintage story
-    vopono # per-app vpn namespaces
     wayvr # vr desktop manager
     wl-clipboard # clipboard support
   ];

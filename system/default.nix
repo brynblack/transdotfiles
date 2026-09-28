@@ -15,7 +15,6 @@
     ./packages.nix
     ./programs.nix
     ./users.nix
-    ./vopono.nix
     inputs.lanzaboote.nixosModules.lanzaboote
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
