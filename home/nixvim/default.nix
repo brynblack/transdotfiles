@@ -5,14 +5,13 @@ let
 in
 {
   programs.nixvim = {
+    nixpkgs.useGlobalPackages = true;
     imports = [
       (import ./mappings.nix { inherit defaultGuifont; })
       ./plugins.nix
     ];
 
     enable = true;
-
-    nixpkgs.config.allowUnfree = true;
 
     clipboard.register = "unnamedplus";
 
@@ -56,27 +55,27 @@ in
         lua_ls.enable = true;
         nil_ls.enable = true;
         rust_analyzer.enable = true;
-      #   vtsls = {
-      #     enable = true;
-      #     config = {
-      #       filetypes = [
-      #         "javascript"
-      #         "javascriptreact"
-      #         "typescript"
-      #         "typescriptreact"
-      #         "vue"
-      #       ];
-      #       settings.vtsls.tsserver.globalPlugins = [
-      #         {
-      #           name = "@vue/typescript-plugin";
-      #           location = "${pkgs.vue-language-server}/lib/language-tools/packages/language-server/node_modules/@vue/typescript-plugin";
-      #           languages = [ "vue" ];
-      #           enableForWorkspaceTypeScriptVersions = true;
-      #         }
-      #       ];
-      #     };
-      #   };
-        # vue_ls.enable = true;
+        vtsls = {
+          enable = true;
+          config = {
+            filetypes = [
+              "javascript"
+              "javascriptreact"
+              "typescript"
+              "typescriptreact"
+              "vue"
+            ];
+            settings.vtsls.tsserver.globalPlugins = [
+              {
+                name = "@vue/typescript-plugin";
+                location = "${pkgs.vue-language-server}/lib/language-tools/packages/language-server/node_modules/@vue/typescript-plugin";
+                languages = [ "vue" ];
+                enableForWorkspaceTypeScriptVersions = true;
+              }
+            ];
+          };
+        };
+        vue_ls.enable = true;
       };
       inlayHints.enable = true;
     };
