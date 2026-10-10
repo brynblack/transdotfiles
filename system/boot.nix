@@ -33,11 +33,18 @@
         tpm2.enable = true;
       };
       luks.devices = {
-        "luks-f08bd8ad-b9c8-4200-ab4e-9f8c7c7d8bf4".device =
-          "/dev/disk/by-uuid/f08bd8ad-b9c8-4200-ab4e-9f8c7c7d8bf4";
-        "luks-c0129f7e-299d-40ca-834d-60f1aff9e11b".device =
-          "/dev/disk/by-uuid/c0129f7e-299d-40ca-834d-60f1aff9e11b";
-        games.device = "/dev/disk/by-uuid/240c3383-ee98-4363-b2f2-0e0c03706b04";
+        "luks-f08bd8ad-b9c8-4200-ab4e-9f8c7c7d8bf4" = {
+          device = "/dev/disk/by-uuid/f08bd8ad-b9c8-4200-ab4e-9f8c7c7d8bf4";
+          allowDiscards = true;
+        };
+        "luks-c0129f7e-299d-40ca-834d-60f1aff9e11b" = {
+          device = "/dev/disk/by-uuid/c0129f7e-299d-40ca-834d-60f1aff9e11b";
+          allowDiscards = true;
+        };
+        games = {
+          device = "/dev/disk/by-uuid/240c3383-ee98-4363-b2f2-0e0c03706b04";
+          allowDiscards = true;
+        };
       };
       verbose = false;
     };
