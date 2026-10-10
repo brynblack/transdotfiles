@@ -56,6 +56,7 @@ hl.config({
     disable_splash_rendering = true,
     background_color = "0x000000",
     animate_manual_resizes = true,
+    vrr = 2,
   },
 })
 

@@ -10,7 +10,19 @@
       enable = true;
       silent = true;
     };
-    gamemode.enable = true;
+    gamemode = {
+      enable = true;
+      settings = {
+        general.renice = 10;
+        # Pin the GPU to its top clock state while a game runs, so it stops
+        # downclocking between frames when the CPU is the bottleneck.
+        gpu = {
+          apply_gpu_optimisations = "accept-responsibility";
+          gpu_device = 1;
+          amd_performance_level = "high";
+        };
+      };
+    };
     gnupg.agent.enable = true;
     hyprland = {
       enable = true;

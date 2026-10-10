@@ -5,6 +5,7 @@
       isNormalUser = true;
       description = "Brynley";
       extraGroups = [
+        "gamemode"
         "input"
         "networkmanager"
         "uinput"
