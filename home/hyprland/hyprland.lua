@@ -60,6 +60,7 @@ hl.config({
   },
 })
 
+-- Keep in sync with the output settings in system/greeter.nix.
 hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
 hl.monitor({
   output = "desc:ASUSTek COMPUTER INC VG279QM M3LMQS406491",

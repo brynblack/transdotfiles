@@ -1,31 +1,32 @@
 {
   networking = {
     hostName = "nixos";
-    hostId = "0f2bfeab";
-    # nameservers = [
-    #   "9.9.9.9#dns.quad9.net"
-    #   "149.112.112.112#dns.quad9.net"
-    # ];
+    # The #name suffix is the hostname resolved checks each server's TLS
+    # certificate against.
     nameservers = [
-      "1.1.1.1"
-      "1.0.0.1"
+      "1.1.1.1#cloudflare-dns.com"
+      "1.0.0.1#cloudflare-dns.com"
     ];
     networkmanager = {
       enable = true;
       dns = "systemd-resolved";
     };
-    firewall.enable = true;
   };
 
   services = {
     resolved = {
       enable = true;
       settings.Resolve = {
+        # Route every lookup to the servers above. Without this, resolved also
+        # queries whatever DNS each link got from DHCP, in parallel.
+        Domains = [ "~." ];
         FallbackDNS = [ "" ];
-        # DNSSEC = true;
-        # DNSOverTLS = true;
-        DNSSEC = false;
-        DNSOverTLS = false;
+        # Validates whenever the upstream serves DNSSEC records, which
+        # Cloudflare always does. Over an authenticated DoT channel nobody can
+        # strip them to force the downgrade, and unlike strict mode it doesn't
+        # hard-fail domains with broken signatures.
+        DNSSEC = "allow-downgrade";
+        DNSOverTLS = true;
       };
     };
   };

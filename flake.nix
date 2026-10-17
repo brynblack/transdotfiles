@@ -30,7 +30,6 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./system
-          inputs.noctalia-greeter.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {

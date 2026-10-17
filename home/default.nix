@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   ...
 }:
 
@@ -10,14 +9,19 @@
     ./hyprland
     ./mangohud.nix
     ./nixvim
+    ./noctalia
     ./wezterm
     ./zsh.nix
-    inputs.nixvim.homeModules.nixvim
   ];
 
   home = {
     stateVersion = "26.05";
-    file.".icons/default".source = "${pkgs.capitaine-cursors}/share/icons/capitaine-cursors";
+    pointerCursor = {
+      enable = true;
+      package = pkgs.capitaine-cursors;
+      name = "capitaine-cursors";
+      size = 24;
+    };
   };
 
   xdg.userDirs = {

@@ -1,12 +1,14 @@
+{ pkgs, ... }:
+
 {
   users = {
-    defaultUserShell = "/run/current-system/sw/bin/zsh";
+    defaultUserShell = pkgs.zsh;
     users.brynleyl = {
       isNormalUser = true;
+      uid = 1000;
       description = "Brynley";
       extraGroups = [
         "gamemode"
-        "input"
         "networkmanager"
         "uinput"
         "wheel"

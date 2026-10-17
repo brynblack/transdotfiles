@@ -1,11 +1,7 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "amdgpu" ];
-    excludePackages = [ pkgs.xterm ];
-  };
+  imports = [ inputs.noctalia-greeter.nixosModules.default ];
 
   services.displayManager.noctalia-greeter = {
     enable = true;
@@ -16,6 +12,7 @@
         layout = "us";
         variant = "colemak";
       };
+      # Keep in sync with the hl.monitor() rules in home/hyprland/hyprland.lua.
       output = {
         name = "DP-1";
         layout = "DP-1:0,0; HDMI-A-1:1920,-350";

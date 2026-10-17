@@ -1,6 +1,5 @@
 {
   inputs,
-  modulesPath,
   ...
 }:
 
@@ -8,15 +7,13 @@
   imports = [
     ./boot.nix
     ./filesystems.nix
-    ./graphics.nix
+    ./greeter.nix
     ./hardware.nix
     ./locale.nix
     ./networking.nix
     ./packages.nix
     ./programs.nix
     ./users.nix
-    inputs.lanzaboote.nixosModules.lanzaboote
-    (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
   nixpkgs = {
@@ -33,12 +30,12 @@
     auto-optimise-store = true;
   };
 
-  nixpkgs.config.permittedInsecurePackages = [ "electron-40.10.5" ];
-
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     QT_LOGGING_RULES = "qt.qpa.services.warning=false";
     SSH_ASKPASS_REQUIRE = "force";
+    # Kept here rather than relying on home.pointerCursor: UWSM builds the
+    # session environment without sourcing home-manager's session variables.
     XCURSOR_SIZE = "24";
   };
 

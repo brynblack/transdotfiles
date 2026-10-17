@@ -1,7 +1,15 @@
 { defaultGuifont }:
 
 let
-  mkMap = key: action: { inherit key action; };
+  # Motions apply in every mode the original key does: normal, visual,
+  # select and operator-pending.
+  mkMotion = key: action: { inherit key action; };
+  # Everything else is normal mode only. In visual mode a ":" mapping gets
+  # '<,'> prepended, which breaks commands that take no range.
+  mkMap = key: action: {
+    inherit key action;
+    mode = "n";
+  };
 
   colemakMotion = [
     {
@@ -44,11 +52,12 @@ in
 {
   globals.mapleader = " ";
   keymaps =
-    (map ({ from, to }: mkMap from to) colemakAll)
-    ++ (map ({ from, to }: mkMap "<c-w>${from}" "<c-w>${to}") colemakMotion)
+    (map ({ from, to }: mkMotion from to) colemakAll)
+    ++ (map ({ from, to }: mkMotion "<c-w>${from}" "<c-w>${to}") colemakMotion)
     ++ [
       {
         key = "<tab>";
+        mode = "n";
         action.__raw = ''
           function()
             if vim.bo.buftype ~= "terminal" then
@@ -59,6 +68,7 @@ in
       }
       {
         key = "<s-tab>";
+        mode = "n";
         action.__raw = ''
           function()
             if vim.bo.buftype ~= "terminal" then
@@ -69,6 +79,7 @@ in
       }
       {
         key = "<leader>x";
+        mode = "n";
         action.__raw = ''
           function()
             if vim.bo.buftype == "terminal" then
@@ -90,6 +101,7 @@ in
       }
       {
         key = "<c-=>";
+        mode = "n";
         action.__raw = ''
           function()
             local font, size = vim.o.guifont:match("^(.*):h(%d+)$")
@@ -101,6 +113,7 @@ in
       }
       {
         key = "<c-->";
+        mode = "n";
         action.__raw = ''
           function()
             local font, size = vim.o.guifont:match("^(.*):h(%d+)$")
@@ -110,18 +123,18 @@ in
           end
         '';
       }
-      (mkMap "<c-0>" ":set guifont=${builtins.replaceStrings [ " " ] [ "\\ " ] defaultGuifont}<cr>")
-      (mkMap "<c-tab>" ":tabnext<cr>")
-      (mkMap "<c-s-tab>" ":tabprevious<cr>")
-      (mkMap "grd" ":lua vim.lsp.buf.definition()<cr>")
-      (mkMap "grD" ":lua vim.lsp.buf.declaration()<cr>")
-      (mkMap "<esc>" ":noh<cr>")
-      (mkMap "<c-s>" ":w<cr>")
-      (mkMap "<c-n>" ":Neotree toggle<cr>")
-      (mkMap "<leader>h" ":belowright split | terminal<cr>i")
-      (mkMap "<leader>v" ":belowright vsplit | terminal<cr>i")
-      (mkMap "<leader>th" ":Telescope colorscheme enable_preview=true<cr>")
-      (mkMap "<leader>tk" ":Telescope keymaps<cr>")
+      (mkMap "<c-0>" "<cmd>set guifont=${builtins.replaceStrings [ " " ] [ "\\ " ] defaultGuifont}<cr>")
+      (mkMap "<c-tab>" "<cmd>tabnext<cr>")
+      (mkMap "<c-s-tab>" "<cmd>tabprevious<cr>")
+      (mkMap "grd" "<cmd>lua vim.lsp.buf.definition()<cr>")
+      (mkMap "grD" "<cmd>lua vim.lsp.buf.declaration()<cr>")
+      (mkMap "<esc>" "<cmd>noh<cr>")
+      (mkMap "<c-s>" "<cmd>w<cr>")
+      (mkMap "<c-n>" "<cmd>Neotree toggle<cr>")
+      (mkMap "<leader>h" "<cmd>belowright split | terminal<cr>i")
+      (mkMap "<leader>v" "<cmd>belowright vsplit | terminal<cr>i")
+      (mkMap "<leader>th" "<cmd>Telescope colorscheme enable_preview=true<cr>")
+      (mkMap "<leader>tk" "<cmd>Telescope keymaps<cr>")
       {
         key = "<c-x>";
         action = "<c-\\><c-n>";

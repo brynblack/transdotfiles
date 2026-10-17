@@ -1,9 +1,12 @@
 {
+  inputs,
   pkgs,
   ...
 }:
 
 {
+  imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
+
   swapDevices = [ { device = "/dev/disk/by-uuid/acf90d0f-99c5-4034-a52e-7c870c333bdd"; } ];
 
   boot = {
@@ -44,6 +47,9 @@
         games = {
           device = "/dev/disk/by-uuid/240c3383-ee98-4363-b2f2-0e0c03706b04";
           allowDiscards = true;
+          # Not needed to boot, so a missing or failed drive mustn't hold up the
+          # initrd; /srv/games is nofail to match.
+          crypttabExtraOpts = [ "nofail" ];
         };
       };
       verbose = false;
@@ -53,11 +59,9 @@
       pkiBundle = "/var/lib/sbctl";
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    consoleLogLevel = 4;
     kernelParams = [
       "quiet"
       "splash"
-      "boot.shell_on_fail"
       "rd.udev.log_level=3"
       "udev.log_priority=3"
     ];

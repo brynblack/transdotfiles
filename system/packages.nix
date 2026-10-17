@@ -1,11 +1,9 @@
 { pkgs, ... }:
 
-with pkgs;
 {
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     adw-gtk3 # theming
     btop # system monitor
-    capitaine-cursors # cursor package
     claude-code # ai agent
     darktable # raw editing
     ddcutil # brightness control
@@ -15,19 +13,16 @@ with pkgs;
     eza # ls replacement
     fd # telescope.nvim find_files
     feishin # music
-    git # git
     hugin # darktable plugin
     hyprpicker # color picker
     hyprshot # screenshot utility
     kdePackages.breeze # theming
     kdePackages.breeze-icons # theming
-    kdePackages.qt6ct # qt5/qt6 customiser
     librewolf # browser
     loupe # image viewer
     mpv # video player
     nautilus # file manager
     neovide # code editor
-    nh # nix helper
     pfetch # neofetch replacement
     prismlauncher # minecraft
     proton-pass # password manager
@@ -42,8 +37,9 @@ with pkgs;
     wl-clipboard # clipboard support
   ];
 
-  fonts.packages = [
+  fonts.packages = with pkgs; [
+    nerd-fonts.caskaydia-cove # wezterm, neovide, noctalia
+    nerd-fonts.symbols-only # glyph fallback for other fonts
     noto-fonts-cjk-sans
-  ]
-  ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+  ];
 }

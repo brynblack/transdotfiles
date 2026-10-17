@@ -33,7 +33,23 @@
               highlight = "Directory";
             }
           ];
+          # Otherwise these are set as defaults, which an existing group wins
+          # over, so a re-theme would never reach the tabline.
+          themable = false;
         };
+        # Every group transparent. Icon highlights are created lazily from
+        # these, so they inherit it too. The selected tab loses its block, so
+        # it is bold instead.
+        highlights.__raw = ''
+          function(defaults)
+            local hl = {}
+            for name, attrs in pairs(defaults.highlights) do
+              hl[name] = vim.tbl_extend("force", attrs, { bg = "NONE" })
+            end
+            hl.buffer_selected.bold = true
+            return hl
+          end
+        '';
       };
     };
     direnv.enable = true;
@@ -45,15 +61,13 @@
         virtual_symbol = "■";
       };
     };
-    indent-blankline = {
-      enable = true;
-      settings = {
-        indent.highlight = "LineNr";
-        scope.highlight = "Comment";
-      };
-    };
+    # Colours come from IblIndent/IblScope in the noctalia template.
+    indent-blankline.enable = true;
     lspconfig.enable = true;
-    lualine.enable = true;
+    lualine = {
+      enable = true;
+      settings.options.theme = "noctalia";
+    };
     neo-tree = {
       enable = true;
       settings = {

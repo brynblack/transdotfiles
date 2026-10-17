@@ -4,6 +4,9 @@
 }:
 
 {
+  # Holds the CIFS credentials file, kept out of the repo and readable by root only.
+  systemd.tmpfiles.rules = [ "d /var/lib/secrets 0700 root root -" ];
+
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/8c4a536b-109e-471d-bbfe-2ff2ae3b9512";
@@ -37,11 +40,9 @@
             + "x-systemd.mount-timeout=5s";
         in
         [
-          "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=${toString config.users.users.brynleyl.uid},gid=${toString config.users.groups.users.gid}"
-          "uid=1000"
-          "gid=100"
-          ",vers=3.1.1,seal"
-          ",_netdev"
+          "${automount_opts},credentials=/var/lib/secrets/smb-vault,uid=${toString config.users.users.brynleyl.uid},gid=${toString config.users.groups.users.gid}"
+          "vers=3.1.1,seal"
+          "_netdev"
         ];
     };
   };
