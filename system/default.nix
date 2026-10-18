@@ -22,6 +22,8 @@
     overlays = [ inputs.millennium.overlays.default ];
   };
 
+  nix.channel.enable = false;
+
   nix.settings = {
     experimental-features = [
       "nix-command"
@@ -42,6 +44,7 @@
     accounts-daemon.enable = true;
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
+    journald.settings.Journal.SystemMaxUse = "500M";
     upower.enable = true;
     wivrn = {
       enable = true;
