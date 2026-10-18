@@ -31,7 +31,6 @@
     ripgrep # telescope.nvim live_grep
     tor-browser # anonymous browsing
     vesktop # discord
-    via # keyboard customiser
     vintagestory # vintage story
     wayvr # vr desktop manager
     wl-clipboard # clipboard support

@@ -1,70 +1,30 @@
 { defaultGuifont }:
 
 let
-  # Motions apply in every mode the original key does: normal, visual,
-  # select and operator-pending.
-  mkMotion = key: action: { inherit key action; };
-  # Everything else is normal mode only. In visual mode a ":" mapping gets
-  # '<,'> prepended, which breaks commands that take no range.
+  # Normal mode only. In visual mode a ":" mapping gets '<,'> prepended, which
+  # breaks commands that take no range.
   mkMap = key: action: {
     inherit key action;
     mode = "n";
   };
-
-  colemakMotion = [
-    {
-      from = "n";
-      to = "h";
-    }
-    {
-      from = "e";
-      to = "j";
-    }
-    {
-      from = "i";
-      to = "k";
-    }
-    {
-      from = "o";
-      to = "l";
-    }
-  ];
-
-  colemakAll = colemakMotion ++ [
-    {
-      from = "j";
-      to = "y";
-    }
-    {
-      from = "l";
-      to = "u";
-    }
-    {
-      from = "y";
-      to = "o";
-    }
-    {
-      from = "u";
-      to = "i";
-    }
-    # n and e went to motions, so search-next and end-of-word take the keys
-    # those motions freed.
-    {
-      from = "k";
-      to = "n";
-    }
-    {
-      from = "h";
-      to = "e";
-    }
-  ];
 in
 {
   globals.mapleader = " ";
-  keymaps =
-    (map ({ from, to }: mkMotion from to) colemakAll)
-    ++ (map ({ from, to }: mkMotion "<c-w>${from}" "<c-w>${to}") colemakMotion)
-    ++ [
+
+  # Colemak: hjkl shifted one key right onto neio, with the keys that displaces
+  # moved along (j->y, l->u, y->o, u->i), then search-next and end-of-word on
+  # the k and h freed up. Written as typed;meaning.
+  #
+  # Unlike mappings, langmap translates keys before mapping lookup, so plugins'
+  # buffer-local j/k and <c-w> targets follow it too. It leaves Insert, Select
+  # and Command-line mode alone (so typing over a snippet placeholder works)
+  # and doesn't touch the character after f/t/r.
+  #
+  # Mapping lhs below are matched after translation, so a key typed as h has to
+  # be written as e, k as n, and so on.
+  opts.langmap = "neiojlyukh;hjklyuoine";
+
+  keymaps = [
       {
         key = "<tab>";
         mode = "n";
@@ -141,10 +101,11 @@ in
       (mkMap "<esc>" "<cmd>noh<cr>")
       (mkMap "<c-s>" "<cmd>w<cr>")
       (mkMap "<c-n>" "<cmd>Neotree toggle<cr>")
-      (mkMap "<leader>h" "<cmd>belowright split | terminal<cr>i")
+      # Typed as <leader>h, <leader>th and <leader>tk (see langmap above).
+      (mkMap "<leader>e" "<cmd>belowright split | terminal<cr>i")
       (mkMap "<leader>v" "<cmd>belowright vsplit | terminal<cr>i")
-      (mkMap "<leader>th" "<cmd>Telescope colorscheme enable_preview=true<cr>")
-      (mkMap "<leader>tk" "<cmd>Telescope keymaps<cr>")
+      (mkMap "<leader>te" "<cmd>Telescope colorscheme enable_preview=true<cr>")
+      (mkMap "<leader>tn" "<cmd>Telescope keymaps<cr>")
       {
         key = "<c-x>";
         action = "<c-\\><c-n>";
@@ -159,7 +120,7 @@ in
       {
         key = "<leader>/";
         action = "gc";
-        mode = "v";
+        mode = "x";
         options.remap = true;
       }
       {
@@ -171,7 +132,7 @@ in
       {
         key = "<leader><c-/>";
         action = "gb";
-        mode = "v";
+        mode = "x";
         options.remap = true;
       }
     ];

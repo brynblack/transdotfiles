@@ -61,10 +61,13 @@
   # /var/lib/noctalia-greeter, so dropping the prompt for this one action is
   # low-risk. It still only applies to wheel in the active local session, not
   # to remote or background sessions.
+  #
+  # The ID is the one inside the policy, not its filename: the file is
+  # org.noctalia.greeter.apply-appearance.policy but defines sync-appearance.
   security.polkit.extraConfig = ''
     polkit.addRule(function(action, subject) {
       if (
-        action.id === "org.noctalia.greeter.apply-appearance" &&
+        action.id === "org.noctalia.greeter.sync-appearance" &&
         subject.isInGroup("wheel") &&
         subject.local &&
         subject.active

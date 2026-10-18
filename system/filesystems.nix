@@ -4,8 +4,21 @@
 }:
 
 {
-  # Holds the CIFS credentials file, kept out of the repo and readable by root only.
+  # Holds the CIFS credentials file and the games LUKS keyfile, kept out of the
+  # repo and readable by root only.
   systemd.tmpfiles.rules = [ "d /var/lib/secrets 0700 root root -" ];
+
+  # The games drive is unlocked in stage 2 with a keyfile on root, so it is
+  # exactly as protected as root is. Unlocked in the initrd with nofail, nothing
+  # ordered it before switch-root, which could start mid-unlock. The drive keeps
+  # its own passphrase keyslot, so losing root costs the keyfile, not the data.
+  #
+  # headless=yes: if the keyfile is missing, fail rather than wait on a
+  # password prompt nobody sees behind the greeter. nofail plus /srv/games'
+  # nofail lets boot carry on without it either way.
+  environment.etc.crypttab.text = ''
+    games /dev/disk/by-uuid/240c3383-ee98-4363-b2f2-0e0c03706b04 /var/lib/secrets/games.key discard,headless=yes,nofail
+  '';
 
   fileSystems = {
     "/" = {

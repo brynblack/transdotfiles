@@ -7,7 +7,20 @@
 {
   imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/acf90d0f-99c5-4034-a52e-7c870c333bdd"; } ];
+  # A fresh random key every boot: nothing to unlock, no keyslots to attack,
+  # and last boot's swap is unreadable once powered off. Rules out hibernation,
+  # which 8.8G of swap against 31G of RAM couldn't do reliably anyway.
+  # By PARTUUID because the partition is reformatted as plain dm-crypt on each
+  # boot, so it has no stable filesystem or LUKS UUID.
+  swapDevices = [
+    {
+      device = "/dev/disk/by-partuuid/1b616b4f-3d26-4d07-af0e-d51cf50811ac";
+      randomEncryption = {
+        enable = true;
+        allowDiscards = true;
+      };
+    }
+  ];
 
   boot = {
     kernelModules = [
@@ -17,6 +30,10 @@
     loader = {
       efi.canTouchEfiVariables = true;
       timeout = 0;
+      # lanzaboote copies this into loader.conf. Root unlocks from the TPM with
+      # no passphrase, so a kernel command line edited at the boot menu (say,
+      # to get a shell) would run with the disk already open.
+      systemd-boot.editor = false;
     };
     plymouth.enable = true;
     initrd = {
@@ -36,21 +53,11 @@
         tpm2.enable = true;
       };
       luks.devices = {
-        "luks-f08bd8ad-b9c8-4200-ab4e-9f8c7c7d8bf4" = {
-          device = "/dev/disk/by-uuid/f08bd8ad-b9c8-4200-ab4e-9f8c7c7d8bf4";
-          allowDiscards = true;
-        };
         "luks-c0129f7e-299d-40ca-834d-60f1aff9e11b" = {
           device = "/dev/disk/by-uuid/c0129f7e-299d-40ca-834d-60f1aff9e11b";
           allowDiscards = true;
         };
-        games = {
-          device = "/dev/disk/by-uuid/240c3383-ee98-4363-b2f2-0e0c03706b04";
-          allowDiscards = true;
-          # Not needed to boot, so a missing or failed drive mustn't hold up the
-          # initrd; /srv/games is nofail to match.
-          crypttabExtraOpts = [ "nofail" ];
-        };
+        # games is unlocked in stage 2 instead; see system/filesystems.nix.
       };
       verbose = false;
     };

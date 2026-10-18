@@ -184,27 +184,29 @@ in
       }
       {
         # `nvim .` leaves an empty [No Name] buffer behind when neo-tree takes
-        # over the directory buffer. Drop it, and any like it, once a real file
-        # is open and it is no longer shown in a window.
-        event = "BufWinEnter";
+        # over the directory buffer, and opening a file from the tree creates a
+        # new buffer rather than reusing it. Wipe it, and any like it, once no
+        # window in any tab shows it.
+        event = "BufHidden";
         callback.__raw = ''
           function(args)
-            if vim.api.nvim_buf_get_name(args.buf) == "" then
+            local buf = args.buf
+            local function is_empty_scratch()
+              return vim.api.nvim_buf_is_valid(buf)
+                and vim.bo[buf].buflisted
+                and vim.bo[buf].buftype == ""
+                and not vim.bo[buf].modified
+                and vim.api.nvim_buf_get_name(buf) == ""
+                and vim.api.nvim_buf_line_count(buf) == 1
+                and vim.api.nvim_buf_get_lines(buf, 0, 1, false)[1] == ""
+            end
+            if not is_empty_scratch() then
               return
             end
+            -- A buffer can't be wiped from inside its own BufHidden.
             vim.schedule(function()
-              for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-                if
-                  vim.bo[buf].buflisted
-                  and vim.bo[buf].buftype == ""
-                  and not vim.bo[buf].modified
-                  and vim.api.nvim_buf_get_name(buf) == ""
-                  and vim.fn.bufwinid(buf) == -1
-                  and vim.api.nvim_buf_line_count(buf) == 1
-                  and vim.api.nvim_buf_get_lines(buf, 0, 1, false)[1] == ""
-                then
-                  pcall(vim.api.nvim_buf_delete, buf, {})
-                end
+              if is_empty_scratch() and #vim.fn.win_findbuf(buf) == 0 then
+                pcall(vim.api.nvim_buf_delete, buf, {})
               end
             end)
           end
