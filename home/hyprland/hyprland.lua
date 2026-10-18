@@ -76,8 +76,8 @@ hl.monitor({
   transform = 1,
 })
 
-hl.workspace_rule({ workspace = "1", monitor = "DP-1" })
-hl.workspace_rule({ workspace = "2", monitor = "HDMI-A-1" })
+hl.workspace_rule({ workspace = "1", monitor = "desc:ASUSTek COMPUTER INC VG279QM M3LMQS406491" })
+hl.workspace_rule({ workspace = "2", monitor = "desc:Microstep MSI MP273A PB4H643C00347" })
 
 hl.bind(mod .. " + ESCAPE", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
 hl.bind(mod .. " + Q", hl.dsp.exec_cmd(terminal))

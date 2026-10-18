@@ -33,7 +33,6 @@
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     QT_LOGGING_RULES = "qt.qpa.services.warning=false";
-    SSH_ASKPASS_REQUIRE = "force";
     # Kept here rather than relying on home.pointerCursor: UWSM builds the
     # session environment without sourcing home-manager's session variables.
     XCURSOR_SIZE = "24";
@@ -56,11 +55,17 @@
   # Auto-Sync fires this action on every wallpaper, colour or theme-mode change,
   # and the shipped policy demands auth_admin even for an active local session.
   # The helper only ever installs a validated staging directory into
-  # /var/lib/noctalia-greeter, and wheel can already reach root via sudo, so
-  # dropping the prompt for this one action grants nothing new.
+  # /var/lib/noctalia-greeter, so dropping the prompt for this one action is
+  # low-risk. It still only applies to wheel in the active local session, not
+  # to remote or background sessions.
   security.polkit.extraConfig = ''
     polkit.addRule(function(action, subject) {
-      if (action.id === "org.noctalia.greeter.apply-appearance" && subject.isInGroup("wheel")) {
+      if (
+        action.id === "org.noctalia.greeter.apply-appearance" &&
+        subject.isInGroup("wheel") &&
+        subject.local &&
+        subject.active
+      ) {
         return polkit.Result.YES;
       }
     });

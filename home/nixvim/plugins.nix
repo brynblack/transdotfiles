@@ -13,6 +13,8 @@
       };
     };
     bufdelete.enable = true;
+    # Provides gb/gbc block comments; Neovim's built-in commenting has only gc.
+    comment.enable = true;
     bufferline = {
       enable = true;
       settings = {

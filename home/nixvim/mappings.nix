@@ -47,6 +47,16 @@ let
       from = "u";
       to = "i";
     }
+    # n and e went to motions, so search-next and end-of-word take the keys
+    # those motions freed.
+    {
+      from = "k";
+      to = "n";
+    }
+    {
+      from = "h";
+      to = "e";
+    }
   ];
 in
 {

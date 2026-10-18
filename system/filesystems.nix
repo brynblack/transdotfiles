@@ -15,9 +15,10 @@
     "/boot" = {
       device = "/dev/disk/by-uuid/C63C-E1AC";
       fsType = "vfat";
+      # Root only: the ESP holds systemd-boot's random seed.
       options = [
-        "fmask=0022"
-        "dmask=0022"
+        "fmask=0077"
+        "dmask=0077"
       ];
     };
     "/srv/games" = {

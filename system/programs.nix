@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   ...
 }:
@@ -48,7 +49,7 @@
       enable = true;
       presets = [ "nerd-font-symbols" ];
       settings = {
-        format = pkgs.lib.concatStrings [
+        format = lib.concatStrings [
           "[╭╴](238)$all"
           "[╰─>](238)$character"
         ];

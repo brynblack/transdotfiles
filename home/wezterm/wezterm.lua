@@ -15,12 +15,14 @@ config.font = wezterm.font_with_fallback({
 local scheme_file = wezterm.config_dir .. "/colors/Noctalia.toml"
 local ok, scheme = pcall(wezterm.color.load_scheme, scheme_file)
 
+-- Watch the directory either way: it catches Noctalia replacing the file
+-- rather than rewriting it in place (a rename would otherwise orphan a file
+-- watch), and the file's first appearance on a fresh setup.
+wezterm.add_to_config_reload_watch_list(wezterm.config_dir .. "/colors")
+
 if ok then
   config.colors = scheme
   wezterm.add_to_config_reload_watch_list(scheme_file)
-  -- Also watch the directory, in case Noctalia replaces the file rather than
-  -- rewriting it in place (a rename would otherwise orphan the file watch).
-  wezterm.add_to_config_reload_watch_list(wezterm.config_dir .. "/colors")
 else
   config.color_scheme = "Noctalia"
 end
