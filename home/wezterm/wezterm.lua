@@ -6,11 +6,6 @@ config.enable_tab_bar = false
 -- Without it, Tab and <C-i> reach Neovim as the same byte, so mapping one maps
 -- both, and <C-/> arrives as <C-_>.
 config.enable_kitty_keyboard = true
--- Tabs are unused (no tab bar), so let these through to Neovim's tab mappings.
-config.keys = {
-  { key = "Tab", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
-  { key = "Tab", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
-}
 config.font_size = 11
 config.font = wezterm.font_with_fallback({
   "CaskaydiaCove Nerd Font",
