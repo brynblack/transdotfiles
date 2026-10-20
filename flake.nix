@@ -26,6 +26,8 @@
   outputs =
     { nixpkgs, home-manager, ... }@inputs:
     {
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
+
       nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
@@ -35,6 +37,8 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              # Move a pre-existing file aside instead of failing activation.
+              backupFileExtension = "hm-backup";
               extraSpecialArgs = { inherit inputs; };
               users.brynleyl = import ./home;
             };

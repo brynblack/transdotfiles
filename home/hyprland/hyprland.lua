@@ -1,6 +1,7 @@
 local mod = "SUPER"
-local terminal = "wezterm"
-local fileManager = "nautilus"
+-- uwsm app gives each its own scope instead of leaving it in Hyprland's unit.
+local terminal = "uwsm app -- wezterm"
+local fileManager = "uwsm app -- nautilus"
 local screenshotEnv = "HYPRSHOT_DIR=~/Pictures/Screenshots"
 local screenshotName = "$(date +'Screenshot_%Y%m%d_%H%M%S.png')"
 

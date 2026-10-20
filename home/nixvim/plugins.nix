@@ -77,6 +77,13 @@
           enabled = true;
           leave_dirs_open = false;
         };
+        # langmap turns typed o into l (right) and typed h into e (end of
+        # word), which neo-tree binds to focus_preview and
+        # toggle_auto_expand_width. Unbinding them leaves the motions.
+        window.mappings = {
+          l = "none";
+          e = "none";
+        };
       };
     };
     nvim-autopairs.enable = true;
@@ -106,7 +113,12 @@
         };
       };
     };
-    treesitter.enable = true;
+    treesitter = {
+      enable = true;
+      # Off by default on nvim-treesitter's main branch, which leaves every
+      # grammar installed but unused outside Neovim's own lua/help/markdown.
+      highlight.enable = true;
+    };
     web-devicons.enable = true;
   };
 }

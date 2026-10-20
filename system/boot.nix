@@ -19,8 +19,20 @@
         enable = true;
         allowDiscards = true;
       };
+      # allowDiscards only lets dm-crypt pass discards through; swapon has to be
+      # asked to issue them.
+      discardPolicy = "both";
     }
   ];
+
+  # The kernel still offers hibernation as long as swap exists, and nothing
+  # written to this swap survives a reboot: a hibernate would look like it
+  # worked, then cold-boot and lose every open session.
+  systemd.sleep.settings.Sleep = {
+    AllowHibernation = "no";
+    AllowSuspendThenHibernate = "no";
+    AllowHybridSleep = "no";
+  };
 
   boot = {
     kernelModules = [
