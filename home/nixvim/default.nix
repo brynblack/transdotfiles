@@ -5,16 +5,13 @@
   ...
 }:
 
-let
-  defaultGuifont = "CaskaydiaCove Nerd Font:h11";
-in
 {
   imports = [ inputs.nixvim.homeModules.nixvim ];
 
   programs.nixvim = {
     nixpkgs.useGlobalPackages = true;
     imports = [
-      (import ./mappings.nix { inherit defaultGuifont; })
+      ./mappings.nix
       ./plugins.nix
     ];
 
@@ -29,7 +26,7 @@ in
       shiftwidth = 2;
       expandtab = true;
       fillchars = "eob: ";
-      guifont = defaultGuifont;
+      guifont = "CaskaydiaCove Nerd Font:h11";
       updatetime = 500;
       # Border for every floating window that doesn't set its own: LSP hover and
       # signature help, diagnostic floats, and blink-cmp's menus.
@@ -46,11 +43,11 @@ in
     globals = {
       neovide_cursor_animation_length = 0;
       # neovide_opacity would fade the text along with everything else. This
-      # fades only the Normal background, matching what wezterm's
-      # window_background_opacity does at the same 0.8.
+      # fades only the Normal background, matching what kitty's
+      # background_opacity does at the same 0.8.
       neovide_normal_opacity = 0.8;
 
-      # wezterm's default window_padding is 1cell horizontally and 0.5cell
+      # kitty's padding (wezterm's old default) is 1 cell horizontally and 0.5 cell
       # vertically. Measured off a screenshot, CaskaydiaCove at h11 gives a 9x18
       # px cell here, so both work out to 9px. neovide takes pixels and defaults
       # to 0, hence the explicit values — they only hold for this font at this
@@ -151,7 +148,7 @@ in
       {
         # Clear the backgrounds that would paint over the terminal's
         # translucency. Groups that link elsewhere follow their target, which
-        # covers neo-tree's. Neovide is the window itself, with nothing behind
+        # covers plugins'. Neovide is the window itself, with nothing behind
         # it to show through, so there Normal keeps the background that
         # neovide_normal_opacity is applied to.
         event = "ColorScheme";
@@ -183,9 +180,9 @@ in
         command = "setlocal winfixheight nonumber norelativenumber";
       }
       {
-        # `nvim .` leaves an empty [No Name] buffer behind when neo-tree takes
-        # over the directory buffer, and opening a file from the tree creates a
-        # new buffer rather than reusing it. Wipe it, and any like it, once no
+        # `nvim .` can leave an empty [No Name] buffer behind when a file
+        # explorer takes over the directory buffer, and opening a file from it
+        # creates a new buffer rather than reusing it. Wipe it, and any like it, once no
         # window in any tab shows it.
         event = "BufHidden";
         callback.__raw = ''

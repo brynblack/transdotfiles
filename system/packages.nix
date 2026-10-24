@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -11,7 +11,7 @@
     element-desktop # private messaging
     enblend-enfuse # darktable plugin
     eza # ls replacement
-    fd # telescope.nvim find_files
+    fd # find replacement
     feishin # music
     hugin # darktable plugin
     hyprpicker # color picker
@@ -25,10 +25,25 @@
     neovide # code editor
     pfetch # neofetch replacement
     prismlauncher # minecraft
-    proton-pass # password manager
+    # password manager
+    (proton-pass.overrideAttrs (old: {
+      # Stop the app writing native messaging manifests into every browser's
+      # config dir on startup (~/.mozilla, ~/.config/chromium, ...). They're
+      # only needed for unlocking the browser extension via the desktop app.
+      preInstall =
+        lib.replaceStrings
+          [ "asar pack" ]
+          [
+            ''
+              substituteInPlace tmp/.webpack/main/index.js \
+                --replace-fail "await (native_namespaceFn().napi_native_messaging).install(config.hostLocation);" ""
+              asar pack''
+          ]
+          old.preInstall;
+    }))
     proton-vpn # vpn
     protonplus # proton tools
-    ripgrep # telescope.nvim live_grep
+    ripgrep # grep replacement
     tor-browser # anonymous browsing
     vesktop # discord
     vintagestory # vintage story
@@ -37,7 +52,7 @@
   ];
 
   fonts.packages = with pkgs; [
-    nerd-fonts.caskaydia-cove # wezterm, neovide, noctalia
+    nerd-fonts.caskaydia-cove # kitty, neovide, noctalia
     nerd-fonts.symbols-only # glyph fallback for other fonts
     noto-fonts-cjk-sans
   ];

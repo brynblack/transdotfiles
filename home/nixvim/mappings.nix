@@ -1,4 +1,4 @@
-{ defaultGuifont }:
+{ config, lib, ... }:
 
 let
   # Normal mode only. In visual mode a ":" mapping gets '<,'> prepended, which
@@ -53,11 +53,8 @@ in
       action.__raw = ''
         function()
           if vim.bo.buftype == "terminal" then
-            local non_tree_wins = vim.tbl_filter(function(w)
-              return vim.bo[vim.api.nvim_win_get_buf(w)].filetype ~= "neo-tree"
-            end, vim.api.nvim_list_wins())
             local bufnr = vim.fn.bufnr()
-            if #non_tree_wins > 1 then
+            if #vim.api.nvim_list_wins() > 1 then
               vim.cmd("close")
               vim.cmd("bdelete! " .. bufnr)
             else
@@ -93,7 +90,7 @@ in
         end
       '';
     }
-    (mkMap "<c-0>" "<cmd>set guifont=${builtins.replaceStrings [ " " ] [ "\\ " ] defaultGuifont}<cr>")
+    (mkMap "<c-0>" "<cmd>set guifont=${lib.escape [ " " ] config.opts.guifont}<cr>")
     (mkMap "<c-tab>" "<cmd>tabnext<cr>")
     (mkMap "<c-s-tab>" "<cmd>tabprevious<cr>")
     (mkMap "grd" "<cmd>lua vim.lsp.buf.definition()<cr>")
@@ -104,7 +101,21 @@ in
     (mkMap "grk" "<cmd>lua vim.lsp.buf.implementation()<cr>")
     (mkMap "<esc>" "<cmd>noh<cr>")
     (mkMap "<c-s>" "<cmd>w<cr>")
-    (mkMap "<c-n>" "<cmd>Neotree toggle<cr>")
+    {
+      # oil opens in the current window rather than a sidebar, so toggling
+      # means going back to the buffer it replaced.
+      key = "<c-n>";
+      mode = "n";
+      action.__raw = ''
+        function()
+          if vim.bo.filetype == "oil" then
+            require("oil").close()
+          else
+            require("oil").open()
+          end
+        end
+      '';
+    }
     # Typed as <leader>h, <leader>th and <leader>tk (see langmap above).
     (mkMap "<leader>e" "<cmd>belowright split | terminal<cr>i")
     (mkMap "<leader>v" "<cmd>belowright vsplit | terminal<cr>i")

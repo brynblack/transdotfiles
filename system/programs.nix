@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   ...
@@ -24,7 +25,6 @@
         };
       };
     };
-    gnupg.agent.enable = true;
     hyprland = {
       enable = true;
       withUWSM = true;
@@ -32,7 +32,7 @@
     localsend.enable = true;
     nh = {
       enable = true;
-      flake = "/home/brynleyl/.config/nixos";
+      flake = "${config.users.users.brynleyl.home}/.config/nixos";
       clean.enable = true;
     };
     noctalia = {
@@ -41,7 +41,7 @@
       recommendedServices.enable = true;
     };
     ssh = {
-      askPassword = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+      askPassword = lib.getExe pkgs.kdePackages.ksshaskpass;
       # Defaults to services.xserver.enable, which this Wayland-only setup leaves off.
       enableAskPassword = true;
     };
@@ -70,6 +70,10 @@
       # home-manager's zsh already runs compinit; running it here too doubles
       # the work on every shell start.
       enableGlobalCompInit = false;
+      # Lets home-manager's zsh dotDir work without a ~/.zshenv shim.
+      shellInit = ''
+        export ZDOTDIR="''${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+      '';
     };
   };
 }

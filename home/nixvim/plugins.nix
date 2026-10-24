@@ -1,3 +1,5 @@
+{ lib, ... }:
+
 {
   plugins = {
     blink-cmp = {
@@ -29,12 +31,6 @@
               return vim.bo[buf_number].buftype ~= "terminal"
             end
           '';
-          offsets = [
-            {
-              filetype = "neo-tree";
-              highlight = "Directory";
-            }
-          ];
           # Otherwise these are set as defaults, which an existing group wins
           # over, so a re-theme would never reach the tabline.
           themable = false;
@@ -70,27 +66,18 @@
       enable = true;
       settings.options.theme = "noctalia";
     };
-    neo-tree = {
-      enable = true;
-      settings = {
-        filesystem.follow_current_file = {
-          enabled = true;
-          leave_dirs_open = false;
-        };
-        # langmap turns typed o into l (right) and typed h into e (end of
-        # word), which neo-tree binds to focus_preview and
-        # toggle_auto_expand_width. Unbinding them leaves the motions.
-        window.mappings = {
-          l = "none";
-          e = "none";
-        };
-      };
-    };
     nvim-autopairs.enable = true;
+    oil = {
+      enable = true;
+      # oil binds <C-s> to open in a vsplit, which would shadow the global
+      # <c-s> save. Saving is also how oil applies its edits to the filesystem.
+      settings.keymaps."<C-s>" = false;
+    };
     scope.enable = true;
     telescope = {
       enable = true;
       enabledExtensions = [ "scope" ];
+      extensions.fzf-native.enable = true;
       keymaps = {
         "<leader>ff" = "find_files";
         "<leader>fw" = "live_grep";
@@ -100,16 +87,7 @@
         defaults = {
           sorting_strategy = "ascending";
           layout_config.prompt_position = "top";
-          borderchars = [
-            " "
-            " "
-            " "
-            " "
-            " "
-            " "
-            " "
-            " "
-          ];
+          borderchars = lib.replicate 8 " ";
         };
       };
     };

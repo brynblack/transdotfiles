@@ -1,6 +1,6 @@
 local mod = "SUPER"
 -- uwsm app gives each its own scope instead of leaving it in Hyprland's unit.
-local terminal = "uwsm app -- wezterm"
+local terminal = "uwsm app -- kitty"
 local fileManager = "uwsm app -- nautilus"
 local screenshotEnv = "HYPRSHOT_DIR=~/Pictures/Screenshots"
 local screenshotName = "$(date +'Screenshot_%Y%m%d_%H%M%S.png')"
@@ -57,6 +57,7 @@ hl.config({
     disable_splash_rendering = true,
     background_color = "0x000000",
     animate_manual_resizes = true,
+    enable_swallow = false,
     vrr = 2,
   },
 })

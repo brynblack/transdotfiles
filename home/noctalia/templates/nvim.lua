@@ -26,7 +26,7 @@ require('base16-colorscheme').setup({
 })
 vim.g.colors_name = 'noctalia'
 
--- The same ANSI palette noctalia gives wezterm, so :terminal matches it.
+-- The same ANSI palette noctalia gives kitty, so :terminal matches it.
 for i, colour in ipairs({
   '{{colors.terminal_normal_black.default.hex}}',
   '{{colors.terminal_normal_red.default.hex}}',

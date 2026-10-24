@@ -22,14 +22,16 @@
     overlays = [ inputs.millennium.overlays.default ];
   };
 
-  nix.channel.enable = false;
-
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    auto-optimise-store = true;
+  nix = {
+    channel.enable = false;
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      auto-optimise-store = true;
+      use-xdg-base-directories = true;
+    };
   };
 
   environment.sessionVariables = {

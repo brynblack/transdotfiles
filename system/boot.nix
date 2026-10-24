@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
   ...
@@ -47,7 +48,28 @@
       # to get a shell) would run with the disk already open.
       systemd-boot.editor = false;
     };
-    plymouth.enable = true;
+    plymouth = {
+      enable = true;
+      theme = "bgrt-nokeymap";
+      # bgrt with its keyboard layout indicator removed. two-step has no option
+      # for it, but skips the indicator when ImageDir has no keyboard.png, so
+      # point it at a copy of spinner's images without one.
+      themePackages = [
+        (pkgs.runCommand "plymouth-bgrt-nokeymap" { } ''
+          themes=${pkgs.plymouth}/share/plymouth/themes
+          dir=$out/share/plymouth/themes/bgrt-nokeymap
+          mkdir -p $dir
+          cp $themes/spinner/*.png $dir
+          rm $dir/keyboard.png $dir/keymap-render.png
+          # The NixOS module only adds the logo to the stock spinner dir.
+          cp ${config.boot.plymouth.logo} $dir/watermark.png
+          sed -e "s,^ImageDir=.*,ImageDir=$dir," \
+            -e "s,^Name=.*,Name=BGRT (no keymap)," \
+            -e "/^Name\[/d" \
+            $themes/bgrt/bgrt.plymouth > $dir/bgrt-nokeymap.plymouth
+        '')
+      ];
+    };
     initrd = {
       kernelModules = [
         "amdgpu"
