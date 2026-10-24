@@ -26,36 +26,12 @@
       shiftwidth = 2;
       expandtab = true;
       fillchars = "eob: ";
-      guifont = "CaskaydiaCove Nerd Font:h11";
       updatetime = 500;
       # Border for every floating window that doesn't set its own: LSP hover and
       # signature help, diagnostic floats, and blink-cmp's menus.
       winborder = "solid";
-      # Neovide draws the message grid as a floating layer, and floating layers
-      # composite their background over the root fill (SrcOver) rather than
-      # replacing it (Src), so at 0.8 opacity that row lands at 0.96 and reads as
-      # an opaque bar. It happens below the highlight layer, so no MsgArea change
-      # reaches it. Reclaiming the row removes it outright; messages still appear
-      # over the last line when there are any.
+      # Messages still appear over the last line when there are any.
       cmdheight = 0;
-    };
-
-    globals = {
-      neovide_cursor_animation_length = 0;
-      # neovide_opacity would fade the text along with everything else. This
-      # fades only the Normal background, matching what kitty's
-      # background_opacity does at the same 0.8.
-      neovide_normal_opacity = 0.8;
-
-      # kitty's padding (wezterm's old default) is 1 cell horizontally and 0.5 cell
-      # vertically. Measured off a screenshot, CaskaydiaCove at h11 gives a 9x18
-      # px cell here, so both work out to 9px. neovide takes pixels and defaults
-      # to 0, hence the explicit values — they only hold for this font at this
-      # size, and would need remeasuring if either changes.
-      neovide_padding_top = 9;
-      neovide_padding_bottom = 9;
-      neovide_padding_left = 9;
-      neovide_padding_right = 9;
     };
 
     lsp = {
@@ -148,9 +124,7 @@
       {
         # Clear the backgrounds that would paint over the terminal's
         # translucency. Groups that link elsewhere follow their target, which
-        # covers plugins'. Neovide is the window itself, with nothing behind
-        # it to show through, so there Normal keeps the background that
-        # neovide_normal_opacity is applied to.
+        # covers plugins'.
         event = "ColorScheme";
         pattern = "*";
         callback.__raw = ''
@@ -165,8 +139,7 @@
             }
             for _, group in ipairs(groups) do
               local hl = vim.api.nvim_get_hl(0, { name = group })
-              local keep = vim.g.neovide and (group == "Normal" or group == "NormalNC")
-              if hl.bg and not hl.link and not keep then
+              if hl.bg and not hl.link then
                 hl.bg, hl.ctermbg = nil, nil
                 vim.api.nvim_set_hl(0, group, hl)
               end

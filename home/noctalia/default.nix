@@ -42,6 +42,13 @@ in
         post_hook = "tmux source-file ${config.xdg.configHome}/tmux/noctalia.conf 2>/dev/null || true";
       };
 
+      # fzf colours, an options file read through FZF_DEFAULT_OPTS_FILE (see
+      # home/zsh.nix). fzf reads it on every launch, so no hook is needed.
+      fzf = {
+        input_path = "${./templates/fzf}";
+        output_path = "${config.xdg.configHome}/fzf/noctalia";
+      };
+
       # Claude Code custom theme, selected in /theme as "Noctalia". Claude Code
       # watches its themes dir and reloads on change, so no hook is needed;
       # only the very first write needs a restart, as the dir won't exist yet.

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ ... }:
 
 let
   # Normal mode only. In visual mode a ":" mapping gets '<,'> prepended, which
@@ -66,31 +66,6 @@ in
         end
       '';
     }
-    {
-      key = "<c-=>";
-      mode = "n";
-      action.__raw = ''
-        function()
-          local font, size = vim.o.guifont:match("^(.*):h(%d+)$")
-          if font and size then
-            vim.o.guifont = font .. ":h" .. (tonumber(size) + 1)
-          end
-        end
-      '';
-    }
-    {
-      key = "<c-->";
-      mode = "n";
-      action.__raw = ''
-        function()
-          local font, size = vim.o.guifont:match("^(.*):h(%d+)$")
-          if font and size and tonumber(size) > 1 then
-            vim.o.guifont = font .. ":h" .. (tonumber(size) - 1)
-          end
-        end
-      '';
-    }
-    (mkMap "<c-0>" "<cmd>set guifont=${lib.escape [ " " ] config.opts.guifont}<cr>")
     (mkMap "<c-tab>" "<cmd>tabnext<cr>")
     (mkMap "<c-s-tab>" "<cmd>tabprevious<cr>")
     (mkMap "grd" "<cmd>lua vim.lsp.buf.definition()<cr>")

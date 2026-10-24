@@ -22,7 +22,6 @@
     loupe # image viewer
     mpv # video player
     nautilus # file manager
-    neovide # code editor
     pfetch # neofetch replacement
     prismlauncher # minecraft
     # password manager
@@ -52,7 +51,7 @@
   ];
 
   fonts.packages = with pkgs; [
-    nerd-fonts.caskaydia-cove # kitty, neovide, noctalia
+    nerd-fonts.caskaydia-cove # kitty, noctalia
     nerd-fonts.symbols-only # glyph fallback for other fonts
     noto-fonts-cjk-sans
   ];

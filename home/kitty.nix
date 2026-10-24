@@ -13,13 +13,13 @@
       # tmux handles tabs, splits and copy/paste
       clear_all_shortcuts = true;
       # Give each kitty window its own tmux session, destroyed when the window
-      # closes. Launched here rather than from zsh so other terminals (neovide's
+      # closes. Launched here rather than from zsh so other terminals (nvim's
       # :terminal, a TTY) still get a plain shell.
       shell = "${lib.getExe config.programs.tmux.package} new-session ; set-option destroy-unattached on";
       background_opacity = "0.8";
       # wezterm's default padding: 1 cell horizontally, 0.5 cell vertically,
-      # which is 9px for both at this font and size (see neovide_padding in
-      # home/nixvim). kitty takes pt, and 9px at scale 1 is 6.75pt.
+      # which is 9px for both at this font and size. kitty takes pt, and 9px at
+      # scale 1 is 6.75pt.
       window_padding_width = "6.75";
       disable_ligatures = "cursor";
 
@@ -41,6 +41,14 @@
 
       # Written by noctalia (see home/noctalia); missing until its first run
       include = "themes/noctalia.conf";
+    };
+    # Font size keys most terminals use, rather than kitty's ctrl+shift ones.
+    # ctrl+minus would otherwise send ^_ (zsh undo), which ctrl+shift+minus
+    # and ctrl+/ still do.
+    keybindings = {
+      "ctrl+equal" = "change_font_size current +1.0";
+      "ctrl+minus" = "change_font_size current -1.0";
+      "ctrl+0" = "change_font_size current 0";
     };
   };
 }

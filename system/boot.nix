@@ -82,10 +82,7 @@
         "usb_storage"
         "sd_mod"
       ];
-      systemd = {
-        enable = true;
-        tpm2.enable = true;
-      };
+      systemd.tpm2.enable = true;
       luks.devices = {
         "luks-c0129f7e-299d-40ca-834d-60f1aff9e11b" = {
           device = "/dev/disk/by-uuid/c0129f7e-299d-40ca-834d-60f1aff9e11b";
@@ -93,7 +90,6 @@
         };
         # games is unlocked in stage 2 instead; see system/filesystems.nix.
       };
-      verbose = false;
     };
     lanzaboote = {
       enable = true;
