@@ -7,6 +7,10 @@
 
 let
   toml = pkgs.formats.toml { };
+
+  openrgb-load-profile = pkgs.writers.writePython3Bin "openrgb-load-profile" {
+    flakeIgnore = [ "E501" ];
+  } (builtins.readFile ./openrgb-load-profile.py);
 in
 {
   # Merged by noctalia over the state-dir settings.toml, which the shell
@@ -44,6 +48,21 @@ in
       claude = {
         input_path = "${./templates/claude.json}";
         output_path = "${config.home.sessionVariables.CLAUDE_CONFIG_DIR}/themes/noctalia.json";
+      };
+
+      # OpenRGB "Default" profile: the Effects plugin's NoiseMap effect, in
+      # the primary colour at full saturation, as pastel tones wash out to
+      # white on LEDs. Built from the profile saved by the GUI, so re-export
+      # it after changing the effect or devices there, and put the colours
+      # back as "#rrggbb" placeholders.
+      #
+      # The hook uploads it to the system openrgb service over the SDK and
+      # loads it, which converts the hex colours and reapplies the effect
+      # live. Being the service's startup/resume profile, it also persists.
+      openrgb = {
+        input_path = "${./templates/openrgb.json}";
+        output_path = "${config.xdg.configHome}/OpenRGB/noctalia.json";
+        post_hook = "${openrgb-load-profile}/bin/openrgb-load-profile ${config.xdg.configHome}/OpenRGB/noctalia.json";
       };
 
       # Steam / Millennium "Material" theme (kuska1/Material-Theme).
