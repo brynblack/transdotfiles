@@ -51,7 +51,7 @@
   ];
 
   fonts.packages = with pkgs; [
-    nerd-fonts.caskaydia-cove # kitty, noctalia
+    nerd-fonts.jetbrains-mono # kitty, noctalia
     nerd-fonts.symbols-only # glyph fallback for other fonts
     noto-fonts-cjk-sans
   ];

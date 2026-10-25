@@ -58,7 +58,7 @@ hl.config({
     background_color = "0x000000",
     animate_manual_resizes = true,
     enable_swallow = false,
-    vrr = 2,
+    vrr = 0,
   },
 })
 

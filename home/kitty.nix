@@ -4,7 +4,7 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "CaskaydiaCove Nerd Font";
+      name = "JetbrainsMono Nerd Font";
       size = 11;
     };
     # Skip kitty's zsh hooks; nothing here uses them
