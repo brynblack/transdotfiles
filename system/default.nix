@@ -37,6 +37,10 @@
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     QT_LOGGING_RULES = "qt.qpa.services.warning=false";
+    # greetd runs the session on the greeter's VT, so `uwsm start` printed its
+    # progress there before Hyprland took the screen. Errors still print, and
+    # everything still reaches the journal.
+    UWSM_SILENT_START = "1";
     # Kept here rather than relying on home.pointerCursor: UWSM builds the
     # session environment without sourcing home-manager's session variables.
     XCURSOR_SIZE = "24";

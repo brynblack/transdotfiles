@@ -58,13 +58,13 @@ in
       };
 
       # OpenRGB "Default" profile: the Effects plugin's NoiseMap effect, in
-      # the primary colour at full saturation, as pastel tones wash out to
-      # white on LEDs. Built from the profile saved by the GUI, so re-export
-      # it after changing the effect or devices there, and put the colours
-      # back as "#rrggbb" placeholders.
+      # the wallpaper's source colour. Built from the profile saved by the
+      # GUI, so re-export it after changing the effect or devices there, and
+      # put the colours back as "#rrggbb" placeholders.
       #
       # The hook uploads it to the system openrgb service over the SDK and
-      # loads it, which converts the hex colours and reapplies the effect
+      # loads it, which converts the hex colours to LED ones (keeping the
+      # hue, but not the lightness, see to_led) and reapplies the effect
       # live. Being the service's startup/resume profile, it also persists.
       openrgb = {
         input_path = "${./templates/openrgb.json}";

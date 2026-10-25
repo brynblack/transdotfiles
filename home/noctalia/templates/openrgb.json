@@ -116,7 +116,7 @@
                     "CustomSettings": {
                         "amplitude": 3.8999998569488525,
                         "colors": [
-                            "{{colors.primary.default.hex | set_lightness 50 | set_saturation 100}}",
+                            "{{colors.source_color.default.hex}}",
                             0,
                             0
                         ],
