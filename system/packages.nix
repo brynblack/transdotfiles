@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -24,26 +24,8 @@
     nautilus # file manager
     pfetch # neofetch replacement
     prismlauncher # minecraft
-    # password manager
-    (proton-pass.overrideAttrs (old: {
-      # Stop the app writing native messaging manifests into every browser's
-      # config dir on startup (~/.mozilla, ~/.config/chromium, ...). They're
-      # only needed for unlocking the browser extension via the desktop app.
-      preInstall =
-        lib.replaceStrings
-          [ "asar pack" ]
-          [
-            ''
-              substituteInPlace tmp/.webpack/main/index.js \
-                --replace-fail "await (native_namespaceFn().napi_native_messaging).install(config.hostLocation);" ""
-              asar pack''
-          ]
-          old.preInstall;
-    }))
-    proton-vpn # vpn
     protonplus # proton tools
     ripgrep # grep replacement
-    tor-browser # anonymous browsing
     vesktop # discord
     vintagestory # vintage story
     wayvr # vr desktop manager
