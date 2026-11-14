@@ -43,9 +43,9 @@
     loader = {
       efi.canTouchEfiVariables = true;
       timeout = 0;
-      # lanzaboote copies this into loader.conf. Root unlocks from the TPM with
-      # no passphrase, so a kernel command line edited at the boot menu (say,
-      # to get a shell) would run with the disk already open.
+      # lanzaboote copies this into loader.conf. A kernel command line edited at
+      # the boot menu (say, init=/bin/sh) would skip the greeter once the disk
+      # is unlocked.
       systemd-boot.editor = false;
     };
     plymouth = {

@@ -12,6 +12,14 @@
     millennium = {
       url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      # Upstream's packages/nix pins millennium-src to a stale commit whose
+      # CMake ignores -DMILLENNIUM_LINUX_X64=ON and forces -m32 on the 64-bit
+      # build. Track the same branch as the recipe so the two stay in sync.
+      inputs.millennium-src.follows = "millennium-src";
+    };
+    millennium-src = {
+      url = "github:SteamClientHomebrew/Millennium";
+      flake = false;
     };
     nixvim = {
       url = "github:nix-community/nixvim";

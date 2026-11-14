@@ -1,7 +1,22 @@
-{ inputs, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 
 {
   imports = [ inputs.noctalia-greeter.nixosModules.default ];
+
+  # Phone-style first unlock: the LUKS passphrase typed at boot is the
+  # authentication, so greetd logs straight in once per boot. initial_session
+  # only runs when greetd first starts; logging out falls back to the greeter,
+  # and locking still uses Noctalia's lock screen.
+  services.greetd.settings.initial_session = {
+    user = "brynleyl";
+    # Same Exec as the "Hyprland (uwsm-managed)" session the greeter launches.
+    command = "${config.programs.uwsm.package}/bin/uwsm start -e -D Hyprland hyprland.desktop";
+  };
 
   services.displayManager.noctalia-greeter = {
     enable = true;
