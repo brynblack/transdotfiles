@@ -43,7 +43,7 @@
       ];
     };
     "/mnt/vault" = {
-      device = "//10.0.0.2/vault";
+      device = "//10.0.2.2/vault";
       fsType = "cifs";
       options = [
         "x-systemd.automount"

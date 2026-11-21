@@ -14,6 +14,7 @@
     ./mangohud.nix
     ./nixvim
     ./noctalia
+    ./stellaris.nix
     ./tmux.nix
     ./zsh.nix
   ];

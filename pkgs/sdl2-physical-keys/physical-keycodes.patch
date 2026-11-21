@@ -1,0 +1,22 @@
+--- a/src/events/SDL_keyboard.c	2026-11-15 17:07:02.814430451 +1100
++++ b/src/events/SDL_keyboard.c	2026-11-15 17:09:46.985821171 +1100
+@@ -702,6 +702,19 @@
+     SDL_Keycode normalized_keymap[SDL_NUM_SCANCODES];
+     SDL_bool is_azerty = SDL_FALSE;
+ 
++    /* Physical-keycodes patch: ignore the platform layout and always use SDL's
++     * default US-QWERTY keymap, so keycodes follow physical key position.
++     * Text input (SDL_TEXTINPUT) still uses the real layout. */
++    (void)scancode; (void)is_azerty; (void)start; (void)keys; (void)length;
++    SDL_GetDefaultKeymap(normalized_keymap);
++    if (SDL_memcmp(keyboard->keymap, normalized_keymap, sizeof(normalized_keymap)) != 0) {
++        SDL_memcpy(keyboard->keymap, normalized_keymap, sizeof(normalized_keymap));
++        if (send_event) {
++            SDL_SendKeymapChangedEvent();
++        }
++    }
++    return;
++
+     if (start < 0 || start + length > SDL_NUM_SCANCODES) {
+         return;
+     }
